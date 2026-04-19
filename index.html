@@ -2,1200 +2,774 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,viewport-fit=cover">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="TEVA Dim.">
-<meta name="theme-color" content="#1a7a55">
-<title>TEVA — Dimensionnement</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&display=swap" rel="stylesheet">
+<meta name="apple-mobile-web-app-title" content="HPTM">
+<meta name="theme-color" content="#1e3a5f">
+<title>HPTM GROUP</title>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
 <style>
-:root {
-  --g:#1a7a55; --gl:#e8f5ef; --gm:#2ea872; --gd:#0f4a2e;
-  --or:#e07b2a; --orl:#fef3e8; --ord:#8a4a10;
-  --bl:#2563b0; --bll:#e8f0fb;
-  --rd:#c0392b; --rdl:#fdf0ef;
-  --bg:#f4f6f4; --card:#ffffff; --border:#e0e4df;
-  --text:#1a1f1a; --muted:#6b7369; --hint:#9ba89a;
-  --safe-top: env(safe-area-inset-top, 0px);
-  --safe-bot: env(safe-area-inset-bottom, 0px);
+:root{
+  --blue:#1e3a5f;--blue2:#2563b0;--blue-l:#e8f0fb;
+  --teal:#0f766e;--teal-l:#ccfbf1;
+  --green:#16a34a;--green-l:#dcfce7;
+  --orange:#ea580c;--orange-l:#ffedd5;
+  --purple:#7c3aed;--purple-l:#ede9fe;
+  --red:#dc2626;--red-l:#fee2e2;
+  --gray:#64748b;--gray-l:#f1f5f9;
+  --text:#0f172a;--muted:#64748b;--hint:#94a3b8;
+  --card:#fff;--bg:#f8fafc;--border:#e2e8f0;
+  --shadow:0 1px 3px rgba(0,0,0,.08),0 4px 12px rgba(0,0,0,.06);
+  --radius:14px;--radius-sm:10px;
 }
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
-html,body{height:100%;overflow:hidden;}
-body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);display:flex;flex-direction:column;}
+html,body{height:100%;overflow:hidden;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;}
+body{background:var(--bg);color:var(--text);display:flex;flex-direction:column;}
+.screen{display:none;flex-direction:column;height:100%;}
+.screen.active{display:flex;}
 
-/* ── HEADER ── */
-.app-header{
-  background:var(--g);color:#fff;
-  padding:calc(var(--safe-top) + 12px) 16px 12px;
-  display:flex;align-items:center;justify-content:space-between;
-  flex-shrink:0;
-}
-.app-header h1{font-size:17px;font-weight:600;letter-spacing:-.02em;}
-.app-header span{font-size:11px;opacity:.75;font-weight:400;}
-.install-btn{background:rgba(255,255,255,.2);border:1px solid rgba(255,255,255,.35);color:#fff;border-radius:8px;padding:6px 10px;font-size:12px;font-family:inherit;cursor:pointer;display:none;}
+/* HOME */
+.home-scroll{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;}
+.home-header{background:linear-gradient(145deg,#1e3a5f 0%,#2d5fa6 60%,#0f766e 100%);padding:calc(env(safe-area-inset-top,0px) + 32px) 20px 36px;text-align:center;position:relative;overflow:hidden;}
+.home-header::before{content:"";position:absolute;top:-60px;right:-60px;width:200px;height:200px;border-radius:50%;background:rgba(255,255,255,.06);}
+.logo-box{width:90px;height:90px;border-radius:20px;background:rgba(255,255,255,.15);border:2px solid rgba(255,255,255,.3);display:flex;flex-direction:column;align-items:center;justify-content:center;margin:0 auto 16px;position:relative;z-index:1;}
+.logo-text{font-size:22px;font-weight:900;color:#fff;letter-spacing:-.03em;line-height:1;}
+.logo-sub{font-size:8px;font-weight:600;color:rgba(255,255,255,.8);letter-spacing:.15em;text-transform:uppercase;margin-top:3px;}
+.home-title{font-size:24px;font-weight:700;color:#fff;letter-spacing:-.03em;position:relative;z-index:1;}
+.home-sub{font-size:13px;color:rgba(255,255,255,.7);margin-top:6px;position:relative;z-index:1;}
+.home-cards{padding:20px 16px 8px;}
+.feature-card{background:var(--card);border-radius:var(--radius);padding:18px;margin-bottom:12px;box-shadow:var(--shadow);display:flex;align-items:center;gap:16px;cursor:pointer;transition:transform .15s;border:1px solid var(--border);}
+.feature-card:active{transform:scale(.98);}
+.feature-icon{width:52px;height:52px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:26px;flex-shrink:0;}
+.ic-blue{background:var(--blue-l);}
+.ic-teal{background:var(--teal-l);}
+.feature-text h3{font-size:15px;font-weight:600;margin-bottom:3px;}
+.feature-text p{font-size:12px;color:var(--muted);line-height:1.4;}
+.chatbot-wrap{margin:0 16px 24px;}
+.chatbot-bubble{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);border:1px solid var(--border);overflow:hidden;}
+.chat-header{background:linear-gradient(90deg,var(--blue),var(--blue2));padding:12px 16px;display:flex;align-items:center;gap:10px;}
+.chat-dot{width:8px;height:8px;border-radius:50%;background:#4ade80;animation:blink 1.5s ease-in-out infinite;}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.4}}
+.chat-header span{font-size:13px;font-weight:600;color:#fff;}
+.chat-msgs{padding:12px;height:160px;overflow-y:auto;display:flex;flex-direction:column;gap:8px;}
+.msg{max-width:82%;padding:9px 13px;border-radius:12px;font-size:13px;line-height:1.45;}
+.msg-ai{background:var(--gray-l);color:var(--text);align-self:flex-start;border-bottom-left-radius:4px;}
+.msg-user{background:var(--blue2);color:#fff;align-self:flex-end;border-bottom-right-radius:4px;}
+.chat-input-row{display:flex;gap:8px;padding:10px 12px;border-top:1px solid var(--border);}
+.chat-input{flex:1;padding:10px 12px;border:1.5px solid var(--border);border-radius:10px;font-size:14px;font-family:inherit;background:var(--bg);color:var(--text);}
+.chat-input:focus{outline:none;border-color:var(--blue2);}
+.chat-send{background:var(--blue2);color:#fff;border:none;border-radius:10px;padding:10px 14px;font-size:16px;cursor:pointer;}
 
-/* ── SCROLL AREA ── */
-.scroll-area{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;padding-bottom:calc(var(--safe-bot) + 70px);}
+/* WIZARD */
+.wiz-header{background:var(--blue);padding:calc(env(safe-area-inset-top,0px)+14px) 16px 14px;display:flex;align-items:center;gap:12px;flex-shrink:0;}
+.wiz-back{background:rgba(255,255,255,.15);border:none;color:#fff;border-radius:8px;width:36px;height:36px;font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.wiz-title{font-size:15px;font-weight:600;color:#fff;flex:1;}
+.wiz-step-lbl{font-size:12px;color:rgba(255,255,255,.7);white-space:nowrap;}
+.progress-bar{height:3px;background:rgba(255,255,255,.2);flex-shrink:0;}
+.progress-fill{height:3px;background:#4ade80;transition:width .4s ease;}
+.wiz-scroll{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:16px 16px 100px;}
+.wiz-footer{position:absolute;bottom:0;left:0;right:0;background:var(--card);border-top:1px solid var(--border);padding:12px 16px calc(env(safe-area-inset-bottom,0px)+12px);display:flex;gap:10px;z-index:50;}
 
-/* ── BOTTOM NAV ── */
-.bottom-nav{
-  background:var(--card);border-top:1px solid var(--border);
-  display:flex;padding-bottom:var(--safe-bot);
-  flex-shrink:0;position:relative;z-index:50;
-}
-.nav-item{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;padding:8px 4px;cursor:pointer;border:none;background:none;color:var(--hint);font-family:inherit;transition:color .15s;}
-.nav-item.active{color:var(--g);}
-.nav-item svg{width:22px;height:22px;}
-.nav-item span{font-size:9px;font-weight:500;text-transform:uppercase;letter-spacing:.04em;}
-.nav-dot{position:absolute;top:6px;right:calc(50% - 18px);width:6px;height:6px;border-radius:50%;background:var(--or);display:none;}
-.nav-item.active .nav-dot{display:block;}
+/* CARDS */
+.card{background:var(--card);border-radius:var(--radius);padding:18px;margin-bottom:14px;box-shadow:var(--shadow);border:1px solid var(--border);}
+.card-title{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-bottom:14px;display:flex;align-items:center;gap:8px;}
+.ctd{width:4px;height:16px;border-radius:2px;background:var(--blue2);flex-shrink:0;}
 
-/* ── PANELS ── */
-.panel{display:none;}.panel.active{display:block;}
-.section{padding:16px 16px 0;}
-.section:last-child{padding-bottom:16px;}
-
-/* ── CARDS ── */
-.card{background:var(--card);border-radius:14px;padding:16px;margin-bottom:12px;border:1px solid var(--border);}
-.card-title{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);margin-bottom:14px;display:flex;align-items:center;gap:7px;}
-.card-title::before{content:'';width:3px;height:13px;background:var(--g);border-radius:2px;flex-shrink:0;}
-
-/* ── FIELDS ── */
+/* FIELDS */
 .field{margin-bottom:14px;}
 .field:last-child{margin-bottom:0;}
-.field label{display:block;font-size:12px;font-weight:500;color:var(--muted);margin-bottom:5px;}
-.field input,.field select{
-  width:100%;padding:12px 14px;font-size:15px;font-family:inherit;
-  border:1.5px solid var(--border);border-radius:10px;
-  background:var(--bg);color:var(--text);
-  transition:border-color .15s,box-shadow .15s;
-  -webkit-appearance:none;appearance:none;
-}
-.field select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%236b7369' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center;padding-right:36px;}
-.field input:focus,.field select:focus{outline:none;border-color:var(--g);box-shadow:0 0 0 3px rgba(26,122,85,.12);background:#fff;}
-.field .hint{font-size:11px;color:var(--hint);margin-top:4px;}
+.field label{display:block;font-size:12px;font-weight:600;color:var(--muted);margin-bottom:6px;}
+.field input,.field select{width:100%;padding:12px 14px;font-size:15px;font-family:inherit;border:1.5px solid var(--border);border-radius:var(--radius-sm);background:var(--bg);color:var(--text);transition:border-color .15s;-webkit-appearance:none;appearance:none;}
+.field select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%2364748b' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center;padding-right:36px;}
+.field input:focus,.field select:focus{outline:none;border-color:var(--blue2);box-shadow:0 0 0 3px rgba(37,99,176,.1);background:#fff;}
 .field-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
-.field-row3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;}
-
-/* ── BUTTONS ── */
-.btn{width:100%;padding:14px;font-size:15px;font-weight:600;font-family:inherit;border-radius:12px;border:none;cursor:pointer;transition:all .15s;margin-top:4px;}
-.btn-primary{background:var(--g);color:#fff;}
-.btn-primary:active{background:var(--gd);transform:scale(.98);}
-.btn-secondary{background:var(--gl);color:var(--g);border:1px solid #b8dece;}
-.btn-orange{background:var(--or);color:#fff;}
-.btn-sm{padding:10px;font-size:13px;border-radius:10px;width:auto;display:inline-block;}
-
-/* ── GEO ROW ── */
+.hint{font-size:11px;color:var(--hint);margin-top:4px;line-height:1.4;}
 .geo-row{display:flex;gap:8px;align-items:flex-end;}
 .geo-row .field{flex:1;margin-bottom:0;}
-.geo-btn{flex-shrink:0;padding:12px 14px;border:1.5px solid var(--border);border-radius:10px;background:var(--bg);cursor:pointer;font-size:20px;transition:all .15s;}
-.geo-btn:active{background:var(--gl);border-color:var(--g);}
+.geo-btn{flex-shrink:0;padding:0 16px;border:1.5px solid var(--border);border-radius:var(--radius-sm);background:var(--bg);cursor:pointer;font-size:20px;height:50px;display:flex;align-items:center;}
 
-/* ── ALERTS ── */
-.alert{border-radius:10px;padding:12px 14px;font-size:13px;margin-top:10px;line-height:1.5;display:none;}
-.alert.show{display:block;}
-.alert-ok{background:var(--gl);color:var(--gd);border:1px solid #9dd4ba;}
-.alert-warn{background:var(--orl);color:var(--ord);border:1px solid #f5c98a;}
-.alert-err{background:var(--rdl);color:var(--rd);border:1px solid #f0b0aa;}
+/* TRAVAUX */
+.travaux-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+.travaux-item{background:var(--bg);border:2px solid var(--border);border-radius:var(--radius-sm);padding:16px 12px;cursor:pointer;text-align:center;transition:all .2s;user-select:none;}
+.travaux-item.checked{background:var(--blue-l);border-color:var(--blue2);}
+.ti-icon{font-size:30px;margin-bottom:8px;}
+.ti-label{font-size:12px;font-weight:600;color:var(--text);}
+.travaux-item.checked .ti-label{color:var(--blue2);}
 
-/* ── LOADER ── */
-.loader{display:none;align-items:center;gap:10px;padding:14px 0;font-size:13px;color:var(--muted);}
-.loader.show{display:flex;}
-.spinner{width:18px;height:18px;border:2px solid var(--border);border-top-color:var(--g);border-radius:50%;animation:spin .7s linear infinite;}
+/* OPTIONS */
+.options-list{display:flex;flex-direction:column;gap:8px;}
+.option-btn{padding:13px 16px;border:2px solid var(--border);border-radius:var(--radius-sm);background:var(--bg);font-size:14px;font-family:inherit;text-align:left;cursor:pointer;transition:all .15s;color:var(--text);}
+.option-btn.selected{background:var(--blue-l);border-color:var(--blue2);color:var(--blue2);font-weight:500;}
+.q-badge{display:inline-block;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;padding:3px 10px;border-radius:20px;margin-bottom:10px;}
+.q-text{font-size:16px;font-weight:600;margin-bottom:14px;line-height:1.4;color:var(--text);}
+
+/* PHOTOS */
+.photo-section{margin-bottom:18px;}
+.photo-label{font-size:13px;font-weight:600;margin-bottom:3px;display:flex;align-items:center;gap:6px;color:var(--text);}
+.ia-badge{display:inline-flex;align-items:center;gap:3px;background:var(--purple-l);color:var(--purple);border-radius:20px;padding:2px 7px;font-size:10px;font-weight:700;}
+.photo-hint{font-size:11px;color:var(--muted);margin-bottom:10px;}
+.photo-slot{background:var(--bg);border:2px dashed var(--border);border-radius:var(--radius-sm);aspect-ratio:4/3;display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;position:relative;overflow:hidden;transition:all .15s;}
+.photo-slot.has-photo{border-style:solid;border-color:var(--green);}
+.photo-slot img{width:100%;height:100%;object-fit:cover;}
+.slot-empty{display:flex;flex-direction:column;align-items:center;gap:6px;}
+.slot-empty-icon{font-size:28px;opacity:.4;}
+.slot-empty-txt{font-size:11px;color:var(--muted);text-align:center;}
+.photo-input{display:none;}
+.ia-loading{display:none;align-items:center;gap:8px;margin-top:8px;font-size:12px;color:var(--muted);}
+.ia-loading.show{display:flex;}
+.ia-spinner{width:16px;height:16px;border:2px solid var(--border);border-top-color:var(--purple);border-radius:50%;animation:spin .7s linear infinite;}
 @keyframes spin{to{transform:rotate(360deg)}}
+.ia-result{border-radius:8px;padding:10px 12px;margin-top:8px;font-size:12px;line-height:1.5;display:none;}
+.ia-result.show{display:block;}
+.ia-result.ok{background:var(--green-l);color:#166534;}
+.ia-result.warn{background:var(--orange-l);color:#9a3412;}
+.ia-result.err{background:var(--red-l);color:#991b1b;}
 
-/* ── RESULT METRICS ── */
-.metrics-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px;}
-.metric{background:var(--bg);border-radius:10px;padding:12px;border:1px solid var(--border);}
-.metric.full{grid-column:1/-1;}
-.metric-label{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);margin-bottom:4px;}
-.metric-val{font-size:26px;font-weight:600;line-height:1;color:var(--g);}
-.metric-val.orange{color:var(--or);}
-.metric-val.blue{color:var(--bl);}
-.metric-val.dark{color:var(--text);}
-.metric-unit{font-size:11px;color:var(--muted);margin-top:2px;}
+/* ALERTS */
+.alert{border-radius:var(--radius-sm);padding:12px 14px;font-size:13px;line-height:1.5;margin-top:8px;display:none;}
+.alert.show{display:block;}
+.alert-ok{background:var(--green-l);color:#166534;border:1px solid #86efac;}
+.alert-warn{background:var(--orange-l);color:#9a3412;border:1px solid #fdba74;}
+.alert-err{background:var(--red-l);color:#991b1b;border:1px solid #fca5a5;}
 
-/* ── RECO TABLE ── */
-.reco-table{margin-top:12px;border-radius:10px;overflow:hidden;border:1px solid var(--border);}
-.reco-row{display:grid;grid-template-columns:2fr 1fr 1fr;padding:10px 12px;font-size:12px;border-bottom:1px solid var(--border);align-items:center;gap:8px;}
-.reco-row:last-child{border-bottom:none;}
-.reco-row.head{background:var(--bg);font-weight:600;font-size:10px;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);}
-.reco-row.ok{background:var(--gl);}
-.badge{display:inline-block;font-size:10px;font-weight:600;padding:2px 8px;border-radius:20px;}
-.badge-green{background:var(--g);color:#fff;}
-.badge-gray{background:var(--bg);color:var(--muted);border:1px solid var(--border);}
+/* BUTTONS */
+.btn{padding:14px 20px;font-size:15px;font-weight:600;font-family:inherit;border-radius:var(--radius-sm);border:none;cursor:pointer;transition:transform .15s;flex:1;}
+.btn:active{transform:scale(.98);}
+.btn-primary{background:var(--blue2);color:#fff;}
+.btn-secondary{background:var(--gray-l);color:var(--text);border:1px solid var(--border);}
+.btn-teal{background:var(--teal);color:#fff;}
+.btn-sm{padding:10px 14px;font-size:13px;flex:none;}
 
-/* ── MONTH TABLE ── */
-.month-table{width:100%;border-collapse:collapse;font-size:12px;margin-top:10px;}
-.month-table th{background:var(--bg);padding:8px 10px;text-align:left;font-size:10px;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);border-bottom:1px solid var(--border);}
-.month-table td{padding:7px 10px;border-bottom:1px solid var(--border);}
-.month-table tr:last-child td{border-bottom:none;}
-.bar-wrap{background:var(--border);border-radius:4px;height:7px;min-width:60px;}
-.bar-fill{background:var(--or);border-radius:4px;height:7px;}
+/* RECAP */
+.recap-hero{background:linear-gradient(135deg,var(--blue) 0%,#2d5fa6 60%,var(--teal) 100%);border-radius:var(--radius);padding:24px;color:#fff;margin-bottom:14px;position:relative;overflow:hidden;}
+.recap-hero::before{content:"";position:absolute;top:-40px;right:-40px;width:140px;height:140px;border-radius:50%;background:rgba(255,255,255,.07);}
+.recap-logo-txt{font-size:18px;font-weight:900;color:#fff;letter-spacing:-.02em;margin-bottom:10px;position:relative;z-index:1;}
+.recap-name{font-size:22px;font-weight:700;position:relative;z-index:1;}
+.recap-meta{font-size:12px;opacity:.8;margin-top:4px;position:relative;z-index:1;}
+.recap-chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:14px;position:relative;z-index:1;}
+.recap-chip{background:rgba(255,255,255,.2);border-radius:20px;padding:4px 12px;font-size:11px;font-weight:600;}
+.recap-row{display:flex;justify-content:space-between;align-items:baseline;padding:7px 0;border-bottom:1px solid var(--border);font-size:13px;}
+.recap-row:last-child{border-bottom:none;}
+.recap-val{font-weight:600;text-align:right;max-width:60%;}
+.section-h3{font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--blue2);margin-bottom:10px;padding-bottom:8px;border-bottom:2px solid var(--blue-l);}
+.send-box{background:linear-gradient(135deg,var(--teal-l),var(--blue-l));border:1px solid #99f6e4;border-radius:var(--radius);padding:20px;text-align:center;margin-bottom:14px;}
+.send-box h3{font-size:16px;font-weight:700;color:var(--blue);margin-bottom:6px;}
+.send-box p{font-size:12px;color:var(--muted);margin-bottom:16px;line-height:1.5;}
+.send-btns{display:flex;gap:10px;justify-content:center;}
+.photos-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-top:10px;}
+.photos-grid-item{border-radius:8px;overflow:hidden;aspect-ratio:1;border:1px solid var(--border);}
+.photos-grid-item img{width:100%;height:100%;object-fit:cover;}
 
-/* ── SYNTHESE ── */
-.synth-hero{background:linear-gradient(135deg,var(--g) 0%,#0f6e56 100%);border-radius:16px;padding:24px;color:#fff;margin-bottom:16px;position:relative;overflow:hidden;}
-.synth-hero::before{content:'';position:absolute;top:-20px;right:-20px;width:120px;height:120px;border-radius:50%;background:rgba(255,255,255,.07);}
-.synth-hero::after{content:'';position:absolute;bottom:-30px;right:30px;width:80px;height:80px;border-radius:50%;background:rgba(255,255,255,.05);}
-.synth-hero-title{font-size:13px;font-weight:500;opacity:.8;margin-bottom:4px;}
-.synth-hero-name{font-size:22px;font-weight:700;margin-bottom:2px;}
-.synth-hero-addr{font-size:13px;opacity:.75;}
-.synth-hero-date{font-size:11px;opacity:.6;margin-top:8px;}
-.synth-kpis{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-top:16px;}
-.synth-kpi{background:rgba(255,255,255,.15);border-radius:10px;padding:10px;text-align:center;}
-.synth-kpi-val{font-size:20px;font-weight:700;}
-.synth-kpi-label{font-size:9px;opacity:.8;text-transform:uppercase;letter-spacing:.06em;margin-top:2px;}
-.synth-section{margin-bottom:16px;}
-.synth-section h3{font-size:14px;font-weight:600;color:var(--g);margin-bottom:10px;padding-bottom:6px;border-bottom:2px solid var(--gl);display:flex;align-items:center;gap:6px;}
-.synth-row{display:flex;justify-content:space-between;align-items:baseline;padding:8px 0;border-bottom:1px solid var(--border);font-size:13px;}
-.synth-row:last-child{border-bottom:none;}
-.synth-val{font-weight:600;color:var(--text);}
-.chart-wrap{position:relative;height:200px;margin:12px 0;}
-.roi-highlight{background:linear-gradient(135deg,var(--orl),#fff7ee);border:1px solid #f5c98a;border-radius:12px;padding:14px;text-align:center;margin:12px 0;}
-.roi-highlight-num{font-size:32px;font-weight:700;color:var(--or);}
-.roi-highlight-label{font-size:12px;color:var(--ord);margin-top:2px;}
-.disclaimer{background:var(--gl);border-radius:10px;padding:12px;font-size:11px;color:var(--gd);line-height:1.6;margin-top:12px;}
-.print-btn{background:var(--g);color:#fff;border:none;border-radius:12px;padding:14px;width:100%;font-size:15px;font-weight:600;font-family:inherit;cursor:pointer;margin-bottom:8px;}
+/* AIDE */
+.aide-top{background:linear-gradient(135deg,var(--blue),var(--blue2));padding:calc(env(safe-area-inset-top,0px)+14px) 16px 20px;}
+.aide-top-inner{display:flex;align-items:center;gap:12px;}
+.aide-scroll{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:16px 16px 24px;}
+.quick-btns{display:flex;flex-direction:column;gap:8px;}
+.quick-btn{padding:12px 16px;border:1.5px solid var(--border);border-radius:var(--radius-sm);background:var(--bg);font-size:13px;font-family:inherit;text-align:left;cursor:pointer;color:var(--text);}
 
-/* ── PRINT ── */
-@media print{
-  .app-header,.bottom-nav,.btn,.print-btn,.alert{display:none!important;}
-  .panel{display:block!important;}
-  .scroll-area{overflow:visible;padding-bottom:0;}
-  .synth-hero{background:#1a7a55!important;-webkit-print-color-adjust:exact;print-color-adjust:exact;}
-}
 @media(min-width:600px){
-  .field-row,.field-row3{gap:14px;}
-  .metrics-grid{grid-template-columns:repeat(4,1fr);}
-  .metrics-grid .metric.full{grid-column:1/-1;}
+  .travaux-grid{grid-template-columns:repeat(3,1fr);}
+  .field-row{gap:14px;}
 }
 </style>
 </head>
 <body>
 
-<header class="app-header">
-  <div>
-    <h1>TEVA ENERGIES</h1>
-    <span>Outil de dimensionnement</span>
-  </div>
-  <button class="install-btn" id="install-btn">Installer l'app</button>
-</header>
-
-<div class="scroll-area" id="scroll-area">
-
-  <!-- ══════════════ PAC ══════════════ -->
-  <div class="panel active" id="panel-pac">
-    <div class="section">
-      <!-- Client -->
-      <div class="card">
-        <div class="card-title">Client & chantier</div>
-        <div class="field">
-          <label>Nom du client</label>
-          <input type="text" id="pac-client" placeholder="M. / Mme Dupont" oninput="syncSynth()">
-        </div>
-        <div class="field">
-          <label>Adresse du chantier</label>
-          <div class="geo-row">
-            <div class="field" style="margin-bottom:0">
-              <input type="text" id="pac-adresse" placeholder="19 rue du 18 juin, 94700 Maisons-Alfort" oninput="syncSynth()">
-            </div>
-            <button class="geo-btn" onclick="geolocMe()" title="Me géolocaliser">📍</button>
-          </div>
-          <div class="hint">Appuie sur 📍 pour récupérer ta position GPS automatiquement</div>
-        </div>
-        <div class="field">
-          <label>Date du devis</label>
-          <input type="date" id="pac-date">
+<!-- ═══════════ HOME ═══════════ -->
+<div class="screen active" id="screen-home">
+  <div class="home-scroll">
+    <div class="home-header">
+      <div class="logo-box">
+        <div class="logo-text">HPTM</div>
+        <div class="logo-sub">GROUPE</div>
+      </div>
+      <div class="home-title">HPTM GROUP</div>
+      <div class="home-sub">Outil terrain — Dossier installation</div>
+    </div>
+    <div class="home-cards">
+      <div class="feature-card" onclick="startWizard()">
+        <div class="feature-icon ic-blue">📋</div>
+        <div class="feature-text">
+          <h3>Créer un dossier</h3>
+          <p>Nouveau client · Questions guidées · Analyse photos IA · Envoi par mail</p>
         </div>
       </div>
-
-      <!-- Caractéristiques thermiques -->
-      <div class="card">
-        <div class="card-title">Caractéristiques thermiques</div>
-        <div class="field-row">
-          <div class="field">
-            <label>Surface habitable (m²)</label>
-            <input type="number" id="pac-surface" placeholder="120" min="20" max="1000" inputmode="numeric" oninput="calcPAC()">
-          </div>
-          <div class="field">
-            <label>Hauteur plafond (m)</label>
-            <input type="number" id="pac-hauteur" value="2.5" step="0.1" min="2" max="4" inputmode="decimal" oninput="calcPAC()">
-          </div>
-        </div>
-        <div class="field">
-          <label>Classe DPE</label>
-          <select id="pac-dpe" onchange="calcPAC()">
-            <option value="">-- Sélectionner --</option>
-            <option value="A">A — Très bonne isolation (≤ 50 kWh/m²/an)</option>
-            <option value="B">B — Bonne isolation (51–90)</option>
-            <option value="C">C — Isolation correcte (91–150)</option>
-            <option value="D">D — Isolation moyenne (151–230)</option>
-            <option value="E">E — Mauvaise isolation (231–330)</option>
-            <option value="F">F — Très mauvaise isolation (331–450)</option>
-            <option value="G">G — Passoire thermique (> 450)</option>
-          </select>
-        </div>
-        <div class="field">
-          <label>Zone climatique</label>
-          <select id="pac-zone" onchange="updateZoneInfo(); calcPAC()">
-            <option value="">-- Sélectionner --</option>
-            <optgroup label="Zone H1 — Grand Nord / Montagne">
-              <option value="H1a">H1a — Alsace (Strasbourg, Mulhouse)</option>
-              <option value="H1b">H1b — Nord-Est (Reims, Metz, Nancy)</option>
-              <option value="H1c">H1c — Île-de-France / Centre-Nord (Paris, Orléans)</option>
-            </optgroup>
-            <optgroup label="Zone H2 — Centre / Bretagne / Aquitaine">
-              <option value="H2a">H2a — Bretagne (Rennes, Brest)</option>
-              <option value="H2b">H2b — Centre-Ouest (Nantes, Poitiers, Tours)</option>
-              <option value="H2c">H2c — Pyrénées / Sud-Ouest (Bordeaux, Bayonne)</option>
-              <option value="H2d">H2d — Rhône-Alpes / Auvergne (Lyon, Grenoble, Clermont)</option>
-            </optgroup>
-            <optgroup label="Zone H3 — Sud / Méditerranée">
-              <option value="H3">H3 — PACA / Occitanie (Marseille, Nice, Montpellier, Toulouse)</option>
-            </optgroup>
-          </select>
-          <div class="hint" id="zone-hint" style="margin-top:6px"></div>
-        </div>
-        <div class="field">
-          <label>Altitude approximative (m)</label>
-          <input type="number" id="pac-altitude" placeholder="0 — 200 — 500 — 1000..." min="0" max="3000" inputmode="numeric" oninput="calcPAC()">
-          <div class="hint">Influence la Tbase de dimensionnement (+altitude = plus froid)</div>
-        </div>
-        <div class="field">
-          <label>Type de logement</label>
-          <select id="pac-type" onchange="calcPAC()">
-            <option value="maison">Maison individuelle</option>
-            <option value="mitoyen">Maison mitoyenne (1 mur mitoyen)</option>
-            <option value="mitoyen2">Maison mitoyenne (2 murs mitoyens)</option>
-            <option value="appart">Appartement intermédiaire</option>
-            <option value="appart-dern">Appartement dernier étage</option>
-          </select>
-        </div>
-        <div class="field">
-          <label>Nb de personnes dans le foyer</label>
-          <input type="number" id="pac-personnes" value="3" min="1" max="12" inputmode="numeric" oninput="calcPAC()">
+      <div class="feature-card" onclick="goScreen('screen-aide')">
+        <div class="feature-icon ic-teal">🤖</div>
+        <div class="feature-text">
+          <h3>Assistant IA</h3>
+          <p>Aides MaPrimeRénov', dimensionnement, conseils techniques</p>
         </div>
       </div>
-
-      <!-- Consommations actuelles -->
-      <div class="card">
-        <div class="card-title">Consommations énergétiques actuelles</div>
-        <div class="hint" style="margin-bottom:12px;font-size:12px;color:var(--muted)">Renseigne ce que tu peux — chaque champ améliore la précision du calcul et de l'estimation des économies.</div>
-        <div class="field">
-          <label>Électricité actuelle (kWh/an)</label>
-          <input type="number" id="conso-elec" placeholder="ex : 8 000" inputmode="numeric" oninput="calcPAC()">
-          <div class="hint">Sur la facture EDF — hors chauffage si chauffage gaz/fioul</div>
+    </div>
+    <div class="chatbot-wrap">
+      <div class="chatbot-bubble">
+        <div class="chat-header">
+          <div class="chat-dot"></div>
+          <span>Assistant HPTM — en ligne</span>
         </div>
-        <div class="field">
-          <label>Gaz actuel (kWh/an)</label>
-          <input type="number" id="conso-gaz" placeholder="ex : 15 000" inputmode="numeric" oninput="calcPAC()">
-          <div class="hint">Converti depuis m³ : 1 m³ ≈ 11,6 kWh. Aussi sur la facture.</div>
+        <div class="chat-msgs" id="home-msgs">
+          <div class="msg msg-ai">Bonjour ! Je suis votre assistant HPTM. Posez-moi vos questions sur les aides, travaux ou dimensionnement.</div>
         </div>
-        <div class="field">
-          <label>Fioul actuel (litres/an)</label>
-          <input type="number" id="conso-fioul" placeholder="ex : 1 200" inputmode="numeric" oninput="calcPAC()">
-          <div class="hint">1 litre fioul ≈ 10 kWh PCI</div>
-        </div>
-        <div id="conso-alert" class="alert"></div>
-      </div>
-
-      <!-- Installation -->
-      <div class="card">
-        <div class="card-title">Installation PAC</div>
-        <div class="field">
-          <label>Type de PAC</label>
-          <select id="pac-typepac" onchange="calcPAC()">
-            <option value="aw">Air / Eau — chauffage + production ECS</option>
-          </select>
-          <div class="hint">Seul le type Air/Eau est proposé dans cette version</div>
-        </div>
-        <div class="field">
-          <label>Émetteurs existants ou prévus</label>
-          <select id="pac-emetteurs" onchange="updateTdep(); calcPAC()">
-            <option value="plancher">Plancher chauffant basse température</option>
-            <option value="rad-bt">Radiateurs basse température (rénovés)</option>
-            <option value="rad-ht">Radiateurs haute température (existants)</option>
-            <option value="mixte">Mixte plancher + radiateurs</option>
-            <option value="new-rad">Nouveaux radiateurs à poser</option>
-          </select>
-        </div>
-        <div class="field">
-          <label>Température de départ (°C)</label>
-          <input type="number" id="pac-tdep" value="45" min="30" max="70" inputmode="numeric" oninput="calcPAC()">
-          <div class="hint" id="tdep-hint">Plancher chauffant : 35–45°C · Radiateurs BT : 45–55°C · Radiateurs HT : 55–65°C</div>
-        </div>
-        <button class="btn btn-primary" onclick="calcPAC(true)">Calculer le dimensionnement</button>
-      </div>
-
-      <!-- Résultats PAC -->
-      <div id="pac-results" style="display:none">
-        <div class="card">
-          <div class="card-title">Résultats — dimensionnement PAC</div>
-          <div class="metrics-grid">
-            <div class="metric full">
-              <div class="metric-label">Déperditions estimées du bâtiment</div>
-              <div class="metric-val" id="res-deperd">—</div>
-              <div class="metric-unit">kW (puissance de chauffe nécessaire)</div>
-            </div>
-            <div class="metric">
-              <div class="metric-label">Puissance PAC recommandée</div>
-              <div class="metric-val orange" id="res-pac-puiss">—</div>
-              <div class="metric-unit">kW (+20% marge)</div>
-            </div>
-            <div class="metric">
-              <div class="metric-label">COP estimé</div>
-              <div class="metric-val blue" id="res-cop">—</div>
-              <div class="metric-unit">à T° départ saisie</div>
-            </div>
-            <div class="metric">
-              <div class="metric-label">Conso. annuelle PAC</div>
-              <div class="metric-val dark" id="res-conso">—</div>
-              <div class="metric-unit">kWh/an</div>
-            </div>
-            <div class="metric">
-              <div class="metric-label">T° extérieure base</div>
-              <div class="metric-val dark" id="res-tbase">—</div>
-              <div class="metric-unit">°C (Tbase zone+altitude)</div>
-            </div>
-          </div>
-          <div id="alert-pac" class="alert" style="margin-top:10px"></div>
-          <div id="conso-confirm" class="alert alert-ok" style="margin-top:10px;display:none"></div>
-        </div>
-
-        <div class="card">
-          <div class="card-title">Modèles conseillés</div>
-          <div class="reco-table">
-            <div class="reco-row head"><div>Gamme</div><div>Puissance</div><div>Note</div></div>
-            <div id="pac-reco-rows"></div>
-          </div>
+        <div class="chat-input-row">
+          <input class="chat-input" id="home-inp" placeholder="Votre question…" onkeydown="if(event.key==='Enter')sendChat('home')">
+          <button class="chat-send" onclick="sendChat('home')">➤</button>
         </div>
       </div>
     </div>
   </div>
+</div>
 
-  <!-- ══════════════ PV ══════════════ -->
-  <div class="panel" id="panel-pv">
-    <div class="section">
-      <div class="card">
-        <div class="card-title">Localisation</div>
-        <div class="field">
-          <label>Adresse du chantier</label>
-          <div class="geo-row">
-            <div class="field" style="margin-bottom:0">
-              <input type="text" id="pv-adresse" placeholder="Adresse complète...">
-            </div>
-            <button class="geo-btn" onclick="geolocPV()" title="Me géolocaliser">📍</button>
-          </div>
-        </div>
-        <button class="btn btn-secondary" onclick="geocodeAdresse()" style="margin-top:4px">Géolocaliser cette adresse</button>
-        <div class="field-row" style="margin-top:12px">
-          <div class="field">
-            <label>Latitude</label>
-            <input type="number" id="pv-lat" placeholder="48.8566" step="0.0001" inputmode="decimal">
-          </div>
-          <div class="field">
-            <label>Longitude</label>
-            <input type="number" id="pv-lon" placeholder="2.3522" step="0.0001" inputmode="decimal">
-          </div>
-        </div>
-        <div id="alert-geo" class="alert"></div>
-      </div>
+<!-- ═══════════ WIZARD ═══════════ -->
+<div class="screen" id="screen-wizard" style="position:relative;">
+  <div class="wiz-header">
+    <button class="wiz-back" onclick="wizBack()">←</button>
+    <div class="wiz-title" id="wiz-title">Nouveau dossier</div>
+    <div class="wiz-step-lbl" id="wiz-step-lbl">1/5</div>
+  </div>
+  <div class="progress-bar"><div class="progress-fill" id="prog-fill" style="width:20%"></div></div>
+  <div class="wiz-scroll" id="wiz-content"></div>
+  <div class="wiz-footer">
+    <button class="btn btn-secondary btn-sm" id="btn-prev" onclick="wizBack()" style="display:none">← Retour</button>
+    <button class="btn btn-primary" id="btn-next" onclick="wizNext()">Suivant →</button>
+  </div>
+</div>
 
-      <div class="card">
-        <div class="card-title">Système photovoltaïque</div>
-        <div class="field-row">
-          <div class="field">
-            <label>Puissance crête (kWc)</label>
-            <input type="number" id="pv-kwc" placeholder="6" step="0.5" min="1" max="100" inputmode="decimal">
-          </div>
-          <div class="field">
-            <label>Inclinaison (°)</label>
-            <input type="number" id="pv-incl" value="30" min="0" max="90" inputmode="numeric">
-            <div class="hint">0°=plat · 30°=idéal · 90°=vertical</div>
-          </div>
-        </div>
-        <div class="field-row">
-          <div class="field">
-            <label>Orientation (azimut °)</label>
-            <input type="number" id="pv-azimut" value="0" min="-180" max="180" inputmode="numeric">
-            <div class="hint">0°=Sud · -90°=Est · +90°=Ouest</div>
-          </div>
-          <div class="field">
-            <label>Pertes système (%)</label>
-            <input type="number" id="pv-pertes" value="14" min="0" max="50" inputmode="numeric">
-          </div>
-        </div>
-        <div class="field-row">
-          <div class="field">
-            <label>Technologie</label>
-            <select id="pv-tech">
-              <option value="crystSi">Silicium cristallin</option>
-              <option value="CIS">CIS / CIGS</option>
-              <option value="CdTe">CdTe</option>
-            </select>
-          </div>
-          <div class="field">
-            <label>Montage</label>
-            <select id="pv-montage">
-              <option value="free">Ventilé</option>
-              <option value="building">Intégré toiture</option>
-            </select>
-          </div>
-        </div>
-        <button class="btn btn-orange" onclick="callPVGIS()">Calculer via PVGIS</button>
-      </div>
-
-      <div class="loader" id="pv-loader"><div class="spinner"></div><span>Connexion à l'API PVGIS…</span></div>
-      <div id="alert-pv" class="alert"></div>
-
-      <div id="pv-results" style="display:none">
-        <div class="card">
-          <div class="card-title">Production estimée — PVGIS</div>
-          <div class="metrics-grid">
-            <div class="metric full">
-              <div class="metric-label">Production annuelle</div>
-              <div class="metric-val orange" id="pv-prod-an">—</div>
-              <div class="metric-unit">kWh/an</div>
-            </div>
-            <div class="metric">
-              <div class="metric-label">Ratio performance</div>
-              <div class="metric-val dark" id="pv-spec">—</div>
-              <div class="metric-unit">kWh/kWc/an</div>
-            </div>
-            <div class="metric">
-              <div class="metric-label">Moy. mensuelle</div>
-              <div class="metric-val dark" id="pv-mois-moy">—</div>
-              <div class="metric-unit">kWh/mois</div>
-            </div>
-          </div>
-          <div style="overflow-x:auto;margin-top:4px">
-            <table class="month-table" id="pv-month-table" style="display:none">
-              <thead><tr><th>Mois</th><th>Production</th><th>Irrad.</th><th style="min-width:80px">Visualisation</th></tr></thead>
-              <tbody id="pv-month-body"></tbody>
-            </table>
-          </div>
-        </div>
+<!-- ═══════════ AIDE ═══════════ -->
+<div class="screen" id="screen-aide" style="position:relative;">
+  <div class="aide-top">
+    <div class="aide-top-inner">
+      <button style="background:rgba(255,255,255,.15);border:none;color:#fff;border-radius:8px;width:36px;height:36px;font-size:18px;cursor:pointer;flex-shrink:0;" onclick="goScreen('screen-home')">←</button>
+      <div>
+        <div style="font-size:18px;font-weight:700;color:#fff;">Assistant IA</div>
+        <div style="font-size:12px;color:rgba(255,255,255,.7);">Aides, MaPrimeRénov', conseils techniques</div>
       </div>
     </div>
   </div>
-
-  <!-- ══════════════ ROI ══════════════ -->
-  <div class="panel" id="panel-roi">
-    <div class="section">
-      <div class="card">
-        <div class="card-title">Paramètres économiques</div>
-        <div class="field-row">
-          <div class="field">
-            <label>Investissement total (€ TTC)</label>
-            <input type="number" id="roi-invest" placeholder="12 000" inputmode="numeric" oninput="calcROI()">
-          </div>
-          <div class="field">
-            <label>Aides & subventions (€)</label>
-            <input type="number" id="roi-aides" placeholder="3 000" inputmode="numeric" oninput="calcROI()">
-            <div class="hint">MaPrimeRénov', CEE, éco-PTZ…</div>
-          </div>
-        </div>
-        <div class="field-row">
-          <div class="field">
-            <label>Prix kWh réseau (€)</label>
-            <input type="number" id="roi-prix-kwh" value="0.2516" step="0.001" inputmode="decimal" oninput="calcROI()">
-          </div>
-          <div class="field">
-            <label>Prix rachat surplus (€/kWh)</label>
-            <input type="number" id="roi-rachat" value="0.13" step="0.01" inputmode="decimal" oninput="calcROI()">
-            <div class="hint">OA EDF 2024 ≤9 kWc</div>
-          </div>
-        </div>
-        <div class="field-row">
-          <div class="field">
-            <label>Taux autoconsommation (%)</label>
-            <input type="number" id="roi-autoc" value="70" min="10" max="100" inputmode="numeric" oninput="calcROI()">
-          </div>
-          <div class="field">
-            <label>Revalorisation tarif (%/an)</label>
-            <input type="number" id="roi-revalor" value="4" step="0.5" inputmode="decimal" oninput="calcROI()">
-          </div>
-        </div>
-        <div class="field">
-          <label>Production PV (kWh/an) <span style="color:var(--g)">(auto depuis onglet PV)</span></label>
-          <input type="number" id="roi-prod-pv" placeholder="Auto…" inputmode="numeric" oninput="calcROI()">
-        </div>
-        <div class="field">
-          <label>Conso. PAC (kWh/an) <span style="color:var(--g)">(auto depuis onglet PAC)</span></label>
-          <input type="number" id="roi-conso-pac" placeholder="Auto…" inputmode="numeric" oninput="calcROI()">
-        </div>
-        <div class="field">
-          <label>Économies PAC vs ancienne chaudière (€/an)</label>
-          <input type="number" id="roi-eco-pac" placeholder="Auto calculé si conso. gaz/fioul renseignée" inputmode="numeric" oninput="calcROI()">
-          <div class="hint" id="eco-pac-hint"></div>
-        </div>
+  <div class="aide-scroll">
+    <div class="card">
+      <div class="card-title"><div class="ctd"></div>Conversation</div>
+      <div class="chat-msgs" id="aide-msgs" style="height:220px;">
+        <div class="msg msg-ai">Bonjour ! Je peux vous aider sur les aides disponibles, le dimensionnement PAC/PV, ou toute question technique. Que souhaitez-vous savoir ?</div>
       </div>
-
-      <div id="roi-results" style="display:none">
-        <div class="card">
-          <div class="card-title">Bilan financier</div>
-          <div class="metrics-grid">
-            <div class="metric">
-              <div class="metric-label">Investissement net</div>
-              <div class="metric-val dark" id="roi-net">—</div>
-              <div class="metric-unit">€ après aides</div>
-            </div>
-            <div class="metric">
-              <div class="metric-label">Économies an 1</div>
-              <div class="metric-val orange" id="roi-eco-an1">—</div>
-              <div class="metric-unit">€/an</div>
-            </div>
-            <div class="metric">
-              <div class="metric-label">Retour investissement</div>
-              <div class="metric-val blue" id="roi-payback">—</div>
-              <div class="metric-unit">années</div>
-            </div>
-            <div class="metric">
-              <div class="metric-label">Gain cumulé 25 ans</div>
-              <div class="metric-val" id="roi-gain25">—</div>
-              <div class="metric-unit">€ net</div>
-            </div>
-          </div>
-          <div class="chart-wrap"><canvas id="roi-chart"></canvas></div>
-        </div>
+      <div class="chat-input-row" style="padding:10px 0 0;">
+        <input class="chat-input" id="aide-inp" placeholder="Posez votre question…" onkeydown="if(event.key==='Enter')sendChat('aide')">
+        <button class="chat-send" onclick="sendChat('aide')">➤</button>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title"><div class="ctd"></div>Questions fréquentes</div>
+      <div class="quick-btns">
+        <button class="quick-btn" onclick="quickQ('Quelles aides sont disponibles pour une PAC air/eau en 2024 ?')">💶 Aides PAC 2024</button>
+        <button class="quick-btn" onclick="quickQ('Comment dimensionner une PAC pour 120m² DPE D en zone H1c ?')">🌡️ Dimensionnement PAC</button>
+        <button class="quick-btn" onclick="quickQ('Quelles conditions pour MaPrimeRénov sur le photovoltaïque ?')">☀️ Aides photovoltaïque</button>
+        <button class="quick-btn" onclick="quickQ('Quelle isolation recommandez-vous pour une maison DPE F ?')">🏠 Conseils isolation</button>
+        <button class="quick-btn" onclick="quickQ('Quel volume de ballon thermodynamique pour 4 personnes ?')">🚿 Ballon thermodynamique</button>
       </div>
     </div>
   </div>
-
-  <!-- ══════════════ SYNTHÈSE ══════════════ -->
-  <div class="panel" id="panel-synth">
-    <div class="section" id="synth-content">
-
-      <div class="synth-hero">
-        <div class="synth-hero-title">Synthèse dimensionnement</div>
-        <div class="synth-hero-name" id="s-client">—</div>
-        <div class="synth-hero-addr" id="s-adresse">—</div>
-        <div class="synth-hero-date" id="s-date">—</div>
-        <div class="synth-kpis">
-          <div class="synth-kpi">
-            <div class="synth-kpi-val" id="s-pac-kw">—</div>
-            <div class="synth-kpi-label">kW PAC</div>
-          </div>
-          <div class="synth-kpi">
-            <div class="synth-kpi-val" id="s-pv-kwc">—</div>
-            <div class="synth-kpi-label">kWc PV</div>
-          </div>
-          <div class="synth-kpi">
-            <div class="synth-kpi-val" id="s-payback-hero">—</div>
-            <div class="synth-kpi-label">Ans ROI</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="card synth-section">
-        <div class="synth-section"><h3>🏠 Bâtiment</h3>
-          <div class="synth-row"><span>Surface</span><span class="synth-val" id="s-surface">—</span></div>
-          <div class="synth-row"><span>Classe DPE</span><span class="synth-val" id="s-dpe">—</span></div>
-          <div class="synth-row"><span>Zone climatique</span><span class="synth-val" id="s-zone">—</span></div>
-          <div class="synth-row"><span>Altitude</span><span class="synth-val" id="s-alt">—</span></div>
-          <div class="synth-row"><span>Émetteurs</span><span class="synth-val" id="s-emetteurs">—</span></div>
-        </div>
-      </div>
-
-      <div class="card synth-section">
-        <div class="synth-section"><h3>🌡️ Pompe à chaleur Air/Eau</h3>
-          <div class="synth-row"><span>Déperditions bâtiment</span><span class="synth-val" id="s-deperd">—</span></div>
-          <div class="synth-row"><span>Puissance PAC recommandée</span><span class="synth-val" id="s-pac-puiss">—</span></div>
-          <div class="synth-row"><span>Température de départ</span><span class="synth-val" id="s-tdep">—</span></div>
-          <div class="synth-row"><span>COP estimé</span><span class="synth-val" id="s-cop">—</span></div>
-          <div class="synth-row"><span>Consommation annuelle PAC</span><span class="synth-val" id="s-conso">—</span></div>
-        </div>
-      </div>
-
-      <div class="card synth-section" id="s-pv-section" style="display:none">
-        <div class="synth-section"><h3>☀️ Installation photovoltaïque</h3>
-          <div class="synth-row"><span>Puissance installée</span><span class="synth-val" id="s-kwc">—</span></div>
-          <div class="synth-row"><span>Production annuelle estimée</span><span class="synth-val" id="s-prod-an">—</span></div>
-          <div class="synth-row"><span>Ratio de performance</span><span class="synth-val" id="s-spec-synth">—</span></div>
-          <div class="synth-row"><span>Mois le plus productif</span><span class="synth-val" id="s-best-month">—</span></div>
-        </div>
-      </div>
-
-      <div class="card synth-section" id="s-roi-section" style="display:none">
-        <div class="synth-section"><h3>💶 Économies réalisées</h3>
-          <div class="synth-row"><span>Investissement net (après aides)</span><span class="synth-val" id="s-invest-net">—</span></div>
-          <div class="synth-row"><span>Économies estimées an 1</span><span class="synth-val" id="s-eco-an">—</span></div>
-          <div class="roi-highlight">
-            <div class="roi-highlight-num" id="s-payback-big">—</div>
-            <div class="roi-highlight-label">années pour rembourser l'investissement</div>
-          </div>
-          <div class="synth-row"><span>Gain net cumulé sur 25 ans</span><span class="synth-val" id="s-gain25">—</span></div>
-        </div>
-        <div class="chart-wrap"><canvas id="synth-chart"></canvas></div>
-      </div>
-
-      <div class="disclaimer">
-        ⚠️ Ces résultats sont des estimations réalisées à des fins d'aide à la décision commerciale. Les valeurs définitives seront confirmées lors de l'étude technique approfondie. Les économies dépendent des habitudes de consommation et de l'évolution des tarifs énergétiques.<br><br>
-        <strong>TEVA ENERGIES</strong> — 14 rue Davoust, 93500 Pantin
-      </div>
-
-      <div style="margin-top:16px">
-        <button class="print-btn" onclick="window.print()">🖨️ Imprimer / Enregistrer en PDF</button>
-        <button class="btn btn-secondary" onclick="copyText()">Copier le résumé texte</button>
-      </div>
-    </div>
-  </div>
-
-</div><!-- end scroll-area -->
-
-<!-- ── BOTTOM NAV ── -->
-<nav class="bottom-nav">
-  <button class="nav-item active" id="nav-pac" onclick="switchTab('pac')">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="3" y="3" width="18" height="13" rx="2"/><path d="M8 20h8M12 16v4"/><path d="M7 9l2 2 4-4"/></svg>
-    <span>PAC</span>
-  </button>
-  <button class="nav-item" id="nav-pv" onclick="switchTab('pv')">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
-    <span>PV</span>
-  </button>
-  <button class="nav-item" id="nav-roi" onclick="switchTab('roi')">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
-    <span>Économies</span>
-  </button>
-  <button class="nav-item" id="nav-synth" onclick="switchTab('synth')">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
-    <span>Synthèse</span>
-  </button>
-</nav>
+</div>
 
 <script>
-// ── NAVIGATION ──
-let roiChartInst = null, synthChartInst = null;
+const API_KEY="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";
+const MAIL="souvrer@gmail.com";
 
-function switchTab(name) {
-  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
-  document.querySelectorAll('.nav-item').forEach(b => b.classList.remove('active'));
-  document.getElementById('panel-' + name).classList.add('active');
-  document.getElementById('nav-' + name).classList.add('active');
-  document.getElementById('scroll-area').scrollTop = 0;
-  if (name === 'synth') buildSynth();
-  if (name === 'roi') calcROI();
+// ─── NAV ───
+function goScreen(id){
+  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
 }
 
-// ── ZONE INFO ──
-const ZONE_DATA = {
-  H1a:{label:'Alsace',tbase:-12,coeff:1.35,heures:2000},
-  H1b:{label:'Nord-Est',tbase:-10,coeff:1.28,heures:1900},
-  H1c:{label:'Île-de-France / Centre-Nord',tbase:-7,coeff:1.18,heures:1750},
-  H2a:{label:'Bretagne',tbase:-5,coeff:1.05,heures:1500},
-  H2b:{label:'Centre-Ouest',tbase:-5,coeff:1.05,heures:1550},
-  H2c:{label:'Pyrénées / Sud-Ouest',tbase:-5,coeff:1.00,heures:1400},
-  H2d:{label:'Rhône-Alpes / Auvergne',tbase:-8,coeff:1.15,heures:1700},
-  H3:{label:'PACA / Occitanie',tbase:-2,coeff:0.80,heures:1200},
+// ─── STATE ───
+let S={step:0,data:{},travaux:[],photos:{},questions:[],qi:0};
+const STEPS=['infos','travaux','questions','photos','recap'];
+const LABELS=['Infos client','Type de travaux','Questions','Photos','Récapitulatif'];
+
+function startWizard(){
+  S={step:0,data:{},travaux:[],photos:{},questions:[],qi:0};
+  goScreen('screen-wizard');
+  render();
+}
+
+function render(){
+  const pct=((S.step+1)/STEPS.length*100);
+  document.getElementById('prog-fill').style.width=pct+'%';
+  document.getElementById('wiz-step-lbl').textContent=(S.step+1)+'/'+STEPS.length;
+  document.getElementById('wiz-title').textContent=LABELS[S.step];
+  document.getElementById('btn-prev').style.display=S.step>0?'block':'none';
+  const isLast=S.step===STEPS.length-1;
+  document.getElementById('btn-next').textContent=isLast?'📤 Envoyer le dossier':'Suivant →';
+  document.getElementById('wiz-content').scrollTop=0;
+  ({infos:rInfos,travaux:rTravaux,questions:rQuestions,photos:rPhotos,recap:rRecap}[STEPS[S.step]])();
+}
+
+// ─── STEP 1 INFOS ───
+function rInfos(){
+  const d=S.data;
+  document.getElementById('wiz-content').innerHTML=`
+  <div class="card">
+    <div class="card-title"><div class="ctd"></div>Entreprise & commercial</div>
+    <div class="field"><label>Nom de l'entreprise *</label><input id="f-ent" placeholder="ex: TEVA ENERGIES" value="${d.ent||''}"></div>
+    <div class="field"><label>Nom du commercial</label><input id="f-com" placeholder="Prénom NOM" value="${d.com||''}"></div>
+  </div>
+  <div class="card">
+    <div class="card-title"><div class="ctd"></div>Client</div>
+    <div class="field-row">
+      <div class="field"><label>Nom *</label><input id="f-nom" placeholder="Dupont" value="${d.nom||''}"></div>
+      <div class="field"><label>Prénom *</label><input id="f-pre" placeholder="Jean" value="${d.pre||''}"></div>
+    </div>
+    <div class="field"><label>Téléphone</label><input id="f-tel" type="tel" placeholder="06 00 00 00 00" value="${d.tel||''}"></div>
+    <div class="field"><label>Email</label><input id="f-mail" type="email" placeholder="client@email.fr" value="${d.mail||''}"></div>
+  </div>
+  <div class="card">
+    <div class="card-title"><div class="ctd"></div>Adresse du chantier</div>
+    <div class="field">
+      <label>Adresse *</label>
+      <div class="geo-row">
+        <div class="field" style="margin:0"><input id="f-adr" placeholder="19 rue de la Paix, 75001 Paris" value="${d.adr||''}"></div>
+        <button class="geo-btn" onclick="geolocNow()">📍</button>
+      </div>
+      <div class="hint">📍 = récupère ta position GPS automatiquement</div>
+    </div>
+    <div class="field-row">
+      <div class="field"><label>Altitude (m)</label><input id="f-alt" type="number" placeholder="ex: 120" inputmode="numeric" value="${d.alt||''}"></div>
+      <div class="field"><label>T° ext. base (°C)</label><input id="f-tb" type="number" placeholder="auto" inputmode="numeric" value="${d.tb||''}"></div>
+    </div>
+    <div id="geo-alert" class="alert"></div>
+  </div>
+  <div class="card">
+    <div class="card-title"><div class="ctd"></div>Bâtiment</div>
+    <div class="field-row">
+      <div class="field"><label>Surface (m²) *</label><input id="f-surf" type="number" placeholder="120" inputmode="numeric" value="${d.surf||''}" oninput="calcVol()"></div>
+      <div class="field"><label>Hauteur plafond (m)</label><input id="f-haut" type="number" placeholder="2.5" step="0.1" inputmode="decimal" value="${d.haut||'2.5'}" oninput="calcVol()"></div>
+    </div>
+    <div class="field"><label>Volume m³ <span style="color:var(--green);font-size:11px" id="vol-lbl"></span></label><input id="f-vol" readonly style="background:var(--gray-l)" value="${d.vol||''}"></div>
+    <div class="field"><label>Classe DPE</label>
+      <select id="f-dpe">${['','A','B','C','D','E','F','G'].map(v=>`<option value="${v}" ${d.dpe===v?'selected':''}>${v||'-- Sélectionner --'}</option>`).join('')}</select>
+    </div>
+    <div class="field"><label>Type de logement</label>
+      <select id="f-type">
+        <option value="maison" ${d.type==='maison'?'selected':''}>Maison individuelle</option>
+        <option value="mitoyen" ${d.type==='mitoyen'?'selected':''}>Maison mitoyenne</option>
+        <option value="appart" ${d.type==='appart'?'selected':''}>Appartement</option>
+      </select>
+    </div>
+    <div class="field"><label>Nb de personnes</label><input id="f-pers" type="number" placeholder="3" inputmode="numeric" value="${d.pers||'3'}"></div>
+  </div>`;
+  if(d.surf) calcVol();
+}
+
+function calcVol(){
+  const s=parseFloat(document.getElementById('f-surf').value)||0;
+  const h=parseFloat(document.getElementById('f-haut').value)||2.5;
+  if(s>0){const v=Math.round(s*h);document.getElementById('f-vol').value=v;document.getElementById('vol-lbl').textContent='= '+v+' m³';}
+}
+
+function geolocNow(){
+  if(!navigator.geolocation){alert('GPS non disponible');return;}
+  navigator.geolocation.getCurrentPosition(async p=>{
+    const {latitude:lat,longitude:lon,altitude:alt}=p.coords;
+    try{const r=await fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lon}&zoom=16`);const d=await r.json();document.getElementById('f-adr').value=d.display_name||'';}catch(e){}
+    if(alt&&alt>0) document.getElementById('f-alt').value=Math.round(alt);
+    showAlert('geo-alert','ok','📍 Position GPS récupérée !');
+  },()=>showAlert('geo-alert','err','Impossible de récupérer la position GPS.'));
+}
+
+function saveInfos(){
+  S.data={
+    ent:document.getElementById('f-ent').value.trim(),
+    com:document.getElementById('f-com').value.trim(),
+    nom:document.getElementById('f-nom').value.trim(),
+    pre:document.getElementById('f-pre').value.trim(),
+    tel:document.getElementById('f-tel').value.trim(),
+    mail:document.getElementById('f-mail').value.trim(),
+    adr:document.getElementById('f-adr').value.trim(),
+    alt:document.getElementById('f-alt').value,
+    tb:document.getElementById('f-tb').value,
+    surf:document.getElementById('f-surf').value,
+    haut:document.getElementById('f-haut').value||'2.5',
+    vol:document.getElementById('f-vol').value,
+    dpe:document.getElementById('f-dpe').value,
+    type:document.getElementById('f-type').value,
+    pers:document.getElementById('f-pers').value||'3',
+  };
+  if(!S.data.ent||!S.data.nom||!S.data.pre||!S.data.adr||!S.data.surf){alert('Remplis les champs obligatoires (*)');return false;}
+  return true;
+}
+
+// ─── STEP 2 TRAVAUX ───
+const TV=[{id:'pac',l:'PAC Air/Eau',i:'🌡️'},{id:'clim',l:'PAC Air/Air',i:'❄️'},{id:'pv',l:'Photovoltaïque',i:'☀️'},{id:'ballon',l:'Ballon Thermo.',i:'🚿'},{id:'ite',l:'Isolation ext.',i:'🏠'},{id:'iti',l:'Isolation int.',i:'🧱'}];
+function rTravaux(){
+  document.getElementById('wiz-content').innerHTML=`
+  <div class="card">
+    <div class="card-title"><div class="ctd"></div>Travaux à réaliser</div>
+    <p style="font-size:13px;color:var(--muted);margin-bottom:16px">Sélectionne tous les travaux prévus chez ce client :</p>
+    <div class="travaux-grid">
+      ${TV.map(t=>`<div class="travaux-item ${S.travaux.includes(t.id)?'checked':''}" onclick="toggleT('${t.id}',this)"><div class="ti-icon">${t.i}</div><div class="ti-label">${t.l}</div></div>`).join('')}
+    </div>
+  </div>`;
+}
+function toggleT(id,el){
+  S.travaux=S.travaux.includes(id)?S.travaux.filter(t=>t!==id):[...S.travaux,id];
+  el.classList.toggle('checked');
+}
+
+// ─── STEP 3 QUESTIONS ───
+function buildQ(){
+  S.questions=[];S.qi=0;
+  const a=(id,trav,text,opts)=>S.questions.push({id,trav,text,opts});
+  if(S.travaux.includes('pac')){
+    a('pac_remplace','pac','Chaudière existante à remplacer ?',['Oui — gaz','Oui — fioul','Oui — électrique','Non — installation neuve']);
+    a('pac_emetteurs','pac','Émetteurs existants ou prévus ?',['Plancher chauffant BT','Radiateurs basse température','Radiateurs haute température','Mixte plancher + radiateurs','Nouveaux radiateurs']);
+    a('pac_bizone','pac','Plusieurs zones de chauffe distinctes ?',['Oui — kit bizone nécessaire','Non — zone unique']);
+    a('pac_ecs','pac','La PAC doit produire l'ECS (eau chaude) ?',['Oui — ballon intégré','Oui — ballon séparé','Non — ECS indépendante']);
+    a('pac_reseau','pac','Réseau hydraulique existant ?',['Cuivre','Acier','PER / multicouche','Inconnu']);
+    a('pac_dist','pac','Distance unité ext. / tableau électrique ?',['< 5m','5 à 15m','15 à 30m','> 30m']);
+  }
+  if(S.travaux.includes('clim')){
+    a('clim_pieces','clim','Nombre de pièces à climatiser ?',['1 pièce','2 pièces','3 pièces','4 pièces et plus']);
+    a('clim_usage','clim','Usage principal de la climatisation ?',['Refroidissement été uniquement','Refroidissement + chauffage appoint','Chauffage principal hiver']);
+  }
+  if(S.travaux.includes('pv')){
+    a('pv_puiss','pv','Puissance PV souhaitée ?',['3 kWc (6 panneaux)','6 kWc (12 panneaux)','9 kWc (18 panneaux)','12 kWc et plus','À définir selon toiture']);
+    a('pv_orient','pv','Orientation principale de la toiture ?',['Sud','Sud-Est ou Sud-Ouest','Est ou Ouest','Multiple / complexe']);
+    a('pv_toiture','pv','Type de couverture de toiture ?',['Tuiles rondes','Tuiles plates','Ardoises','Bac acier / zinc','Fibrociment (amiante possible)','Toit terrasse']);
+    a('pv_elec','pv','Type de branchement électrique ?',['Monophasé','Triphasé','Inconnu']);
+  }
+  if(S.travaux.includes('ballon')){
+    a('bal_type','ballon','Type de ballon à installer ?',['Thermodynamique (PAC sur air)','Électrique standard','Remplacement ballon existant']);
+    a('bal_vol','ballon','Volume souhaité ?',['150 litres','200 litres','270 litres','300 litres et plus']);
+    a('bal_loc','ballon','Emplacement du ballon ?',['Garage','Buanderie','Combles','Cave','Autre local technique']);
+  }
+  if(S.travaux.includes('ite')){
+    a('ite_fac','ite','Façades à isoler ?',['Toutes les façades','Façade principale uniquement','Pignons uniquement','Selon relevé sur place']);
+    a('ite_mat','ite','Isolant envisagé ?',['Laine de roche + enduit','PSE graphité (polystyrène)','Laine de bois','Au choix du client']);
+  }
+  if(S.travaux.includes('iti')){
+    a('iti_pieces','iti','Pièces à isoler en intérieur ?',['Toutes les pièces','Chambres uniquement','Séjour + cuisine','Pièces donnant sur extérieur']);
+    a('iti_mur','iti','Type de murs ?',['Béton banché','Parpaing','Brique creuse','Brique pleine / pisé','Inconnu']);
+  }
+}
+
+const QCOL={pac:'#ea580c',clim:'#2563b0',pv:'#ca8a04',ballon:'#0f766e',ite:'#16a34a',iti:'#7c3aed'};
+const QLBL={pac:'🌡️ PAC Air/Eau',clim:'❄️ PAC Air/Air',pv:'☀️ Photovoltaïque',ballon:'🚿 Ballon',ite:'🏠 Isolation ext.',iti:'🧱 Isolation int.'};
+
+function rQuestions(){
+  if(S.questions.length===0){S.step++;render();return;}
+  const q=S.questions[S.qi];
+  const col=QCOL[q.trav]||'var(--blue2)';
+  document.getElementById('wiz-content').innerHTML=`
+  <div style="font-size:12px;color:var(--muted);margin-bottom:10px">Question ${S.qi+1} sur ${S.questions.length}</div>
+  <div class="card">
+    <span class="q-badge" style="background:${col}22;color:${col}">${QLBL[q.trav]}</span>
+    <div class="q-text">${q.text}</div>
+    <div class="options-list">
+      ${q.opts.map(o=>`<button class="option-btn ${S.data[q.id]===o?'selected':''}" onclick="pickOpt(this,'${q.id}','${o.replace(/'/g,"\'")}')">${o}</button>`).join('')}
+    </div>
+  </div>`;
+  document.getElementById('btn-next').textContent=S.qi<S.questions.length-1?'Question suivante →':'Passer aux photos →';
+}
+function pickOpt(el,id,val){
+  document.querySelectorAll('.option-btn').forEach(b=>b.classList.remove('selected'));
+  el.classList.add('selected');
+  S.data[id]=val;
+}
+
+// ─── STEP 4 PHOTOS ───
+function getSlots(){
+  const slots=[];
+  const a=(id,label,hint,ia)=>slots.push({id,label,hint,ia:!!ia});
+  a('compteur','Compteur électrique','Compteur général bien visible + numéro PDL si possible',1);
+  a('tableau','Tableau électrique','Ouvert, disjoncteurs bien visibles',1);
+  if(S.travaux.includes('pac')){
+    a('chaud_loin','Chaudière — vue générale','Chaudière entière + local technique',1);
+    a('chaud_pres','Chaudière — étiquette','Marque, modèle, puissance lisibles',1);
+    a('reseau','Réseau hydraulique','Tuyauteries départ/retour + état',1);
+    a('ext_pac','Emplacement groupe extérieur','Zone prévue pour l'unité extérieure');
+  }
+  if(S.travaux.includes('clim')){
+    a('split1','Emplacement split — pièce 1','Position unité intérieure + passage gaines');
+    if(S.data.clim_pieces&&S.data.clim_pieces!=='1 pièce') a('split2','Emplacement split — pièce 2','Position unité intérieure + passage gaines');
+    a('ext_clim','Unité extérieure clim','Zone prévue, accessibilité');
+  }
+  if(S.travaux.includes('pv')){
+    a('toiture','Toiture — vue générale','Photo complète depuis le sol',1);
+    a('tuiles','Couverture — détail','Type de tuiles/matériau bien visible',1);
+    a('charpente','Charpente — depuis combles','Depuis l'intérieur si accessible',1);
+    a('disjo','Disjoncteur principal','Ampérage et type visibles',1);
+  }
+  if(S.travaux.includes('ballon')){
+    a('ballon_ex','Ballon/chauffe-eau existant','Vue complète avec contenance visible',1);
+    a('ballon_loc','Emplacement prévu — ballon','Local + espace disponible');
+  }
+  if(S.travaux.includes('ite')){
+    a('facade1','Façade principale','Vue complète depuis la rue',1);
+    a('facade2','Autre(s) façade(s)','Pignon / façade arrière',1);
+  }
+  if(S.travaux.includes('iti')){
+    a('mur1','Mur intérieur — pièce 1','Vue complète + état de surface',1);
+    a('mur2','Mur intérieur — pièce 2','Vue complète + état de surface',1);
+  }
+  a('facture_elec','Facture électricité','Page avec consommation annuelle kWh visible',1);
+  if(S.data.pac_remplace&&S.data.pac_remplace.includes('gaz')) a('facture_gaz','Facture gaz','Consommation annuelle bien visible',1);
+  if(S.data.pac_remplace&&S.data.pac_remplace.includes('fioul')) a('facture_fioul','Bon livraison fioul','Quantité litres visible',1);
+  return slots;
+}
+
+function rPhotos(){
+  const slots=getSlots();
+  let html='<div class="card"><div class="card-title"><div class="ctd"></div>Photos requises</div>';
+  html+=`<p style="font-size:12px;color:var(--muted);margin-bottom:16px">${slots.length} photos à prendre. L'IA analyse chaque photo automatiquement.</p>`;
+  slots.forEach(sl=>{
+    const has=!!S.photos[sl.id];
+    html+=`<div class="photo-section">
+      <div class="photo-label">${sl.ia?'<span class="ia-badge">🤖 IA</span>':''} ${sl.label}</div>
+      <div class="photo-hint">${sl.hint}</div>
+      <div class="photo-slot ${has?'has-photo':''}" id="slot-${sl.id}" onclick="document.getElementById('inp-${sl.id}').click()">
+        ${has?`<img src="${S.photos[sl.id].prev}" alt="">`:
+          '<div class="slot-empty"><div class="slot-empty-icon">📷</div><div class="slot-empty-txt">Appuyer pour prendre<br>ou choisir une photo</div></div>'}
+      </div>
+      <input class="photo-input" id="inp-${sl.id}" type="file" accept="image/*" onchange="onPhoto(event,'${sl.id}',${sl.ia?1:0})">
+      <div class="ia-loading" id="ial-${sl.id}"><div class="ia-spinner"></div><span>Analyse IA…</span></div>
+      <div class="ia-result ${S.photos[sl.id]?.cls||''} ${S.photos[sl.id]?.ia?'show':''}" id="iar-${sl.id}">${S.photos[sl.id]?.ia||''}</div>
+    </div>`;
+  });
+  html+='</div>';
+  document.getElementById('wiz-content').innerHTML=html;
+}
+
+const IA_PROMPTS={
+  compteur:"Analyse ce compteur électrique. Dis : 1) Mono ou triphasé 2) Puissance souscrite si visible 3) PDL si lisible 4) État. Max 4 lignes. Commence par ✅ si OK ou ⚠️ si attention.",
+  tableau:"Analyse ce tableau électrique. Dis : 1) Mono ou triphasé 2) Ampérage disjoncteur principal 3) Présence différentiel 4) Vétusté / mise aux normes. Max 4 lignes. ✅ ou ⚠️.",
+  chaud_loin:"Identifie cette chaudière. Type (gaz/fioul/élec), marque si visible, état général. Max 3 lignes. ✅ ou ⚠️.",
+  chaud_pres:"Lis cette étiquette chaudière. Extrait marque, modèle, puissance kW, année. Max 3 lignes. ✅ si lisible.",
+  reseau:"Analyse ce réseau hydraulique. Matériau (cuivre/acier/PER), état, compatibilité PAC. Max 3 lignes. ✅ ou ⚠️.",
+  toiture:"Analyse cette toiture. Estime surface utile, orientation, obstacles (velux, cheminée). Max 4 lignes. ✅ ou ⚠️.",
+  tuiles:"Identifie la couverture. Type exact, compatibilité PV, alerte si fibrociment/amiante probable. Max 3 lignes. ✅ ou ⚠️.",
+  charpente:"Analyse cette charpente. Type, état, surface estimée pour PV, renforcement nécessaire ? Max 4 lignes. ✅ ou ⚠️.",
+  disjo:"Identifie ce disjoncteur. Mono/triphasé, ampérage, capacité raccordement PV. Max 3 lignes. ✅ ou ⚠️.",
+  ballon_ex:"Analyse ce ballon. Type, volume si visible, année, état. Max 3 lignes. ✅ ou ⚠️.",
+  facade1:"Analyse cette façade. Estime surface brute m², ouvrants (fenêtres/portes), éléments saillants, surface nette isolable. Max 4 lignes. ✅ ou ⚠️.",
+  facade2:"Analyse cette façade latérale. Surface brute estimée, ouvrants, surface nette isolable. Max 3 lignes. ✅ ou ⚠️.",
+  mur1:"Analyse ce mur intérieur. Matériau apparent, état, humidité/moisissures, compatible ITI ? Max 3 lignes. ✅ ou ⚠️.",
+  mur2:"Analyse ce mur intérieur. Matériau, état, moisissures éventuelles, compatible ITI ? Max 3 lignes. ✅ ou ⚠️.",
+  facture_elec:"Lis cette facture électricité. Extrait consommation annuelle kWh, montant €/an, option tarifaire, puissance souscrite. ✅ si lisible.",
+  facture_gaz:"Lis cette facture gaz. Extrait consommation kWh ou m³/an, montant €/an. ✅ si lisible.",
+  facture_fioul:"Lis ce bon livraison fioul. Extrait quantité litres, estimation annuelle. ✅ si lisible.",
 };
 
-function updateZoneInfo() {
-  const z = document.getElementById('pac-zone').value;
-  const hint = document.getElementById('zone-hint');
-  if (z && ZONE_DATA[z]) {
-    const d = ZONE_DATA[z];
-    hint.textContent = `${d.label} — Tbase ${d.tbase}°C — ${d.heures}h de chauffage/an estimées`;
-  } else hint.textContent = '';
-}
-
-// ── T DÉPART AUTO ──
-function updateTdep() {
-  const em = document.getElementById('pac-emetteurs').value;
-  const inp = document.getElementById('pac-tdep');
-  const hint = document.getElementById('tdep-hint');
-  if (em === 'plancher') { inp.value = 40; hint.textContent = 'Plancher chauffant BT → 35–45°C recommandé'; }
-  else if (em === 'rad-bt') { inp.value = 50; hint.textContent = 'Radiateurs BT → 45–55°C recommandé'; }
-  else if (em === 'rad-ht') { inp.value = 65; hint.textContent = 'Radiateurs HT existants → 55–65°C (COP réduit, attention)'; }
-  else if (em === 'mixte') { inp.value = 45; hint.textContent = 'Mixte plancher + radiateurs BT → 40–50°C'; }
-  else { inp.value = 55; hint.textContent = 'Nouveaux radiateurs → 45–55°C conseillé'; }
-  calcPAC();
-}
-
-// ── GÉOLOCALISATION ──
-function geolocMe() {
-  if (!navigator.geolocation) { alert('Géolocalisation non disponible sur cet appareil.'); return; }
-  navigator.geolocation.getCurrentPosition(async pos => {
-    const {latitude: lat, longitude: lon} = pos.coords;
-    try {
-      const r = await fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lon}&zoom=16`);
-      const d = await r.json();
-      const addr = d.display_name || `${lat.toFixed(4)}, ${lon.toFixed(4)}`;
-      document.getElementById('pac-adresse').value = addr;
-      document.getElementById('pv-adresse').value = addr;
-      document.getElementById('pv-lat').value = lat.toFixed(4);
-      document.getElementById('pv-lon').value = lon.toFixed(4);
-      syncSynth();
-    } catch(e) {
-      document.getElementById('pac-adresse').value = `${lat.toFixed(4)}, ${lon.toFixed(4)}`;
-    }
-  }, () => alert('Impossible de récupérer la position. Vérifie les autorisations GPS.'));
-}
-
-function geolocPV() {
-  if (!navigator.geolocation) return;
-  navigator.geolocation.getCurrentPosition(async pos => {
-    const {latitude:lat,longitude:lon} = pos.coords;
-    document.getElementById('pv-lat').value = lat.toFixed(4);
-    document.getElementById('pv-lon').value = lon.toFixed(4);
-    try {
-      const r = await fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lon}&zoom=16`);
-      const d = await r.json();
-      document.getElementById('pv-adresse').value = d.display_name || '';
-    } catch(e){}
-    showAlert('alert-geo','ok','📍 Position GPS récupérée avec succès.');
-  }, () => showAlert('alert-geo','err','Impossible de récupérer la position GPS.'));
-}
-
-async function geocodeAdresse() {
-  const addr = document.getElementById('pv-adresse').value.trim();
-  if (!addr) return;
-  try {
-    const r = await fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(addr)}&limit=1`);
-    const d = await r.json();
-    if (d.length > 0) {
-      document.getElementById('pv-lat').value = parseFloat(d[0].lat).toFixed(4);
-      document.getElementById('pv-lon').value = parseFloat(d[0].lon).toFixed(4);
-      showAlert('alert-geo','ok','✅ Géocodage réussi : ' + d[0].display_name.substring(0,80));
-    } else showAlert('alert-geo','err','Adresse introuvable. Saisie les coordonnées manuellement.');
-  } catch(e) { showAlert('alert-geo','err','Erreur de géocodage. Vérifie ta connexion.'); }
-}
-
-// ── DPE COEFFICIENTS ──
-const DPE_COEFF = {A:35,B:50,C:70,D:90,E:115,F:145,G:180};
-const TYPE_COEFF = {maison:1.0,mitoyen:0.90,mitoyen2:0.82,appart:0.80,'appart-dern':0.88};
-
-// ── CALCUL PAC ──
-function calcPAC(showResult = false) {
-  const surface = parseFloat(document.getElementById('pac-surface').value);
-  const dpe = document.getElementById('pac-dpe').value;
-  const zone = document.getElementById('pac-zone').value;
-  const type = document.getElementById('pac-type').value;
-  const hauteur = parseFloat(document.getElementById('pac-hauteur').value) || 2.5;
-  const tdep = parseFloat(document.getElementById('pac-tdep').value) || 45;
-  const altitude = parseFloat(document.getElementById('pac-altitude').value) || 0;
-
-  if (!surface || !dpe || !zone) {
-    if(showResult) alert('Renseigne la surface, le DPE et la zone climatique.');
-    return;
-  }
-
-  const zoneData = ZONE_DATA[zone];
-  const altCorrection = altitude > 200 ? (altitude - 200) * 0.005 : 0;
-  const tbase = zoneData.tbase - altCorrection;
-
-  const coeff_dep = DPE_COEFF[dpe];
-  const coeff_type = TYPE_COEFF[type] || 1.0;
-  const coeff_zone = zoneData.coeff + altCorrection * 0.05;
-
-  const deperd = (coeff_dep * surface * coeff_zone * coeff_type) / 1000;
-  const pac_puiss = deperd * 1.20;
-
-  let cop;
-  if (tdep <= 35) cop = 5.8;
-  else if (tdep <= 40) cop = 5.2;
-  else if (tdep <= 45) cop = 4.6;
-  else if (tdep <= 50) cop = 4.1;
-  else if (tdep <= 55) cop = 3.7;
-  else if (tdep <= 60) cop = 3.3;
-  else cop = 3.0;
-
-  const heures = zoneData.heures + Math.round(altitude * 0.2);
-  const conso_an = Math.round((deperd * heures) / cop);
-
-  document.getElementById('res-deperd').textContent = deperd.toFixed(1) + ' kW';
-  document.getElementById('res-pac-puiss').textContent = pac_puiss.toFixed(1) + ' kW';
-  document.getElementById('res-cop').textContent = cop.toFixed(1);
-  document.getElementById('res-conso').textContent = conso_an.toLocaleString('fr-FR');
-  document.getElementById('res-tbase').textContent = tbase.toFixed(1) + ' °C';
-  document.getElementById('pac-results').style.display = 'block';
-
-  // Alerte DPE
-  const alertPac = document.getElementById('alert-pac');
-  alertPac.className = 'alert';
-  if (dpe === 'F' || dpe === 'G') {
-    alertPac.textContent = '⚠️ DPE F/G : isolation insuffisante. La PAC sera sous-performante. Recommande une rénovation énergétique avant ou en parallèle de l\'installation.';
-    alertPac.classList.add('alert-warn','show');
-  } else if (['A','B'].includes(dpe)) {
-    alertPac.textContent = '✅ Excellent DPE — logement bien isolé, la PAC sera très performante.';
-    alertPac.classList.add('alert-ok','show');
-  }
-
-  // Confirmation via conso réelle
-  const consoGaz = parseFloat(document.getElementById('conso-gaz').value) || 0;
-  const consoFioul = parseFloat(document.getElementById('conso-fioul').value) || 0;
-  const consoElec = parseFloat(document.getElementById('conso-elec').value) || 0;
-  const consoConfirm = document.getElementById('conso-confirm');
-  const econHint = document.getElementById('eco-pac-hint');
-
-  if (consoGaz > 0 || consoFioul > 0) {
-    const kwh_chauffage = consoGaz > 0 ? consoGaz * 0.85 : consoFioul * 10 * 0.85;
-    const ratio = kwh_chauffage / (deperd * heures);
-    consoConfirm.style.display = 'block';
-    consoConfirm.textContent = `✅ Confirmation via consommation réelle : ${kwh_chauffage.toLocaleString('fr-FR')} kWh chauffage actuel — ratio vs déperditions calc. : ${ratio.toFixed(2)} (0.85–1.15 = cohérent)`;
-
-    // Économie PAC vs ancienne énergie
-    let cout_actuel = 0;
-    let label_eco = '';
-    if (consoGaz > 0) {
-      cout_actuel = consoGaz * 0.85 * 0.0937;
-      label_eco = `Gaz : ${consoGaz.toLocaleString('fr-FR')} kWh/an × 0,0937€ = ${Math.round(cout_actuel)} €/an`;
-    } else if (consoFioul > 0) {
-      cout_actuel = consoFioul * 1.15;
-      label_eco = `Fioul : ${consoFioul.toLocaleString('fr-FR')} L × 1,15€ = ${Math.round(cout_actuel)} €/an`;
-    }
-    const cout_pac = conso_an * 0.2516;
-    const eco_annuelle = Math.round(cout_actuel - cout_pac);
-    if (eco_annuelle > 0) {
-      const roiInp = document.getElementById('roi-eco-pac');
-      if (!roiInp.dataset.manual) roiInp.value = eco_annuelle;
-      econHint.textContent = `${label_eco} → PAC : ${conso_an.toLocaleString('fr-FR')} kWh × 0,2516€ = ${Math.round(cout_pac)} €/an → Économie : ${eco_annuelle} €/an`;
-    }
-  } else consoConfirm.style.display = 'none';
-
-  // Recommandations modèles
-  const gammes = [
-    {nom:'PAC monobloc compact Air/Eau',min:4,max:8,cop:'4.8',note:'Moyen'},
-    {nom:'PAC Air/Eau standard Inverter',min:6,max:14,cop:'4.6',note:'Standard'},
-    {nom:'PAC Air/Eau haute performance',min:8,max:20,cop:'5.1',note:'Premium'},
-    {nom:'PAC Air/Eau grande puissance',min:14,max:40,cop:'4.2',note:'Fort'},
-  ];
-  const rows = document.getElementById('pac-reco-rows');
-  rows.innerHTML = '';
-  gammes.forEach(g => {
-    if (pac_puiss > g.min - 3 && pac_puiss <= g.max + 3) {
-      const ok = pac_puiss >= g.min && pac_puiss <= g.max;
-      const row = document.createElement('div');
-      row.className = 'reco-row' + (ok ? ' ok' : '');
-      row.innerHTML = `<div>${g.nom}</div><div style="font-weight:600">${g.min}–${g.max} kW</div><div><span class="badge ${ok?'badge-green':'badge-gray'}">${ok?'✓ Adapté':'Limite'}</span></div>`;
-      rows.appendChild(row);
-    }
-  });
-
-  document.getElementById('roi-conso-pac').value = conso_an;
-  calcROI();
-  syncSynth();
-}
-
-// ── PVGIS ──
-async function callPVGIS() {
-  const lat = parseFloat(document.getElementById('pv-lat').value);
-  const lon = parseFloat(document.getElementById('pv-lon').value);
-  const kwc = parseFloat(document.getElementById('pv-kwc').value);
-  const incl = parseFloat(document.getElementById('pv-incl').value) || 30;
-  const az = parseFloat(document.getElementById('pv-azimut').value) || 0;
-  const tech = document.getElementById('pv-tech').value;
-  const pertes = parseFloat(document.getElementById('pv-pertes').value) || 14;
-  const montage = document.getElementById('pv-montage').value;
-
-  if (!lat || !lon) { showAlert('alert-pv','err','Géolocalise d\'abord l\'adresse.'); return; }
-  if (!kwc || kwc <= 0) { showAlert('alert-pv','err','Saisis la puissance crête (kWc).'); return; }
-
-  document.getElementById('pv-loader').classList.add('show');
-  document.getElementById('pv-results').style.display = 'none';
-  document.getElementById('alert-pv').classList.remove('show');
-
-  const params = `lat=${lat}&lon=${lon}&peakpower=${kwc}&loss=${pertes}&angle=${incl}&aspect=${az}&pvtechchoice=${tech}&mountingplace=${montage}&outputformat=json&raddatabase=PVGIS-SARAH2`;
-  const direct = `https://re.jrc.ec.europa.eu/api/v5_2/PVcalc?${params}`;
-  const proxy = `https://corsproxy.io/?url=${encodeURIComponent(direct)}`;
-
-  async function tryFetch(u) {
-    const r = await fetch(u, {signal: AbortSignal.timeout(12000)});
-    if (!r.ok) throw new Error('HTTP ' + r.status);
-    return r.json();
-  }
-
-  try {
-    let data;
-    try { data = await tryFetch(direct); } catch(e1) {
-      try { data = await tryFetch(proxy); } catch(e2) { throw new Error('local'); }
-    }
-
-    const totals = data.outputs.totals.fixed;
-    const monthly = data.outputs.monthly.fixed;
-    const prodAn = Math.round(totals.E_y);
-    const spec = Math.round(totals.E_y / kwc);
-    const moisMoy = Math.round(prodAn / 12);
-
-    document.getElementById('pv-prod-an').textContent = prodAn.toLocaleString('fr-FR');
-    document.getElementById('pv-spec').textContent = spec;
-    document.getElementById('pv-mois-moy').textContent = moisMoy;
-
-    const moisNames = ['Jan','Fév','Mar','Avr','Mai','Jun','Jul','Aoû','Sep','Oct','Nov','Déc'];
-    const maxM = Math.max(...monthly.map(m=>m.E_m));
-    const tbody = document.getElementById('pv-month-body');
-    tbody.innerHTML = '';
-
-    let bestMonth = '', bestVal = 0;
-    monthly.forEach((m,i) => {
-      const prod = Math.round(m.E_m);
-      const pct = Math.round((m.E_m / maxM) * 100);
-      if (prod > bestVal) { bestVal = prod; bestMonth = moisNames[i]; }
-      tbody.innerHTML += `<tr><td><strong>${moisNames[i]}</strong></td><td>${prod.toLocaleString('fr-FR')} kWh</td><td>${m.H_i ? Math.round(m.H_i) : '—'}</td><td><div class="bar-wrap"><div class="bar-fill" style="width:${pct}%"></div></div></td></tr>`;
-    });
-
-    document.getElementById('pv-month-table').style.display = 'table';
-    document.getElementById('pv-results').style.display = 'block';
-    showAlert('alert-pv','ok','✅ Données PVGIS-SARAH2 récupérées avec succès.');
-    document.getElementById('roi-prod-pv').value = prodAn;
-
-    window._pvBestMonth = bestMonth;
-    window._pvMonthly = monthly.map((m,i)=>({mois:moisNames[i],prod:Math.round(m.E_m)}));
-    calcROI();
-
-  } catch(e) {
-    // Estimation locale fallback
-    const irradBase = lat > 47 ? 1050 : lat > 44 ? 1250 : 1450;
-    const perf = (100 - pertes)/100;
-    const factAz = 1 - Math.abs(az)/400;
-    const factIn = (incl >= 20 && incl <= 45) ? 1.0 : 0.95;
-    const prodAnEst = Math.round(kwc * irradBase * perf * factAz * factIn);
-    const coeffs = [0.045,0.055,0.085,0.095,0.11,0.115,0.115,0.105,0.09,0.07,0.05,0.065];
-    const moisNames = ['Jan','Fév','Mar','Avr','Mai','Jun','Jul','Aoû','Sep','Oct','Nov','Déc'];
-    const maxC = Math.max(...coeffs);
-    const tbody = document.getElementById('pv-month-body');
-    tbody.innerHTML = '';
-    window._pvMonthly = [];
-    let bestM = '', bestV = 0;
-    coeffs.forEach((c,i) => {
-      const p = Math.round(c * prodAnEst);
-      const pct = Math.round((c/maxC)*100);
-      if(p>bestV){bestV=p;bestM=moisNames[i];}
-      tbody.innerHTML += `<tr><td><strong>${moisNames[i]}</strong></td><td>${p.toLocaleString('fr-FR')} kWh</td><td>—</td><td><div class="bar-wrap"><div class="bar-fill" style="width:${pct}%"></div></div></td></tr>`;
-      window._pvMonthly.push({mois:moisNames[i],prod:p});
-    });
-    window._pvBestMonth = bestM;
-    document.getElementById('pv-prod-an').textContent = prodAnEst.toLocaleString('fr-FR');
-    document.getElementById('pv-spec').textContent = Math.round(prodAnEst/kwc);
-    document.getElementById('pv-mois-moy').textContent = Math.round(prodAnEst/12);
-    document.getElementById('pv-month-table').style.display = 'table';
-    document.getElementById('pv-results').style.display = 'block';
-    document.getElementById('roi-prod-pv').value = prodAnEst;
-    showAlert('alert-pv','warn','⚠️ PVGIS inaccessible. Production estimée localement (±10%) selon lat. ' + lat.toFixed(2) + '°.');
-    calcROI();
-  } finally {
-    document.getElementById('pv-loader').classList.remove('show');
-  }
-}
-
-// ── ROI ──
-let roiData = {labels:[], cumul:[], investNet:0};
-
-function calcROI() {
-  const invest = parseFloat(document.getElementById('roi-invest').value) || 0;
-  const aides = parseFloat(document.getElementById('roi-aides').value) || 0;
-  const prix = parseFloat(document.getElementById('roi-prix-kwh').value) || 0.2516;
-  const autoc = parseFloat(document.getElementById('roi-autoc').value) || 70;
-  const rachat = parseFloat(document.getElementById('roi-rachat').value) || 0.13;
-  const revalor = parseFloat(document.getElementById('roi-revalor').value) || 4;
-  const ecoPac = parseFloat(document.getElementById('roi-eco-pac').value) || 0;
-  const prodPV = parseFloat(document.getElementById('roi-prod-pv').value) || 0;
-
-  if (!invest) return;
-
-  const investNet = invest - aides;
-  const autocKwh = prodPV * (autoc / 100);
-  const surplusKwh = prodPV * ((100 - autoc) / 100);
-  const ecoAutoc = autocKwh * prix;
-  const ecoSurplus = surplusKwh * rachat;
-  const ecoAn1 = ecoAutoc + ecoSurplus + ecoPac;
-  const taux = 1 + revalor / 100;
-
-  document.getElementById('roi-net').textContent = Math.round(investNet).toLocaleString('fr-FR') + ' €';
-  document.getElementById('roi-eco-an1').textContent = Math.round(ecoAn1).toLocaleString('fr-FR') + ' €';
-
-  let cumul = 0, payback = null, gain25 = 0;
-  const labels = [], cumulData = [], investLine = [];
-
-  for (let an = 1; an <= 25; an++) {
-    const eco = (ecoAutoc + ecoSurplus) * Math.pow(taux, an-1) + ecoPac * Math.pow(taux, an-1);
-    cumul += eco;
-    gain25 += eco;
-    if (cumul >= investNet && payback === null) payback = an;
-    labels.push('An ' + an);
-    cumulData.push(Math.round(cumul));
-    investLine.push(Math.round(investNet));
-  }
-
-  document.getElementById('roi-payback').textContent = payback ? payback + ' ans' : '> 25 ans';
-  document.getElementById('roi-gain25').textContent = Math.round(gain25 - investNet).toLocaleString('fr-FR') + ' €';
-
-  roiData = {labels, cumul: cumulData, investNet: Math.round(investNet), payback};
-  document.getElementById('roi-results').style.display = 'block';
-  drawROIChart('roi-chart');
-}
-
-function drawROIChart(canvasId) {
-  const ctx = document.getElementById(canvasId);
-  if (!ctx) return;
-  const existing = canvasId === 'roi-chart' ? roiChartInst : synthChartInst;
-  if (existing) existing.destroy();
-  const inst = new Chart(ctx, {
-    type: 'line',
-    data: {
-      labels: roiData.labels,
-      datasets: [
-        {
-          label: 'Cumul économies',
-          data: roiData.cumul,
-          borderColor: '#1a7a55',
-          backgroundColor: 'rgba(26,122,85,.08)',
-          fill: true,
-          tension: 0.4,
-          pointRadius: 0,
-          pointHoverRadius: 4,
-          borderWidth: 2,
-        },
-        {
-          label: 'Investissement net',
-          data: Array(25).fill(roiData.investNet),
-          borderColor: '#e07b2a',
-          borderDash: [5,4],
-          borderWidth: 1.5,
-          pointRadius: 0,
-          fill: false,
-        }
-      ]
-    },
-    options: {
-      responsive: true,
-      maintainAspectRatio: false,
-      plugins: {
-        legend: {labels: {font:{size:11},boxWidth:16,padding:12}},
-        tooltip: {
-          callbacks: {
-            label: ctx => ctx.dataset.label + ' : ' + Math.round(ctx.raw).toLocaleString('fr-FR') + ' €'
-          }
-        }
-      },
-      scales: {
-        x: {ticks:{font:{size:10},maxTicksLimit:10}, grid:{display:false}},
-        y: {ticks:{font:{size:10}, callback: v => Math.round(v/1000)+'k€'}, grid:{color:'rgba(0,0,0,.06)'}}
+async function onPhoto(e,id,doIA){
+  const file=e.target.files[0];if(!file)return;
+  const reader=new FileReader();
+  reader.onload=async ev=>{
+    const url=ev.target.result;
+    const b64=url.split(',')[1];
+    S.photos[id]={prev:url,b64,mime:file.type,ia:'',cls:''};
+    const slot=document.getElementById('slot-'+id);
+    slot.classList.add('has-photo');
+    slot.innerHTML=`<img src="${url}" alt="">`;
+    if(doIA){
+      document.getElementById('ial-'+id).classList.add('show');
+      try{
+        const prompt=IA_PROMPTS[id]||"Analyse cette photo dans le contexte d'une installation énergétique. Décris en 3 lignes. ✅ ou ⚠️.";
+        const res=await fetch('https://api.anthropic.com/v1/messages',{
+          method:'POST',
+          headers:{'Content-Type':'application/json','x-api-key':API_KEY,'anthropic-version':'2023-06-01'},
+          body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:250,messages:[{role:'user',content:[
+            {type:'image',source:{type:'base64',media_type:file.type||'image/jpeg',data:b64}},
+            {type:'text',text:prompt}
+          ]}]})
+        });
+        const data=await res.json();
+        const txt=data.content[0].text;
+        const cls=txt.includes('❌')?'err':txt.includes('⚠️')?'warn':'ok';
+        S.photos[id].ia=txt;S.photos[id].cls=cls;
+        const el=document.getElementById('iar-'+id);
+        el.textContent=txt;el.className='ia-result show '+cls;
+      }catch(err){
+        const el=document.getElementById('iar-'+id);
+        el.textContent='⚠️ Analyse IA indisponible — photo enregistrée.';
+        el.className='ia-result show warn';
       }
+      document.getElementById('ial-'+id).classList.remove('show');
     }
-  });
-  if (canvasId === 'roi-chart') roiChartInst = inst;
-  else synthChartInst = inst;
+  };
+  reader.readAsDataURL(file);
 }
 
-// ── SYNTHÈSE ──
-function syncSynth() {}
+// ─── STEP 5 RECAP ───
+function rRecap(){
+  const d=S.data;
+  const tStr=S.travaux.map(id=>({pac:'PAC Air/Eau',clim:'PAC Air/Air',pv:'Photovoltaïque',ballon:'Ballon',ite:'ITE',iti:'ITI'}[id])).join(' · ');
+  const date=new Date().toLocaleDateString('fr-FR',{day:'numeric',month:'long',year:'numeric'});
+  const nPh=Object.keys(S.photos).length;
+  const nSlots=getSlots().length;
+  const pct=Math.round(nPh/nSlots*100);
+  const ok=nPh>=nSlots;
+  let qa='';
+  S.questions.forEach(q=>{if(d[q.id])qa+=`<div class="recap-row"><span style="max-width:55%;color:var(--muted)">${q.text.substring(0,38)}…</span><span class="recap-val">${d[q.id]}</span></div>`;});
+  const pgrid=Object.values(S.photos).slice(0,9).map(p=>`<div class="photos-grid-item"><img src="${p.prev}" alt=""></div>`).join('');
+  const iaAlerts=Object.entries(S.photos).filter(([,v])=>v.cls==='warn'||v.cls==='err').map(([k,v])=>`<div style="margin-top:6px;font-size:12px"><strong>${k}</strong>: ${v.ia}</div>`).join('');
 
-function buildSynth() {
-  const setT = (id,v) => { const e=document.getElementById(id); if(e) e.textContent=v||'—'; };
-  const client = document.getElementById('pac-client').value;
-  const adresse = document.getElementById('pac-adresse').value || document.getElementById('pv-adresse').value;
-  const dateVal = document.getElementById('pac-date').value;
-  const date = dateVal ? new Date(dateVal).toLocaleDateString('fr-FR',{day:'numeric',month:'long',year:'numeric'}) : new Date().toLocaleDateString('fr-FR',{day:'numeric',month:'long',year:'numeric'});
+  document.getElementById('wiz-content').innerHTML=`
+  <div class="recap-hero">
+    <div class="recap-logo-txt">HPTM GROUP</div>
+    <div class="recap-name">${d.nom} ${d.pre}</div>
+    <div class="recap-meta">${d.ent} · ${date}</div>
+    <div class="recap-meta">${d.adr}</div>
+    <div class="recap-chips">${S.travaux.map(id=>({pac:'PAC Air/Eau',clim:'PAC Air/Air',pv:'PV',ballon:'Ballon',ite:'ITE',iti:'ITI'}[id])).map(l=>`<span class="recap-chip">${l}</span>`).join('')}</div>
+  </div>
 
-  setT('s-client', client || 'Client non renseigné');
-  setT('s-adresse', adresse || 'Adresse non renseignée');
-  setT('s-date', 'Document établi le ' + date);
+  <div class="card">
+    <div class="card-title"><div class="ctd"></div>Complétude du dossier</div>
+    <div style="display:flex;align-items:center;gap:12px;">
+      <div style="flex:1;background:var(--border);border-radius:4px;height:8px;"><div style="width:${pct}%;background:${ok?'var(--green)':'var(--orange)'};border-radius:4px;height:8px;"></div></div>
+      <span style="font-size:13px;font-weight:600;color:${ok?'var(--green)':'var(--orange)'}">${nPh}/${nSlots} photos</span>
+    </div>
+    <div class="alert ${ok?'alert-ok':'alert-warn'} show" style="margin-top:10px">${ok?'✅ Dossier complet !':'⚠️ '+(nSlots-nPh)+' photo(s) manquante(s) — le dossier sera envoyé avec les photos disponibles.'}</div>
+    ${iaAlerts?'<div class="alert alert-warn show" style="margin-top:8px">⚠️ Points d'attention IA :<br>'+iaAlerts+'</div>':''}
+  </div>
 
-  const surf = document.getElementById('pac-surface').value;
-  const dpe = document.getElementById('pac-dpe').value;
-  const zone = document.getElementById('pac-zone').value;
-  const alt = document.getElementById('pac-altitude').value;
-  const em = document.getElementById('pac-emetteurs');
-  const tdep = document.getElementById('pac-tdep').value;
+  <div class="card">
+    <div class="section-h3">🏠 Bâtiment</div>
+    <div class="recap-row"><span>Surface</span><span class="recap-val">${d.surf} m²</span></div>
+    <div class="recap-row"><span>Volume</span><span class="recap-val">${d.vol||Math.round(d.surf*d.haut)} m³</span></div>
+    ${d.dpe?'<div class="recap-row"><span>DPE</span><span class="recap-val">'+d.dpe+'</span></div>':''}
+    ${d.alt?'<div class="recap-row"><span>Altitude</span><span class="recap-val">'+d.alt+' m</span></div>':''}
+    <div class="recap-row"><span>Personnes</span><span class="recap-val">${d.pers}</span></div>
+  </div>
 
-  setT('s-surface', surf ? surf + ' m²' : '—');
-  setT('s-dpe', dpe || '—');
-  setT('s-zone', zone && ZONE_DATA[zone] ? zone + ' — ' + ZONE_DATA[zone].label : '—');
-  setT('s-alt', alt ? alt + ' m' : '0–200 m (plaine)');
-  setT('s-emetteurs', em ? em.options[em.selectedIndex].text : '—');
+  ${qa?`<div class="card"><div class="section-h3">📋 Questionnaire</div>${qa}</div>`:''}
 
-  const deperd = document.getElementById('res-deperd').textContent;
-  const pacPuiss = document.getElementById('res-pac-puiss').textContent;
-  const cop = document.getElementById('res-cop').textContent;
-  const conso = document.getElementById('res-conso').textContent;
+  ${pgrid?`<div class="card"><div class="section-h3">📸 Photos (${nPh})</div><div class="photos-grid">${pgrid}</div></div>`:''}
 
-  setT('s-deperd', deperd !== '—' ? deperd : '—');
-  setT('s-pac-puiss', pacPuiss !== '—' ? pacPuiss : '—');
-  setT('s-tdep', tdep ? tdep + ' °C' : '—');
-  setT('s-cop', cop !== '—' ? cop : '—');
-  setT('s-conso', conso !== '—' ? conso + ' kWh/an' : '—');
-  setT('s-pac-kw', pacPuiss !== '—' ? pacPuiss.replace(' kW','') : '—');
+  <div class="send-box">
+    <h3>📤 Envoyer le dossier</h3>
+    <p>Le dossier sera envoyé à<br><strong>${MAIL}</strong><br>avec toutes les informations client.</p>
+    <div class="send-btns">
+      <button class="btn btn-teal" style="flex:none;padding:13px 24px;" onclick="doSend()">Envoyer par mail</button>
+    </div>
+  </div>`;
+}
 
-  const prodAn = document.getElementById('pv-prod-an').textContent;
-  const kwc = document.getElementById('pv-kwc').value;
-  const spec = document.getElementById('pv-spec').textContent;
-  const pvSection = document.getElementById('s-pv-section');
+function doSend(){
+  const d=S.data;
+  const travaux=S.travaux.map(id=>({pac:'PAC',clim:'AIR-AIR',pv:'PV',ballon:'BALLON',ite:'ITE',iti:'ITI'}[id])).join('+');
+  const ref=`${d.ent}_${d.nom}_${d.pre}_${travaux}_${Date.now().toString().slice(-5)}`.replace(/\s+/g,'_');
+  const date=new Date().toLocaleDateString('fr-FR');
+  const nPh=Object.keys(S.photos).length;
 
-  if (prodAn !== '—' && kwc) {
-    pvSection.style.display = 'block';
-    setT('s-kwc', kwc + ' kWc');
-    setT('s-prod-an', prodAn + ' kWh/an');
-    setT('s-spec-synth', spec + ' kWh/kWc');
-    setT('s-best-month', window._pvBestMonth || '—');
-    setT('s-pv-kwc', kwc);
-  } else {
-    pvSection.style.display = 'none';
-    setT('s-pv-kwc', '—');
+  let body=`DOSSIER INSTALLATION — HPTM GROUP
+Référence : ${ref}
+Date : ${date}
+
+ENTREPRISE : ${d.ent}
+COMMERCIAL : ${d.com||'—'}
+
+CLIENT
+Nom : ${d.nom} ${d.pre}
+Tél : ${d.tel||'—'}
+Email : ${d.mail||'—'}
+
+CHANTIER
+Adresse : ${d.adr}
+Surface : ${d.surf} m²  |  Volume : ${d.vol||'—'} m³
+DPE : ${d.dpe||'—'}  |  Altitude : ${d.alt||'—'} m
+Personnes : ${d.pers}
+
+TRAVAUX DEMANDÉS
+${S.travaux.map(id=>({pac:'• PAC Air/Eau',clim:'• PAC Air/Air (Climatisation)',pv:'• Photovoltaïque',ballon:'• Ballon Thermodynamique',ite:'• Isolation Extérieure (ITE)',iti:'• Isolation Intérieure (ITI)'}[id])).join('
+')}
+
+QUESTIONNAIRE TERRAIN
+${S.questions.map(q=>`${q.text}
+→ ${S.data[q.id]||'Non renseigné'}`).join('
+
+')}
+
+ANALYSE IA PHOTOS
+${Object.entries(S.photos).filter(([,v])=>v.ia).map(([k,v])=>`[${k}]
+${v.ia}`).join('
+
+')}
+
+---
+${nPh} photo(s) — à joindre manuellement depuis la galerie
+Référence dossier : ${ref}`;
+
+  const subj=encodeURIComponent(`[${d.ent}] ${d.nom} ${d.pre} — ${travaux} — ${date}`);
+  window.location.href=`mailto:${MAIL}?subject=${subj}&body=${encodeURIComponent(body)}`;
+  setTimeout(()=>{
+    if(nPh>0) alert(`📸 N'oublie pas de joindre les ${nPh} photo(s) au mail !
+
+Elles se trouvent dans ta galerie photo.
+Référence : ${ref}`);
+  },1500);
+}
+
+// ─── WIZARD NAV ───
+function wizNext(){
+  const step=STEPS[S.step];
+  if(step==='infos'){if(!saveInfos())return;}
+  if(step==='travaux'){if(S.travaux.length===0){alert('Sélectionne au moins un type de travaux.');return;}buildQ();}
+  if(step==='questions'){
+    if(S.qi<S.questions.length-1){S.qi++;rQuestions();document.getElementById('wiz-content').scrollTop=0;return;}
   }
-
-  const net = document.getElementById('roi-net').textContent;
-  const eco = document.getElementById('roi-eco-an1').textContent;
-  const pb = document.getElementById('roi-payback').textContent;
-  const g25 = document.getElementById('roi-gain25').textContent;
-  const roiSection = document.getElementById('s-roi-section');
-
-  if (net !== '—') {
-    roiSection.style.display = 'block';
-    setT('s-invest-net', net);
-    setT('s-eco-an', eco + '/an');
-    setT('s-payback-big', pb.replace(' ans',''));
-    setT('s-payback-hero', pb.replace(' ans',''));
-    setT('s-gain25', g25);
-    setTimeout(() => drawROIChart('synth-chart'), 100);
-  } else {
-    roiSection.style.display = 'none';
-    setT('s-payback-hero', '—');
-  }
+  if(S.step===STEPS.length-1){doSend();return;}
+  S.step++;render();
 }
 
-// ── UTILS ──
-function showAlert(id, type, msg) {
-  const el = document.getElementById(id);
-  if (!el) return;
-  el.className = 'alert show alert-' + (type==='ok'?'ok':type==='warn'?'warn':'err');
-  el.textContent = msg;
+function wizBack(){
+  if(STEPS[S.step]==='questions'&&S.qi>0){S.qi--;rQuestions();document.getElementById('wiz-content').scrollTop=0;return;}
+  if(S.step===0){goScreen('screen-home');return;}
+  S.step--;render();
 }
 
-function copyText() {
-  const el = document.getElementById('synth-content');
-  navigator.clipboard.writeText(el.innerText).then(() => alert('Synthèse copiée !'));
+// ─── CHATBOTS ───
+const chatHistory={home:[],aide:[]};
+async function sendChat(who){
+  const inp=document.getElementById(who+'-inp');
+  const txt=inp.value.trim();if(!txt)return;
+  inp.value='';
+  addMsg(who+'-msgs',txt,'user');
+  chatHistory[who].push({role:'user',content:txt});
+  try{
+    const r=await fetch('https://api.anthropic.com/v1/messages',{
+      method:'POST',
+      headers:{'Content-Type':'application/json','x-api-key':API_KEY,'anthropic-version':'2023-06-01'},
+      body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:350,system:"Tu es l'assistant technique de HPTM GROUP, spécialiste en PAC, photovoltaïque, isolation et ballon thermodynamique. Réponds en français, de façon concise et pratique (max 5-6 lignes). Tu connais les aides françaises 2024 (MaPrimeRénov', CEE, éco-PTZ).",messages:chatHistory[who]})
+    });
+    const data=await r.json();
+    const rep=data.content[0].text;
+    chatHistory[who].push({role:'assistant',content:rep});
+    addMsg(who+'-msgs',rep,'ai');
+  }catch(e){addMsg(who+'-msgs','Service IA momentanément indisponible.','ai');}
 }
 
-// Init date
-document.getElementById('pac-date').value = new Date().toISOString().split('T')[0];
+function quickQ(q){document.getElementById('aide-inp').value=q;sendChat('aide');}
 
-// ── PWA SERVICE WORKER ──
-if ('serviceWorker' in navigator) {
-  const swCode = `
-const CACHE = 'teva-dim-v1';
-const ASSETS = [location.href];
-self.addEventListener('install', e => e.waitUntil(caches.open(CACHE).then(c => c.addAll(ASSETS))));
-self.addEventListener('fetch', e => e.respondWith(caches.match(e.request).then(r => r || fetch(e.request))));
-`;
-  const blob = new Blob([swCode], {type:'application/javascript'});
-  const swUrl = URL.createObjectURL(blob);
-  navigator.serviceWorker.register(swUrl);
+function addMsg(cid,txt,who){
+  const c=document.getElementById(cid);
+  const d=document.createElement('div');
+  d.className='msg msg-'+who;d.textContent=txt;
+  c.appendChild(d);c.scrollTop=c.scrollHeight;
 }
 
-// ── PWA INSTALL PROMPT ──
-let deferredPrompt;
-window.addEventListener('beforeinstallprompt', e => {
-  e.preventDefault();
-  deferredPrompt = e;
-  document.getElementById('install-btn').style.display = 'block';
-});
-document.getElementById('install-btn').addEventListener('click', () => {
-  if (deferredPrompt) { deferredPrompt.prompt(); deferredPrompt.waitForOutcomeresult?.(); deferredPrompt = null; }
-});
+// ─── UTILS ───
+function showAlert(id,type,msg){
+  const el=document.getElementById(id);
+  if(!el)return;
+  el.className='alert show alert-'+type;
+  el.textContent=msg;
+}
+
+// PWA
+if('serviceWorker' in navigator){
+  const sw=`const C='hptm-v1';self.addEventListener('install',e=>e.waitUntil(caches.open(C).then(c=>c.addAll(['/']))));self.addEventListener('fetch',e=>e.respondWith(caches.match(e.request).then(r=>r||fetch(e.request))));`;
+  navigator.serviceWorker.register(URL.createObjectURL(new Blob([sw],{type:'application/javascript'})));
+}
 </script>
 </body>
 </html>
