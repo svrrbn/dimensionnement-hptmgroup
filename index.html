@@ -5,770 +5,668 @@
 <meta name="viewport" content="width=device-width,initial-scale=1.0,viewport-fit=cover">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="HPTM">
 <meta name="theme-color" content="#1e3a5f">
 <title>HPTM GROUP</title>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
 <style>
-:root{
-  --blue:#1e3a5f;--blue2:#2563b0;--blue-l:#e8f0fb;
-  --teal:#0f766e;--teal-l:#ccfbf1;
-  --green:#16a34a;--green-l:#dcfce7;
-  --orange:#ea580c;--orange-l:#ffedd5;
-  --purple:#7c3aed;--purple-l:#ede9fe;
-  --red:#dc2626;--red-l:#fee2e2;
-  --gray:#64748b;--gray-l:#f1f5f9;
-  --text:#0f172a;--muted:#64748b;--hint:#94a3b8;
-  --card:#fff;--bg:#f8fafc;--border:#e2e8f0;
-  --shadow:0 1px 3px rgba(0,0,0,.08),0 4px 12px rgba(0,0,0,.06);
-  --radius:14px;--radius-sm:10px;
-}
+:root{--bl:#1e3a5f;--bl2:#2563b0;--bll:#e8f0fb;--tl:#0f766e;--tll:#ccfbf1;--gn:#16a34a;--gnl:#dcfce7;--or:#ea580c;--orl:#ffedd5;--pu:#7c3aed;--pul:#ede9fe;--rd:#dc2626;--rdl:#fee2e2;--gy:#64748b;--gyl:#f1f5f9;--tx:#0f172a;--mu:#64748b;--hn:#94a3b8;--ca:#fff;--bg:#f8fafc;--bd:#e2e8f0;}
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
 html,body{height:100%;overflow:hidden;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;}
-body{background:var(--bg);color:var(--text);display:flex;flex-direction:column;}
-.screen{display:none;flex-direction:column;height:100%;}
-.screen.active{display:flex;}
-
-/* HOME */
-.home-scroll{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;}
-.home-header{background:linear-gradient(145deg,#1e3a5f 0%,#2d5fa6 60%,#0f766e 100%);padding:calc(env(safe-area-inset-top,0px) + 32px) 20px 36px;text-align:center;position:relative;overflow:hidden;}
-.home-header::before{content:"";position:absolute;top:-60px;right:-60px;width:200px;height:200px;border-radius:50%;background:rgba(255,255,255,.06);}
-.logo-box{width:90px;height:90px;border-radius:20px;background:rgba(255,255,255,.15);border:2px solid rgba(255,255,255,.3);display:flex;flex-direction:column;align-items:center;justify-content:center;margin:0 auto 16px;position:relative;z-index:1;}
-.logo-text{font-size:22px;font-weight:900;color:#fff;letter-spacing:-.03em;line-height:1;}
-.logo-sub{font-size:8px;font-weight:600;color:rgba(255,255,255,.8);letter-spacing:.15em;text-transform:uppercase;margin-top:3px;}
-.home-title{font-size:24px;font-weight:700;color:#fff;letter-spacing:-.03em;position:relative;z-index:1;}
-.home-sub{font-size:13px;color:rgba(255,255,255,.7);margin-top:6px;position:relative;z-index:1;}
-.home-cards{padding:20px 16px 8px;}
-.feature-card{background:var(--card);border-radius:var(--radius);padding:18px;margin-bottom:12px;box-shadow:var(--shadow);display:flex;align-items:center;gap:16px;cursor:pointer;transition:transform .15s;border:1px solid var(--border);}
-.feature-card:active{transform:scale(.98);}
-.feature-icon{width:52px;height:52px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:26px;flex-shrink:0;}
-.ic-blue{background:var(--blue-l);}
-.ic-teal{background:var(--teal-l);}
-.feature-text h3{font-size:15px;font-weight:600;margin-bottom:3px;}
-.feature-text p{font-size:12px;color:var(--muted);line-height:1.4;}
-.chatbot-wrap{margin:0 16px 24px;}
-.chatbot-bubble{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);border:1px solid var(--border);overflow:hidden;}
-.chat-header{background:linear-gradient(90deg,var(--blue),var(--blue2));padding:12px 16px;display:flex;align-items:center;gap:10px;}
-.chat-dot{width:8px;height:8px;border-radius:50%;background:#4ade80;animation:blink 1.5s ease-in-out infinite;}
+body{background:var(--bg);color:var(--tx);display:flex;flex-direction:column;}
+.sc{display:none;flex-direction:column;height:100%;}.sc.on{display:flex;}
+.scroll{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;}
+/* HEADER HOME */
+.hh{background:linear-gradient(145deg,#1e3a5f,#2d5fa6 60%,#0f766e);padding:calc(env(safe-area-inset-top,0px)+28px) 20px 32px;text-align:center;position:relative;overflow:hidden;}
+.hh::before{content:"";position:absolute;top:-60px;right:-60px;width:200px;height:200px;border-radius:50%;background:rgba(255,255,255,.06);}
+.logo-b{width:88px;height:88px;border-radius:20px;background:rgba(255,255,255,.15);border:2px solid rgba(255,255,255,.3);display:flex;flex-direction:column;align-items:center;justify-content:center;margin:0 auto 14px;position:relative;z-index:1;}
+.logo-t{font-size:22px;font-weight:900;color:#fff;line-height:1;}
+.logo-s{font-size:8px;font-weight:600;color:rgba(255,255,255,.75);letter-spacing:.15em;text-transform:uppercase;margin-top:3px;}
+.ht{font-size:24px;font-weight:700;color:#fff;letter-spacing:-.02em;position:relative;z-index:1;}
+.hs{font-size:13px;color:rgba(255,255,255,.7);margin-top:5px;position:relative;z-index:1;}
+.hcards{padding:18px 16px 6px;}
+.fc{background:var(--ca);border-radius:14px;padding:17px;margin-bottom:11px;box-shadow:0 1px 3px rgba(0,0,0,.08),0 4px 12px rgba(0,0,0,.06);display:flex;align-items:center;gap:15px;cursor:pointer;border:1px solid var(--bd);transition:transform .15s;}
+.fc:active{transform:scale(.98);}
+.fi{width:50px;height:50px;border-radius:13px;display:flex;align-items:center;justify-content:center;font-size:25px;flex-shrink:0;}
+.fi-bl{background:var(--bll);}
+.fi-tl{background:var(--tll);}
+.ft h3{font-size:15px;font-weight:600;margin-bottom:3px;}
+.ft p{font-size:12px;color:var(--mu);line-height:1.4;}
+/* CHAT */
+.cw{margin:0 16px 22px;}
+.cb{background:var(--ca);border-radius:14px;box-shadow:0 1px 3px rgba(0,0,0,.08),0 4px 12px rgba(0,0,0,.06);border:1px solid var(--bd);overflow:hidden;}
+.ch{background:linear-gradient(90deg,var(--bl),var(--bl2));padding:11px 15px;display:flex;align-items:center;gap:9px;}
+.cd{width:8px;height:8px;border-radius:50%;background:#4ade80;animation:blink 1.5s ease-in-out infinite;}
 @keyframes blink{0%,100%{opacity:1}50%{opacity:.4}}
-.chat-header span{font-size:13px;font-weight:600;color:#fff;}
-.chat-msgs{padding:12px;height:160px;overflow-y:auto;display:flex;flex-direction:column;gap:8px;}
-.msg{max-width:82%;padding:9px 13px;border-radius:12px;font-size:13px;line-height:1.45;}
-.msg-ai{background:var(--gray-l);color:var(--text);align-self:flex-start;border-bottom-left-radius:4px;}
-.msg-user{background:var(--blue2);color:#fff;align-self:flex-end;border-bottom-right-radius:4px;}
-.chat-input-row{display:flex;gap:8px;padding:10px 12px;border-top:1px solid var(--border);}
-.chat-input{flex:1;padding:10px 12px;border:1.5px solid var(--border);border-radius:10px;font-size:14px;font-family:inherit;background:var(--bg);color:var(--text);}
-.chat-input:focus{outline:none;border-color:var(--blue2);}
-.chat-send{background:var(--blue2);color:#fff;border:none;border-radius:10px;padding:10px 14px;font-size:16px;cursor:pointer;}
-
+.ch span{font-size:13px;font-weight:600;color:#fff;}
+.cm{padding:11px;height:155px;overflow-y:auto;display:flex;flex-direction:column;gap:7px;}
+.msg{max-width:82%;padding:8px 12px;border-radius:11px;font-size:13px;line-height:1.45;}
+.ma{background:var(--gyl);color:var(--tx);align-self:flex-start;border-bottom-left-radius:3px;}
+.mu2{background:var(--bl2);color:#fff;align-self:flex-end;border-bottom-right-radius:3px;}
+.ci{display:flex;gap:7px;padding:9px 11px;border-top:1px solid var(--bd);}
+.ci input{flex:1;padding:10px 12px;border:1.5px solid var(--bd);border-radius:10px;font-size:14px;font-family:inherit;background:var(--bg);color:var(--tx);}
+.ci input:focus{outline:none;border-color:var(--bl2);}
+.cs{background:var(--bl2);color:#fff;border:none;border-radius:10px;padding:10px 13px;font-size:16px;cursor:pointer;}
 /* WIZARD */
-.wiz-header{background:var(--blue);padding:calc(env(safe-area-inset-top,0px)+14px) 16px 14px;display:flex;align-items:center;gap:12px;flex-shrink:0;}
-.wiz-back{background:rgba(255,255,255,.15);border:none;color:#fff;border-radius:8px;width:36px;height:36px;font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
-.wiz-title{font-size:15px;font-weight:600;color:#fff;flex:1;}
-.wiz-step-lbl{font-size:12px;color:rgba(255,255,255,.7);white-space:nowrap;}
-.progress-bar{height:3px;background:rgba(255,255,255,.2);flex-shrink:0;}
-.progress-fill{height:3px;background:#4ade80;transition:width .4s ease;}
-.wiz-scroll{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:16px 16px 100px;}
-.wiz-footer{position:absolute;bottom:0;left:0;right:0;background:var(--card);border-top:1px solid var(--border);padding:12px 16px calc(env(safe-area-inset-bottom,0px)+12px);display:flex;gap:10px;z-index:50;}
-
+.wh{background:var(--bl);padding:calc(env(safe-area-inset-top,0px)+13px) 15px 13px;display:flex;align-items:center;gap:11px;flex-shrink:0;}
+.wb{background:rgba(255,255,255,.15);border:none;color:#fff;border-radius:8px;width:35px;height:35px;font-size:17px;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.wt{font-size:15px;font-weight:600;color:#fff;flex:1;}
+.ws{font-size:12px;color:rgba(255,255,255,.7);white-space:nowrap;}
+.pb{height:3px;background:rgba(255,255,255,.2);flex-shrink:0;}
+.pf{height:3px;background:#4ade80;transition:width .4s;}
+.wscroll{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:15px 15px 100px;}
+.wfoot{position:absolute;bottom:0;left:0;right:0;background:var(--ca);border-top:1px solid var(--bd);padding:11px 15px calc(env(safe-area-inset-bottom,0px)+11px);display:flex;gap:9px;z-index:50;}
 /* CARDS */
-.card{background:var(--card);border-radius:var(--radius);padding:18px;margin-bottom:14px;box-shadow:var(--shadow);border:1px solid var(--border);}
-.card-title{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-bottom:14px;display:flex;align-items:center;gap:8px;}
-.ctd{width:4px;height:16px;border-radius:2px;background:var(--blue2);flex-shrink:0;}
-
+.card{background:var(--ca);border-radius:14px;padding:17px;margin-bottom:13px;box-shadow:0 1px 3px rgba(0,0,0,.08),0 4px 12px rgba(0,0,0,.06);border:1px solid var(--bd);}
+.ct{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--mu);margin-bottom:13px;display:flex;align-items:center;gap:7px;}
+.ctd{width:4px;height:15px;border-radius:2px;background:var(--bl2);flex-shrink:0;}
 /* FIELDS */
-.field{margin-bottom:14px;}
-.field:last-child{margin-bottom:0;}
-.field label{display:block;font-size:12px;font-weight:600;color:var(--muted);margin-bottom:6px;}
-.field input,.field select{width:100%;padding:12px 14px;font-size:15px;font-family:inherit;border:1.5px solid var(--border);border-radius:var(--radius-sm);background:var(--bg);color:var(--text);transition:border-color .15s;-webkit-appearance:none;appearance:none;}
-.field select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%2364748b' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center;padding-right:36px;}
-.field input:focus,.field select:focus{outline:none;border-color:var(--blue2);box-shadow:0 0 0 3px rgba(37,99,176,.1);background:#fff;}
-.field-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
-.hint{font-size:11px;color:var(--hint);margin-top:4px;line-height:1.4;}
-.geo-row{display:flex;gap:8px;align-items:flex-end;}
-.geo-row .field{flex:1;margin-bottom:0;}
-.geo-btn{flex-shrink:0;padding:0 16px;border:1.5px solid var(--border);border-radius:var(--radius-sm);background:var(--bg);cursor:pointer;font-size:20px;height:50px;display:flex;align-items:center;}
-
+.f{margin-bottom:13px;}.f:last-child{margin-bottom:0;}
+.f label{display:block;font-size:12px;font-weight:600;color:var(--mu);margin-bottom:5px;}
+.f input,.f select{width:100%;padding:12px 13px;font-size:15px;font-family:inherit;border:1.5px solid var(--bd);border-radius:10px;background:var(--bg);color:var(--tx);-webkit-appearance:none;appearance:none;}
+.f select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%2364748b' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 13px center;padding-right:35px;}
+.f input:focus,.f select:focus{outline:none;border-color:var(--bl2);box-shadow:0 0 0 3px rgba(37,99,176,.1);background:#fff;}
+.fr{display:grid;grid-template-columns:1fr 1fr;gap:9px;}
+.hint{font-size:11px;color:var(--hn);margin-top:4px;line-height:1.4;}
+.gr{display:flex;gap:8px;align-items:flex-end;}
+.gr .f{flex:1;margin-bottom:0;}
+.gb{flex-shrink:0;padding:0 14px;border:1.5px solid var(--bd);border-radius:10px;background:var(--bg);cursor:pointer;font-size:20px;height:49px;display:flex;align-items:center;}
 /* TRAVAUX */
-.travaux-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
-.travaux-item{background:var(--bg);border:2px solid var(--border);border-radius:var(--radius-sm);padding:16px 12px;cursor:pointer;text-align:center;transition:all .2s;user-select:none;}
-.travaux-item.checked{background:var(--blue-l);border-color:var(--blue2);}
-.ti-icon{font-size:30px;margin-bottom:8px;}
-.ti-label{font-size:12px;font-weight:600;color:var(--text);}
-.travaux-item.checked .ti-label{color:var(--blue2);}
-
+.tg{display:grid;grid-template-columns:1fr 1fr;gap:9px;}
+.ti{background:var(--bg);border:2px solid var(--bd);border-radius:10px;padding:15px 11px;cursor:pointer;text-align:center;transition:all .2s;user-select:none;}
+.ti.on{background:var(--bll);border-color:var(--bl2);}
+.tii{font-size:29px;margin-bottom:7px;}
+.til{font-size:12px;font-weight:600;color:var(--tx);}
+.ti.on .til{color:var(--bl2);}
 /* OPTIONS */
-.options-list{display:flex;flex-direction:column;gap:8px;}
-.option-btn{padding:13px 16px;border:2px solid var(--border);border-radius:var(--radius-sm);background:var(--bg);font-size:14px;font-family:inherit;text-align:left;cursor:pointer;transition:all .15s;color:var(--text);}
-.option-btn.selected{background:var(--blue-l);border-color:var(--blue2);color:var(--blue2);font-weight:500;}
-.q-badge{display:inline-block;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;padding:3px 10px;border-radius:20px;margin-bottom:10px;}
-.q-text{font-size:16px;font-weight:600;margin-bottom:14px;line-height:1.4;color:var(--text);}
-
+.ol{display:flex;flex-direction:column;gap:7px;}
+.ob{padding:12px 15px;border:2px solid var(--bd);border-radius:10px;background:var(--bg);font-size:14px;font-family:inherit;text-align:left;cursor:pointer;color:var(--tx);}
+.ob.on{background:var(--bll);border-color:var(--bl2);color:var(--bl2);font-weight:500;}
+.qb{display:inline-block;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;padding:3px 9px;border-radius:20px;margin-bottom:9px;}
+.qt{font-size:16px;font-weight:600;margin-bottom:13px;line-height:1.4;}
 /* PHOTOS */
-.photo-section{margin-bottom:18px;}
-.photo-label{font-size:13px;font-weight:600;margin-bottom:3px;display:flex;align-items:center;gap:6px;color:var(--text);}
-.ia-badge{display:inline-flex;align-items:center;gap:3px;background:var(--purple-l);color:var(--purple);border-radius:20px;padding:2px 7px;font-size:10px;font-weight:700;}
-.photo-hint{font-size:11px;color:var(--muted);margin-bottom:10px;}
-.photo-slot{background:var(--bg);border:2px dashed var(--border);border-radius:var(--radius-sm);aspect-ratio:4/3;display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;position:relative;overflow:hidden;transition:all .15s;}
-.photo-slot.has-photo{border-style:solid;border-color:var(--green);}
-.photo-slot img{width:100%;height:100%;object-fit:cover;}
-.slot-empty{display:flex;flex-direction:column;align-items:center;gap:6px;}
-.slot-empty-icon{font-size:28px;opacity:.4;}
-.slot-empty-txt{font-size:11px;color:var(--muted);text-align:center;}
-.photo-input{display:none;}
-.ia-loading{display:none;align-items:center;gap:8px;margin-top:8px;font-size:12px;color:var(--muted);}
-.ia-loading.show{display:flex;}
-.ia-spinner{width:16px;height:16px;border:2px solid var(--border);border-top-color:var(--purple);border-radius:50%;animation:spin .7s linear infinite;}
+.ps{margin-bottom:17px;}
+.pl{font-size:13px;font-weight:600;margin-bottom:3px;display:flex;align-items:center;gap:5px;}
+.ib{display:inline-flex;align-items:center;gap:3px;background:var(--pul);color:var(--pu);border-radius:20px;padding:2px 7px;font-size:10px;font-weight:700;}
+.ph{font-size:11px;color:var(--mu);margin-bottom:9px;}
+.pslot{background:var(--bg);border:2px dashed var(--bd);border-radius:10px;aspect-ratio:4/3;display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;position:relative;overflow:hidden;}
+.pslot.hp{border-style:solid;border-color:var(--gn);}
+.pslot img{width:100%;height:100%;object-fit:cover;}
+.pe{display:flex;flex-direction:column;align-items:center;gap:5px;}
+.pei{font-size:28px;opacity:.4;}
+.pet{font-size:11px;color:var(--mu);text-align:center;}
+.pi{display:none;}
+.ial{display:none;align-items:center;gap:7px;margin-top:7px;font-size:12px;color:var(--mu);}
+.ial.on{display:flex;}
+.isp{width:15px;height:15px;border:2px solid var(--bd);border-top-color:var(--pu);border-radius:50%;animation:spin .7s linear infinite;}
 @keyframes spin{to{transform:rotate(360deg)}}
-.ia-result{border-radius:8px;padding:10px 12px;margin-top:8px;font-size:12px;line-height:1.5;display:none;}
-.ia-result.show{display:block;}
-.ia-result.ok{background:var(--green-l);color:#166534;}
-.ia-result.warn{background:var(--orange-l);color:#9a3412;}
-.ia-result.err{background:var(--red-l);color:#991b1b;}
-
+.iar{border-radius:8px;padding:9px 11px;margin-top:7px;font-size:12px;line-height:1.5;display:none;}
+.iar.on{display:block;}
+.iar.ok{background:var(--gnl);color:#166534;}
+.iar.wa{background:var(--orl);color:#9a3412;}
+.iar.er{background:var(--rdl);color:#991b1b;}
 /* ALERTS */
-.alert{border-radius:var(--radius-sm);padding:12px 14px;font-size:13px;line-height:1.5;margin-top:8px;display:none;}
-.alert.show{display:block;}
-.alert-ok{background:var(--green-l);color:#166534;border:1px solid #86efac;}
-.alert-warn{background:var(--orange-l);color:#9a3412;border:1px solid #fdba74;}
-.alert-err{background:var(--red-l);color:#991b1b;border:1px solid #fca5a5;}
-
+.al{border-radius:10px;padding:11px 13px;font-size:13px;line-height:1.5;margin-top:7px;display:none;}
+.al.on{display:block;}
+.al-ok{background:var(--gnl);color:#166534;border:1px solid #86efac;}
+.al-wa{background:var(--orl);color:#9a3412;border:1px solid #fdba74;}
+.al-er{background:var(--rdl);color:#991b1b;border:1px solid #fca5a5;}
 /* BUTTONS */
-.btn{padding:14px 20px;font-size:15px;font-weight:600;font-family:inherit;border-radius:var(--radius-sm);border:none;cursor:pointer;transition:transform .15s;flex:1;}
-.btn:active{transform:scale(.98);}
-.btn-primary{background:var(--blue2);color:#fff;}
-.btn-secondary{background:var(--gray-l);color:var(--text);border:1px solid var(--border);}
-.btn-teal{background:var(--teal);color:#fff;}
-.btn-sm{padding:10px 14px;font-size:13px;flex:none;}
-
+.btn{padding:13px 18px;font-size:15px;font-weight:600;font-family:inherit;border-radius:10px;border:none;cursor:pointer;flex:1;}
+.btn:active{opacity:.85;}
+.btn-p{background:var(--bl2);color:#fff;}
+.btn-s{background:var(--gyl);color:var(--tx);border:1px solid var(--bd);}
+.btn-t{background:var(--tl);color:#fff;}
+.btn-sm{padding:10px 13px;font-size:13px;flex:none;}
 /* RECAP */
-.recap-hero{background:linear-gradient(135deg,var(--blue) 0%,#2d5fa6 60%,var(--teal) 100%);border-radius:var(--radius);padding:24px;color:#fff;margin-bottom:14px;position:relative;overflow:hidden;}
-.recap-hero::before{content:"";position:absolute;top:-40px;right:-40px;width:140px;height:140px;border-radius:50%;background:rgba(255,255,255,.07);}
-.recap-logo-txt{font-size:18px;font-weight:900;color:#fff;letter-spacing:-.02em;margin-bottom:10px;position:relative;z-index:1;}
-.recap-name{font-size:22px;font-weight:700;position:relative;z-index:1;}
-.recap-meta{font-size:12px;opacity:.8;margin-top:4px;position:relative;z-index:1;}
-.recap-chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:14px;position:relative;z-index:1;}
-.recap-chip{background:rgba(255,255,255,.2);border-radius:20px;padding:4px 12px;font-size:11px;font-weight:600;}
-.recap-row{display:flex;justify-content:space-between;align-items:baseline;padding:7px 0;border-bottom:1px solid var(--border);font-size:13px;}
-.recap-row:last-child{border-bottom:none;}
-.recap-val{font-weight:600;text-align:right;max-width:60%;}
-.section-h3{font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--blue2);margin-bottom:10px;padding-bottom:8px;border-bottom:2px solid var(--blue-l);}
-.send-box{background:linear-gradient(135deg,var(--teal-l),var(--blue-l));border:1px solid #99f6e4;border-radius:var(--radius);padding:20px;text-align:center;margin-bottom:14px;}
-.send-box h3{font-size:16px;font-weight:700;color:var(--blue);margin-bottom:6px;}
-.send-box p{font-size:12px;color:var(--muted);margin-bottom:16px;line-height:1.5;}
-.send-btns{display:flex;gap:10px;justify-content:center;}
-.photos-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-top:10px;}
-.photos-grid-item{border-radius:8px;overflow:hidden;aspect-ratio:1;border:1px solid var(--border);}
-.photos-grid-item img{width:100%;height:100%;object-fit:cover;}
-
+.rh{background:linear-gradient(135deg,#1e3a5f,#2d5fa6 60%,#0f766e);border-radius:14px;padding:22px;color:#fff;margin-bottom:13px;position:relative;overflow:hidden;}
+.rh::before{content:"";position:absolute;top:-35px;right:-35px;width:130px;height:130px;border-radius:50%;background:rgba(255,255,255,.07);}
+.rlt{font-size:17px;font-weight:900;color:#fff;margin-bottom:9px;position:relative;z-index:1;}
+.rn{font-size:21px;font-weight:700;position:relative;z-index:1;}
+.rm{font-size:12px;opacity:.8;margin-top:3px;position:relative;z-index:1;}
+.rc{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px;position:relative;z-index:1;}
+.rch{background:rgba(255,255,255,.2);border-radius:20px;padding:4px 11px;font-size:11px;font-weight:600;}
+.rrow{display:flex;justify-content:space-between;align-items:baseline;padding:7px 0;border-bottom:1px solid var(--bd);font-size:13px;}
+.rrow:last-child{border-bottom:none;}
+.rv{font-weight:600;text-align:right;max-width:60%;}
+.sh3{font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--bl2);margin-bottom:9px;padding-bottom:7px;border-bottom:2px solid var(--bll);}
+.sb{background:linear-gradient(135deg,var(--tll),var(--bll));border:1px solid #99f6e4;border-radius:14px;padding:19px;text-align:center;margin-bottom:13px;}
+.sb h3{font-size:16px;font-weight:700;color:var(--bl);margin-bottom:5px;}
+.sb p{font-size:12px;color:var(--mu);margin-bottom:15px;line-height:1.5;}
+.pg{display:grid;grid-template-columns:repeat(3,1fr);gap:5px;margin-top:9px;}
+.pgi{border-radius:7px;overflow:hidden;aspect-ratio:1;border:1px solid var(--bd);}
+.pgi img{width:100%;height:100%;object-fit:cover;}
 /* AIDE */
-.aide-top{background:linear-gradient(135deg,var(--blue),var(--blue2));padding:calc(env(safe-area-inset-top,0px)+14px) 16px 20px;}
-.aide-top-inner{display:flex;align-items:center;gap:12px;}
-.aide-scroll{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:16px 16px 24px;}
-.quick-btns{display:flex;flex-direction:column;gap:8px;}
-.quick-btn{padding:12px 16px;border:1.5px solid var(--border);border-radius:var(--radius-sm);background:var(--bg);font-size:13px;font-family:inherit;text-align:left;cursor:pointer;color:var(--text);}
-
-@media(min-width:600px){
-  .travaux-grid{grid-template-columns:repeat(3,1fr);}
-  .field-row{gap:14px;}
-}
+.at{background:linear-gradient(135deg,var(--bl),var(--bl2));padding:calc(env(safe-area-inset-top,0px)+13px) 15px 18px;}
+.ati{display:flex;align-items:center;gap:11px;}
+.abk{background:rgba(255,255,255,.15);border:none;color:#fff;border-radius:8px;width:35px;height:35px;font-size:17px;cursor:pointer;flex-shrink:0;}
+.as{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:15px 15px 22px;}
+.qbs{display:flex;flex-direction:column;gap:7px;}
+.qb2{padding:12px 15px;border:1.5px solid var(--bd);border-radius:10px;background:var(--bg);font-size:13px;font-family:inherit;text-align:left;cursor:pointer;color:var(--tx);}
 </style>
 </head>
 <body>
 
-<!-- ═══════════ HOME ═══════════ -->
-<div class="screen active" id="screen-home">
-  <div class="home-scroll">
-    <div class="home-header">
-      <div class="logo-box">
-        <div class="logo-text">HPTM</div>
-        <div class="logo-sub">GROUPE</div>
-      </div>
-      <div class="home-title">HPTM GROUP</div>
-      <div class="home-sub">Outil terrain — Dossier installation</div>
+<!-- HOME -->
+<div class="sc on" id="s-home">
+  <div class="scroll">
+    <div class="hh">
+      <div class="logo-b"><div class="logo-t">HPTM</div><div class="logo-s">GROUPE</div></div>
+      <div class="ht">HPTM GROUP</div>
+      <div class="hs">Outil terrain &mdash; Dossier installation</div>
     </div>
-    <div class="home-cards">
-      <div class="feature-card" onclick="startWizard()">
-        <div class="feature-icon ic-blue">📋</div>
-        <div class="feature-text">
-          <h3>Créer un dossier</h3>
-          <p>Nouveau client · Questions guidées · Analyse photos IA · Envoi par mail</p>
-        </div>
-      </div>
-      <div class="feature-card" onclick="goScreen('screen-aide')">
-        <div class="feature-icon ic-teal">🤖</div>
-        <div class="feature-text">
-          <h3>Assistant IA</h3>
-          <p>Aides MaPrimeRénov', dimensionnement, conseils techniques</p>
-        </div>
-      </div>
+    <div class="hcards">
+      <div class="fc" id="btn-new"><div class="fi fi-bl">&#128203;</div><div class="ft"><h3>Cr&eacute;er un dossier</h3><p>Nouveau client &middot; Questions guid&eacute;es &middot; Analyse photos IA &middot; Envoi par mail</p></div></div>
+      <div class="fc" id="btn-aide"><div class="fi fi-tl">&#129302;</div><div class="ft"><h3>Assistant IA</h3><p>Aides MaPrimeR&eacute;nov&rsquo;, dimensionnement, conseils techniques</p></div></div>
     </div>
-    <div class="chatbot-wrap">
-      <div class="chatbot-bubble">
-        <div class="chat-header">
-          <div class="chat-dot"></div>
-          <span>Assistant HPTM — en ligne</span>
+    <div class="cw">
+      <div class="cb">
+        <div class="ch"><div class="cd"></div><span>Assistant HPTM &mdash; en ligne</span></div>
+        <div class="cm" id="hm">
+          <div class="msg ma">Bonjour&nbsp;! Je suis votre assistant HPTM. Posez-moi vos questions sur les aides, travaux ou dimensionnement.</div>
         </div>
-        <div class="chat-msgs" id="home-msgs">
-          <div class="msg msg-ai">Bonjour ! Je suis votre assistant HPTM. Posez-moi vos questions sur les aides, travaux ou dimensionnement.</div>
-        </div>
-        <div class="chat-input-row">
-          <input class="chat-input" id="home-inp" placeholder="Votre question…" onkeydown="if(event.key==='Enter')sendChat('home')">
-          <button class="chat-send" onclick="sendChat('home')">➤</button>
-        </div>
+        <div class="ci"><input id="hi" placeholder="Votre question&hellip;"><button class="cs" id="hs">&#10148;</button></div>
       </div>
     </div>
   </div>
 </div>
 
-<!-- ═══════════ WIZARD ═══════════ -->
-<div class="screen" id="screen-wizard" style="position:relative;">
-  <div class="wiz-header">
-    <button class="wiz-back" onclick="wizBack()">←</button>
-    <div class="wiz-title" id="wiz-title">Nouveau dossier</div>
-    <div class="wiz-step-lbl" id="wiz-step-lbl">1/5</div>
-  </div>
-  <div class="progress-bar"><div class="progress-fill" id="prog-fill" style="width:20%"></div></div>
-  <div class="wiz-scroll" id="wiz-content"></div>
-  <div class="wiz-footer">
-    <button class="btn btn-secondary btn-sm" id="btn-prev" onclick="wizBack()" style="display:none">← Retour</button>
-    <button class="btn btn-primary" id="btn-next" onclick="wizNext()">Suivant →</button>
-  </div>
+<!-- WIZARD -->
+<div class="sc" id="s-wiz" style="position:relative;">
+  <div class="wh"><button class="wb" id="wb">&#8592;</button><div class="wt" id="wt">Nouveau dossier</div><div class="ws" id="wsl">1/5</div></div>
+  <div class="pb"><div class="pf" id="pf" style="width:20%"></div></div>
+  <div class="wscroll" id="wc"></div>
+  <div class="wfoot"><button class="btn btn-s btn-sm" id="bprev" style="display:none">&#8592; Retour</button><button class="btn btn-p" id="bnext">Suivant &#8594;</button></div>
 </div>
 
-<!-- ═══════════ AIDE ═══════════ -->
-<div class="screen" id="screen-aide" style="position:relative;">
-  <div class="aide-top">
-    <div class="aide-top-inner">
-      <button style="background:rgba(255,255,255,.15);border:none;color:#fff;border-radius:8px;width:36px;height:36px;font-size:18px;cursor:pointer;flex-shrink:0;" onclick="goScreen('screen-home')">←</button>
-      <div>
-        <div style="font-size:18px;font-weight:700;color:#fff;">Assistant IA</div>
-        <div style="font-size:12px;color:rgba(255,255,255,.7);">Aides, MaPrimeRénov', conseils techniques</div>
-      </div>
-    </div>
-  </div>
-  <div class="aide-scroll">
+<!-- AIDE -->
+<div class="sc" id="s-aide" style="position:relative;">
+  <div class="at"><div class="ati">
+    <button class="abk" id="abk">&#8592;</button>
+    <div><div style="font-size:18px;font-weight:700;color:#fff;">Assistant IA</div><div style="font-size:12px;color:rgba(255,255,255,.7)">Aides, MaPrimeR&eacute;nov&rsquo;, conseils techniques</div></div>
+  </div></div>
+  <div class="as">
     <div class="card">
-      <div class="card-title"><div class="ctd"></div>Conversation</div>
-      <div class="chat-msgs" id="aide-msgs" style="height:220px;">
-        <div class="msg msg-ai">Bonjour ! Je peux vous aider sur les aides disponibles, le dimensionnement PAC/PV, ou toute question technique. Que souhaitez-vous savoir ?</div>
+      <div class="ct"><div class="ctd"></div>Conversation</div>
+      <div class="cm" id="am" style="height:210px;">
+        <div class="msg ma">Bonjour&nbsp;! Je peux vous aider sur les aides disponibles, le dimensionnement PAC/PV, ou toute question technique. Que souhaitez-vous savoir&nbsp;?</div>
       </div>
-      <div class="chat-input-row" style="padding:10px 0 0;">
-        <input class="chat-input" id="aide-inp" placeholder="Posez votre question…" onkeydown="if(event.key==='Enter')sendChat('aide')">
-        <button class="chat-send" onclick="sendChat('aide')">➤</button>
-      </div>
+      <div class="ci" style="padding:9px 0 0;"><input id="ai" placeholder="Posez votre question&hellip;"><button class="cs" id="as2">&#10148;</button></div>
     </div>
     <div class="card">
-      <div class="card-title"><div class="ctd"></div>Questions fréquentes</div>
-      <div class="quick-btns">
-        <button class="quick-btn" onclick="quickQ('Quelles aides sont disponibles pour une PAC air/eau en 2024 ?')">💶 Aides PAC 2024</button>
-        <button class="quick-btn" onclick="quickQ('Comment dimensionner une PAC pour 120m² DPE D en zone H1c ?')">🌡️ Dimensionnement PAC</button>
-        <button class="quick-btn" onclick="quickQ('Quelles conditions pour MaPrimeRénov sur le photovoltaïque ?')">☀️ Aides photovoltaïque</button>
-        <button class="quick-btn" onclick="quickQ('Quelle isolation recommandez-vous pour une maison DPE F ?')">🏠 Conseils isolation</button>
-        <button class="quick-btn" onclick="quickQ('Quel volume de ballon thermodynamique pour 4 personnes ?')">🚿 Ballon thermodynamique</button>
+      <div class="ct"><div class="ctd"></div>Questions fr&eacute;quentes</div>
+      <div class="qbs">
+        <button class="qb2" data-q="Quelles aides sont disponibles pour une PAC air/eau en 2024 ?">&#128182; Aides PAC 2024</button>
+        <button class="qb2" data-q="Comment dimensionner une PAC pour 120m2 DPE D zone H1c ?">&#127861; Dimensionnement PAC</button>
+        <button class="qb2" data-q="Quelles conditions pour MaPrimeRenov sur le photovoltaique ?">&#9728;&#65039; Aides photovolta&iuml;que</button>
+        <button class="qb2" data-q="Quelle isolation recommandez-vous pour une maison DPE F ?">&#127968; Conseil isolation</button>
+        <button class="qb2" data-q="Quel volume de ballon thermodynamique pour 4 personnes ?">&#128703; Ballon thermodynamique</button>
       </div>
     </div>
   </div>
 </div>
 
 <script>
-const API_KEY="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";
-const MAIL="souvrer@gmail.com";
+const KEY = "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";
+const MAIL = "souvrer@gmail.com";
 
-// ─── NAV ───
-function goScreen(id){
-  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
-  document.getElementById(id).classList.add('active');
+function goSc(id) {
+  document.querySelectorAll('.sc').forEach(function(s){s.classList.remove('on');});
+  document.getElementById(id).classList.add('on');
 }
 
-// ─── STATE ───
-let S={step:0,data:{},travaux:[],photos:{},questions:[],qi:0};
-const STEPS=['infos','travaux','questions','photos','recap'];
-const LABELS=['Infos client','Type de travaux','Questions','Photos','Récapitulatif'];
+document.getElementById('btn-new').addEventListener('click', function(){ startWiz(); });
+document.getElementById('btn-aide').addEventListener('click', function(){ goSc('s-aide'); });
+document.getElementById('abk').addEventListener('click', function(){ goSc('s-home'); });
+document.getElementById('wb').addEventListener('click', function(){ wizBack(); });
+document.getElementById('bprev').addEventListener('click', function(){ wizBack(); });
+document.getElementById('bnext').addEventListener('click', function(){ wizNext(); });
+document.getElementById('hs').addEventListener('click', function(){ sendChat('h'); });
+document.getElementById('as2').addEventListener('click', function(){ sendChat('a'); });
+document.getElementById('hi').addEventListener('keydown', function(e){ if(e.key==='Enter') sendChat('h'); });
+document.getElementById('ai').addEventListener('keydown', function(e){ if(e.key==='Enter') sendChat('a'); });
 
-function startWizard(){
-  S={step:0,data:{},travaux:[],photos:{},questions:[],qi:0};
-  goScreen('screen-wizard');
+document.querySelectorAll('.qb2').forEach(function(b){
+  b.addEventListener('click', function(){
+    document.getElementById('ai').value = b.getAttribute('data-q');
+    sendChat('a');
+  });
+});
+
+var S = {step:0, data:{}, tv:[], photos:{}, qs:[], qi:0};
+var STEPS = ['infos','travaux','questions','photos','recap'];
+var LBLS = ['Infos client','Type de travaux','Questions','Photos','Récapitulatif'];
+
+function startWiz() {
+  S = {step:0, data:{}, tv:[], photos:{}, qs:[], qi:0};
+  goSc('s-wiz');
   render();
 }
 
-function render(){
-  const pct=((S.step+1)/STEPS.length*100);
-  document.getElementById('prog-fill').style.width=pct+'%';
-  document.getElementById('wiz-step-lbl').textContent=(S.step+1)+'/'+STEPS.length;
-  document.getElementById('wiz-title').textContent=LABELS[S.step];
-  document.getElementById('btn-prev').style.display=S.step>0?'block':'none';
-  const isLast=S.step===STEPS.length-1;
-  document.getElementById('btn-next').textContent=isLast?'📤 Envoyer le dossier':'Suivant →';
-  document.getElementById('wiz-content').scrollTop=0;
-  ({infos:rInfos,travaux:rTravaux,questions:rQuestions,photos:rPhotos,recap:rRecap}[STEPS[S.step]])();
+function render() {
+  var pct = ((S.step+1)/STEPS.length*100);
+  document.getElementById('pf').style.width = pct + '%';
+  document.getElementById('wsl').textContent = (S.step+1) + '/5';
+  document.getElementById('wt').textContent = LBLS[S.step];
+  document.getElementById('bprev').style.display = S.step > 0 ? 'block' : 'none';
+  document.getElementById('bnext').textContent = S.step === STEPS.length-1 ? '&#128228; Envoyer' : 'Suivant →';
+  document.getElementById('wc').scrollTop = 0;
+  var fn = {infos:rInfos, travaux:rTv, questions:rQs, photos:rPhotos, recap:rRecap};
+  fn[STEPS[S.step]]();
 }
 
-// ─── STEP 1 INFOS ───
-function rInfos(){
-  const d=S.data;
-  document.getElementById('wiz-content').innerHTML=`
-  <div class="card">
-    <div class="card-title"><div class="ctd"></div>Entreprise & commercial</div>
-    <div class="field"><label>Nom de l'entreprise *</label><input id="f-ent" placeholder="ex: TEVA ENERGIES" value="${d.ent||''}"></div>
-    <div class="field"><label>Nom du commercial</label><input id="f-com" placeholder="Prénom NOM" value="${d.com||''}"></div>
-  </div>
-  <div class="card">
-    <div class="card-title"><div class="ctd"></div>Client</div>
-    <div class="field-row">
-      <div class="field"><label>Nom *</label><input id="f-nom" placeholder="Dupont" value="${d.nom||''}"></div>
-      <div class="field"><label>Prénom *</label><input id="f-pre" placeholder="Jean" value="${d.pre||''}"></div>
-    </div>
-    <div class="field"><label>Téléphone</label><input id="f-tel" type="tel" placeholder="06 00 00 00 00" value="${d.tel||''}"></div>
-    <div class="field"><label>Email</label><input id="f-mail" type="email" placeholder="client@email.fr" value="${d.mail||''}"></div>
-  </div>
-  <div class="card">
-    <div class="card-title"><div class="ctd"></div>Adresse du chantier</div>
-    <div class="field">
-      <label>Adresse *</label>
-      <div class="geo-row">
-        <div class="field" style="margin:0"><input id="f-adr" placeholder="19 rue de la Paix, 75001 Paris" value="${d.adr||''}"></div>
-        <button class="geo-btn" onclick="geolocNow()">📍</button>
-      </div>
-      <div class="hint">📍 = récupère ta position GPS automatiquement</div>
-    </div>
-    <div class="field-row">
-      <div class="field"><label>Altitude (m)</label><input id="f-alt" type="number" placeholder="ex: 120" inputmode="numeric" value="${d.alt||''}"></div>
-      <div class="field"><label>T° ext. base (°C)</label><input id="f-tb" type="number" placeholder="auto" inputmode="numeric" value="${d.tb||''}"></div>
-    </div>
-    <div id="geo-alert" class="alert"></div>
-  </div>
-  <div class="card">
-    <div class="card-title"><div class="ctd"></div>Bâtiment</div>
-    <div class="field-row">
-      <div class="field"><label>Surface (m²) *</label><input id="f-surf" type="number" placeholder="120" inputmode="numeric" value="${d.surf||''}" oninput="calcVol()"></div>
-      <div class="field"><label>Hauteur plafond (m)</label><input id="f-haut" type="number" placeholder="2.5" step="0.1" inputmode="decimal" value="${d.haut||'2.5'}" oninput="calcVol()"></div>
-    </div>
-    <div class="field"><label>Volume m³ <span style="color:var(--green);font-size:11px" id="vol-lbl"></span></label><input id="f-vol" readonly style="background:var(--gray-l)" value="${d.vol||''}"></div>
-    <div class="field"><label>Classe DPE</label>
-      <select id="f-dpe">${['','A','B','C','D','E','F','G'].map(v=>`<option value="${v}" ${d.dpe===v?'selected':''}>${v||'-- Sélectionner --'}</option>`).join('')}</select>
-    </div>
-    <div class="field"><label>Type de logement</label>
-      <select id="f-type">
-        <option value="maison" ${d.type==='maison'?'selected':''}>Maison individuelle</option>
-        <option value="mitoyen" ${d.type==='mitoyen'?'selected':''}>Maison mitoyenne</option>
-        <option value="appart" ${d.type==='appart'?'selected':''}>Appartement</option>
-      </select>
-    </div>
-    <div class="field"><label>Nb de personnes</label><input id="f-pers" type="number" placeholder="3" inputmode="numeric" value="${d.pers||'3'}"></div>
-  </div>`;
+function rInfos() {
+  var d = S.data;
+  var html = '<div class="card"><div class="ct"><div class="ctd"></div>Entreprise &amp; commercial</div>';
+  html += '<div class="f"><label>Nom de l’entreprise *</label><input id="f-ent" placeholder="ex: TEVA ENERGIES" value="' + (d.ent||'') + '"></div>';
+  html += '<div class="f"><label>Commercial</label><input id="f-com" placeholder="Prénom NOM" value="' + (d.com||'') + '"></div></div>';
+  html += '<div class="card"><div class="ct"><div class="ctd"></div>Client</div>';
+  html += '<div class="fr"><div class="f"><label>Nom *</label><input id="f-nom" placeholder="Dupont" value="' + (d.nom||'') + '"></div>';
+  html += '<div class="f"><label>Prénom *</label><input id="f-pre" placeholder="Jean" value="' + (d.pre||'') + '"></div></div>';
+  html += '<div class="f"><label>Téléphone</label><input id="f-tel" type="tel" placeholder="06 00 00 00 00" value="' + (d.tel||'') + '"></div>';
+  html += '<div class="f"><label>Email</label><input id="f-mail" type="email" placeholder="client@email.fr" value="' + (d.mail||'') + '"></div></div>';
+  html += '<div class="card"><div class="ct"><div class="ctd"></div>Adresse du chantier</div>';
+  html += '<div class="f"><label>Adresse *</label><div class="gr"><div class="f"><input id="f-adr" placeholder="19 rue de la Paix, 75001 Paris" value="' + (d.adr||'') + '"></div><button class="gb" id="gb">&#128205;</button></div><div class="hint">&#128205; = position GPS automatique</div></div>';
+  html += '<div class="fr"><div class="f"><label>Altitude (m)</label><input id="f-alt" type="number" placeholder="ex: 120" value="' + (d.alt||'') + '"></div>';
+  html += '<div class="f"><label>T&deg; ext. base (&deg;C)</label><input id="f-tb" type="number" placeholder="auto" value="' + (d.tb||'') + '"></div></div>';
+  html += '<div id="geo-al" class="al"></div></div>';
+  html += '<div class="card"><div class="ct"><div class="ctd"></div>Bâtiment</div>';
+  html += '<div class="fr"><div class="f"><label>Surface (m²) *</label><input id="f-surf" type="number" placeholder="120" value="' + (d.surf||'') + '"></div>';
+  html += '<div class="f"><label>Hauteur plafond (m)</label><input id="f-haut" type="number" placeholder="2.5" step="0.1" value="' + (d.haut||'2.5') + '"></div></div>';
+  html += '<div class="f"><label>Volume m³ <span style="color:#16a34a;font-size:11px" id="vl"></span></label><input id="f-vol" readonly style="background:var(--gyl)" value="' + (d.vol||'') + '"></div>';
+  html += '<div class="f"><label>Classe DPE</label><select id="f-dpe"><option value="">-- Sélectionner --</option>';
+  ['A','B','C','D','E','F','G'].forEach(function(v){ html += '<option value="' + v + '"' + (d.dpe===v?' selected':'') + '>' + v + '</option>'; });
+  html += '</select></div>';
+  html += '<div class="f"><label>Type de logement</label><select id="f-type"><option value="maison"' + (d.type==='maison'?' selected':'') + '>Maison individuelle</option><option value="mitoyen"' + (d.type==='mitoyen'?' selected':'') + '>Maison mitoyenne</option><option value="appart"' + (d.type==='appart'?' selected':'') + '>Appartement</option></select></div>';
+  html += '<div class="f"><label>Nb de personnes</label><input id="f-pers" type="number" placeholder="3" value="' + (d.pers||'3') + '"></div></div>';
+  document.getElementById('wc').innerHTML = html;
+  document.getElementById('f-surf').addEventListener('input', calcVol);
+  document.getElementById('f-haut').addEventListener('input', calcVol);
+  document.getElementById('gb').addEventListener('click', geolocNow);
   if(d.surf) calcVol();
 }
 
-function calcVol(){
-  const s=parseFloat(document.getElementById('f-surf').value)||0;
-  const h=parseFloat(document.getElementById('f-haut').value)||2.5;
-  if(s>0){const v=Math.round(s*h);document.getElementById('f-vol').value=v;document.getElementById('vol-lbl').textContent='= '+v+' m³';}
+function calcVol() {
+  var s = parseFloat(document.getElementById('f-surf').value)||0;
+  var h = parseFloat(document.getElementById('f-haut').value)||2.5;
+  if(s > 0) {
+    var v = Math.round(s*h);
+    document.getElementById('f-vol').value = v;
+    document.getElementById('vl').textContent = '= ' + v + ' m³';
+  }
 }
 
-function geolocNow(){
+function geolocNow() {
   if(!navigator.geolocation){alert('GPS non disponible');return;}
-  navigator.geolocation.getCurrentPosition(async p=>{
-    const {latitude:lat,longitude:lon,altitude:alt}=p.coords;
-    try{const r=await fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lon}&zoom=16`);const d=await r.json();document.getElementById('f-adr').value=d.display_name||'';}catch(e){}
-    if(alt&&alt>0) document.getElementById('f-alt').value=Math.round(alt);
-    showAlert('geo-alert','ok','📍 Position GPS récupérée !');
-  },()=>showAlert('geo-alert','err','Impossible de récupérer la position GPS.'));
+  navigator.geolocation.getCurrentPosition(function(p){
+    var lat = p.coords.latitude, lon = p.coords.longitude;
+    if(p.coords.altitude && p.coords.altitude > 0) document.getElementById('f-alt').value = Math.round(p.coords.altitude);
+    fetch('https://nominatim.openstreetmap.org/reverse?format=json&lat='+lat+'&lon='+lon+'&zoom=16')
+      .then(function(r){return r.json();})
+      .then(function(d){document.getElementById('f-adr').value = d.display_name||'';showAl('geo-al','ok','&#128205; Position GPS récupérée !');})
+      .catch(function(){showAl('geo-al','ok','&#128205; Coords: '+lat.toFixed(4)+', '+lon.toFixed(4));});
+  }, function(){showAl('geo-al','er','Impossible de récupérer la position GPS.');});
 }
 
-function saveInfos(){
-  S.data={
-    ent:document.getElementById('f-ent').value.trim(),
-    com:document.getElementById('f-com').value.trim(),
-    nom:document.getElementById('f-nom').value.trim(),
-    pre:document.getElementById('f-pre').value.trim(),
-    tel:document.getElementById('f-tel').value.trim(),
-    mail:document.getElementById('f-mail').value.trim(),
-    adr:document.getElementById('f-adr').value.trim(),
-    alt:document.getElementById('f-alt').value,
-    tb:document.getElementById('f-tb').value,
-    surf:document.getElementById('f-surf').value,
-    haut:document.getElementById('f-haut').value||'2.5',
+function saveInfos() {
+  var ent = document.getElementById('f-ent').value.trim();
+  var nom = document.getElementById('f-nom').value.trim();
+  var pre = document.getElementById('f-pre').value.trim();
+  var adr = document.getElementById('f-adr').value.trim();
+  var surf = document.getElementById('f-surf').value;
+  if(!ent||!nom||!pre||!adr||!surf){alert('Remplis les champs obligatoires (*)');return false;}
+  S.data = {
+    ent:ent, com:document.getElementById('f-com').value.trim(),
+    nom:nom, pre:pre, tel:document.getElementById('f-tel').value.trim(),
+    mail:document.getElementById('f-mail').value.trim(), adr:adr,
+    alt:document.getElementById('f-alt').value, tb:document.getElementById('f-tb').value,
+    surf:surf, haut:document.getElementById('f-haut').value||'2.5',
     vol:document.getElementById('f-vol').value,
     dpe:document.getElementById('f-dpe').value,
     type:document.getElementById('f-type').value,
-    pers:document.getElementById('f-pers').value||'3',
+    pers:document.getElementById('f-pers').value||'3'
   };
-  if(!S.data.ent||!S.data.nom||!S.data.pre||!S.data.adr||!S.data.surf){alert('Remplis les champs obligatoires (*)');return false;}
   return true;
 }
 
-// ─── STEP 2 TRAVAUX ───
-const TV=[{id:'pac',l:'PAC Air/Eau',i:'🌡️'},{id:'clim',l:'PAC Air/Air',i:'❄️'},{id:'pv',l:'Photovoltaïque',i:'☀️'},{id:'ballon',l:'Ballon Thermo.',i:'🚿'},{id:'ite',l:'Isolation ext.',i:'🏠'},{id:'iti',l:'Isolation int.',i:'🧱'}];
-function rTravaux(){
-  document.getElementById('wiz-content').innerHTML=`
-  <div class="card">
-    <div class="card-title"><div class="ctd"></div>Travaux à réaliser</div>
-    <p style="font-size:13px;color:var(--muted);margin-bottom:16px">Sélectionne tous les travaux prévus chez ce client :</p>
-    <div class="travaux-grid">
-      ${TV.map(t=>`<div class="travaux-item ${S.travaux.includes(t.id)?'checked':''}" onclick="toggleT('${t.id}',this)"><div class="ti-icon">${t.i}</div><div class="ti-label">${t.l}</div></div>`).join('')}
-    </div>
-  </div>`;
-}
-function toggleT(id,el){
-  S.travaux=S.travaux.includes(id)?S.travaux.filter(t=>t!==id):[...S.travaux,id];
-  el.classList.toggle('checked');
+var TV = [{id:'pac',l:'PAC Air/Eau',i:'&#127777;'},{id:'clim',l:'PAC Air/Air',i:'❄️'},{id:'pv',l:'Photovoltaïque',i:'☀️'},{id:'ballon',l:'Ballon Thermo.',i:'&#128688;'},{id:'ite',l:'Isolation ext.',i:'&#127968;'},{id:'iti',l:'Isolation int.',i:'&#129521;'}];
+
+function rTv() {
+  var html = '<div class="card"><div class="ct"><div class="ctd"></div>Travaux à réaliser</div><p style="font-size:13px;color:var(--mu);margin-bottom:15px">Sélectionne tous les travaux prévus :</p><div class="tg">';
+  TV.forEach(function(t){
+    html += '<div class="ti' + (S.tv.includes(t.id)?' on':'') + '" data-id="' + t.id + '"><div class="tii">' + t.i + '</div><div class="til">' + t.l + '</div></div>';
+  });
+  html += '</div></div>';
+  document.getElementById('wc').innerHTML = html;
+  document.querySelectorAll('.ti').forEach(function(el){
+    el.addEventListener('click', function(){
+      var id = el.getAttribute('data-id');
+      if(S.tv.includes(id)) S.tv = S.tv.filter(function(x){return x!==id;});
+      else S.tv.push(id);
+      el.classList.toggle('on');
+    });
+  });
 }
 
-// ─── STEP 3 QUESTIONS ───
-function buildQ(){
-  S.questions=[];S.qi=0;
-  const a=(id,trav,text,opts)=>S.questions.push({id,trav,text,opts});
-  if(S.travaux.includes('pac')){
-    a('pac_remplace','pac','Chaudière existante à remplacer ?',['Oui — gaz','Oui — fioul','Oui — électrique','Non — installation neuve']);
-    a('pac_emetteurs','pac','Émetteurs existants ou prévus ?',['Plancher chauffant BT','Radiateurs basse température','Radiateurs haute température','Mixte plancher + radiateurs','Nouveaux radiateurs']);
-    a('pac_bizone','pac','Plusieurs zones de chauffe distinctes ?',['Oui — kit bizone nécessaire','Non — zone unique']);
-    a('pac_ecs','pac','La PAC doit produire l\'ECS (eau chaude) ?',['Oui — ballon intégré','Oui — ballon séparé','Non — ECS indépendante']);
-    a('pac_reseau','pac','Réseau hydraulique existant ?',['Cuivre','Acier','PER / multicouche','Inconnu']);
-    a('pac_dist','pac','Distance unité ext. / tableau électrique ?',['< 5m','5 à 15m','15 à 30m','> 30m']);
+function buildQs() {
+  S.qs = []; S.qi = 0;
+  function a(id,trav,text,opts){S.qs.push({id:id,trav:trav,text:text,opts:opts});}
+  if(S.tv.includes('pac')){
+    a('pac_r','pac','Chaudière existante à remplacer ?',['Oui — gaz','Oui — fioul','Oui — électrique','Non — installation neuve']);
+    a('pac_e','pac','Émetteurs existants ou prévus ?',['Plancher chauffant BT','Radiateurs basse temp.','Radiateurs haute temp.','Mixte plancher + radiateurs','Nouveaux radiateurs']);
+    a('pac_b','pac','Plusieurs zones de chauffe distinctes ?',['Oui — kit bizone nécessaire','Non — zone unique']);
+    a('pac_ecs','pac','La PAC doit produire l’ECS ?',['Oui — ballon intégré','Oui — ballon séparé','Non — ECS indépendante']);
+    a('pac_net','pac','Réseau hydraulique existant ?',['Cuivre','Acier','PER / multicouche','Inconnu']);
+    a('pac_d','pac','Distance unité ext. / tableau électrique ?',['< 5m','5 à 15m','15 à 30m','> 30m']);
   }
-  if(S.travaux.includes('clim')){
-    a('clim_pieces','clim','Nombre de pièces à climatiser ?',['1 pièce','2 pièces','3 pièces','4 pièces et plus']);
-    a('clim_usage','clim','Usage principal de la climatisation ?',['Refroidissement été uniquement','Refroidissement + chauffage appoint','Chauffage principal hiver']);
+  if(S.tv.includes('clim')){
+    a('cl_p','clim','Nombre de pièces à climatiser ?',['1 pièce','2 pièces','3 pièces','4 pièces et plus']);
+    a('cl_u','clim','Usage principal ?',['Refroidissement uniquement','Refroidissement + chauffage appoint','Chauffage principal hiver']);
   }
-  if(S.travaux.includes('pv')){
-    a('pv_puiss','pv','Puissance PV souhaitée ?',['3 kWc (6 panneaux)','6 kWc (12 panneaux)','9 kWc (18 panneaux)','12 kWc et plus','À définir selon toiture']);
-    a('pv_orient','pv','Orientation principale de la toiture ?',['Sud','Sud-Est ou Sud-Ouest','Est ou Ouest','Multiple / complexe']);
-    a('pv_toiture','pv','Type de couverture de toiture ?',['Tuiles rondes','Tuiles plates','Ardoises','Bac acier / zinc','Fibrociment (amiante possible)','Toit terrasse']);
-    a('pv_elec','pv','Type de branchement électrique ?',['Monophasé','Triphasé','Inconnu']);
+  if(S.tv.includes('pv')){
+    a('pv_p','pv','Puissance PV souhaitée ?',['3 kWc (6 panneaux)','6 kWc (12 panneaux)','9 kWc (18 panneaux)','12 kWc et plus','A définir selon toiture']);
+    a('pv_o','pv','Orientation de la toiture ?',['Sud','Sud-Est ou Sud-Ouest','Est ou Ouest','Multiple / complexe']);
+    a('pv_t','pv','Type de couverture ?',['Tuiles rondes','Tuiles plates','Ardoises','Bac acier / zinc','Fibrociment (amiante possible)','Toit terrasse']);
+    a('pv_el','pv','Branchement électrique ?',['Monophasé','Triphasé','Inconnu']);
   }
-  if(S.travaux.includes('ballon')){
-    a('bal_type','ballon','Type de ballon à installer ?',['Thermodynamique (PAC sur air)','Électrique standard','Remplacement ballon existant']);
-    a('bal_vol','ballon','Volume souhaité ?',['150 litres','200 litres','270 litres','300 litres et plus']);
-    a('bal_loc','ballon','Emplacement du ballon ?',['Garage','Buanderie','Combles','Cave','Autre local technique']);
+  if(S.tv.includes('ballon')){
+    a('bal_t','ballon','Type de ballon ?',['Thermodynamique','Electrique standard','Remplacement existant']);
+    a('bal_v','ballon','Volume souhaité ?',['150 litres','200 litres','270 litres','300 litres et plus']);
+    a('bal_l','ballon','Emplacement du ballon ?',['Garage','Buanderie','Combles','Cave','Autre local']);
   }
-  if(S.travaux.includes('ite')){
-    a('ite_fac','ite','Façades à isoler ?',['Toutes les façades','Façade principale uniquement','Pignons uniquement','Selon relevé sur place']);
-    a('ite_mat','ite','Isolant envisagé ?',['Laine de roche + enduit','PSE graphité (polystyrène)','Laine de bois','Au choix du client']);
+  if(S.tv.includes('ite')){
+    a('ite_f','ite','Façades à isoler ?',['Toutes les façades','Façade principale','Pignons','Selon relevé']);
+    a('ite_m','ite','Isolant envisagé ?',['Laine de roche + enduit','PSE graphité','Laine de bois','Au choix']);
   }
-  if(S.travaux.includes('iti')){
-    a('iti_pieces','iti','Pièces à isoler en intérieur ?',['Toutes les pièces','Chambres uniquement','Séjour + cuisine','Pièces donnant sur extérieur']);
-    a('iti_mur','iti','Type de murs ?',['Béton banché','Parpaing','Brique creuse','Brique pleine / pisé','Inconnu']);
+  if(S.tv.includes('iti')){
+    a('iti_p','iti','Pièces à isoler ?',['Toutes les pièces','Chambres','Séjour + cuisine','Pièces sur extérieur']);
+    a('iti_m','iti','Type de murs ?',['Béton banché','Parpaing','Brique creuse','Brique pleine','Inconnu']);
   }
 }
 
-const QCOL={pac:'#ea580c',clim:'#2563b0',pv:'#ca8a04',ballon:'#0f766e',ite:'#16a34a',iti:'#7c3aed'};
-const QLBL={pac:'🌡️ PAC Air/Eau',clim:'❄️ PAC Air/Air',pv:'☀️ Photovoltaïque',ballon:'🚿 Ballon',ite:'🏠 Isolation ext.',iti:'🧱 Isolation int.'};
+var QCOL = {pac:'#ea580c',clim:'#2563b0',pv:'#ca8a04',ballon:'#0f766e',ite:'#16a34a',iti:'#7c3aed'};
+var QLBL = {pac:'&#127777; PAC Air/Eau',clim:'❄️ PAC Air/Air',pv:'☀️ Photovoltaïque',ballon:'&#128688; Ballon',ite:'&#127968; Isolation ext.',iti:'&#129521; Isolation int.'};
 
-function rQuestions(){
-  if(S.questions.length===0){S.step++;render();return;}
-  const q=S.questions[S.qi];
-  const col=QCOL[q.trav]||'var(--blue2)';
-  document.getElementById('wiz-content').innerHTML=`
-  <div style="font-size:12px;color:var(--muted);margin-bottom:10px">Question ${S.qi+1} sur ${S.questions.length}</div>
-  <div class="card">
-    <span class="q-badge" style="background:${col}22;color:${col}">${QLBL[q.trav]}</span>
-    <div class="q-text">${q.text}</div>
-    <div class="options-list">
-      ${q.opts.map(o=>`<button class="option-btn ${S.data[q.id]===o?'selected':''}" onclick="pickOpt(this,'${q.id}','${o.replace(/'/g,"\'")}')">${o}</button>`).join('')}
-    </div>
-  </div>`;
-  document.getElementById('btn-next').textContent=S.qi<S.questions.length-1?'Question suivante →':'Passer aux photos →';
-}
-function pickOpt(el,id,val){
-  document.querySelectorAll('.option-btn').forEach(b=>b.classList.remove('selected'));
-  el.classList.add('selected');
-  S.data[id]=val;
+function rQs() {
+  if(S.qs.length === 0){S.step++;render();return;}
+  var q = S.qs[S.qi];
+  var col = QCOL[q.trav]||'var(--bl2)';
+  var html = '<div style="font-size:12px;color:var(--mu);margin-bottom:9px">Question ' + (S.qi+1) + ' sur ' + S.qs.length + '</div>';
+  html += '<div class="card"><span class="qb" style="background:' + col + '22;color:' + col + '">' + QLBL[q.trav] + '</span>';
+  html += '<div class="qt">' + q.text + '</div><div class="ol">';
+  q.opts.forEach(function(o){
+    var sel = S.data[q.id] === o ? ' on' : '';
+    html += '<button class="ob' + sel + '" data-val="' + o + '">' + o + '</button>';
+  });
+  html += '</div></div>';
+  document.getElementById('wc').innerHTML = html;
+  document.getElementById('bnext').textContent = S.qi < S.qs.length-1 ? 'Question suivante →' : 'Passer aux photos →';
+  document.querySelectorAll('.ob').forEach(function(b){
+    b.addEventListener('click', function(){
+      document.querySelectorAll('.ob').forEach(function(x){x.classList.remove('on');});
+      b.classList.add('on');
+      S.data[q.id] = b.getAttribute('data-val');
+    });
+  });
 }
 
-// ─── STEP 4 PHOTOS ───
-function getSlots(){
-  const slots=[];
-  const a=(id,label,hint,ia)=>slots.push({id,label,hint,ia:!!ia});
-  a('compteur','Compteur électrique','Compteur général bien visible + numéro PDL si possible',1);
-  a('tableau','Tableau électrique','Ouvert, disjoncteurs bien visibles',1);
-  if(S.travaux.includes('pac')){
-    a('chaud_loin','Chaudière — vue générale','Chaudière entière + local technique',1);
-    a('chaud_pres','Chaudière — étiquette','Marque, modèle, puissance lisibles',1);
-    a('reseau','Réseau hydraulique','Tuyauteries départ/retour + état',1);
-    a('ext_pac','Emplacement groupe extérieur','Zone prévue pour l\'unité extérieure');
+function getSlots() {
+  var slots = [];
+  function a(id,lbl,hint,ia){slots.push({id:id,lbl:lbl,hint:hint,ia:!!ia});}
+  a('compteur','Compteur électrique','Compteur + numéro PDL si possible',1);
+  a('tableau','Tableau électrique','Ouvert, disjoncteurs visibles',1);
+  if(S.tv.includes('pac')){
+    a('chaud1','Chaudière — vue générale','Chaudière entière + local',1);
+    a('chaud2','Chaudière — étiquette','Marque, modèle, puissance lisibles',1);
+    a('reseau','Réseau hydraulique','Tuyauteries + état',1);
+    a('ext_pac','Emplacement groupe ext.','Zone prévue pour unité extérieure',0);
   }
-  if(S.travaux.includes('clim')){
-    a('split1','Emplacement split — pièce 1','Position unité intérieure + passage gaines');
-    if(S.data.clim_pieces&&S.data.clim_pieces!=='1 pièce') a('split2','Emplacement split — pièce 2','Position unité intérieure + passage gaines');
-    a('ext_clim','Unité extérieure clim','Zone prévue, accessibilité');
+  if(S.tv.includes('clim')){
+    a('split1','Emplacement split — pièce 1','Position unité int. + gaines',0);
+    if(S.data.cl_p && S.data.cl_p !== '1 pièce') a('split2','Emplacement split — pièce 2','Position unité int. + gaines',0);
+    a('ext_cl','Unité extérieure clim','Zone prévue',0);
   }
-  if(S.travaux.includes('pv')){
+  if(S.tv.includes('pv')){
     a('toiture','Toiture — vue générale','Photo complète depuis le sol',1);
-    a('tuiles','Couverture - detail','Type de tuiles/materiau bien visible de tuiles/matériau bien visible',1);
-    a('charpente','Charpente — depuis combles','Depuis l\'intérieur si accessible',1);
+    a('tuiles','Couverture — détail','Type de tuiles bien visible',1);
+    a('charpente','Charpente — combles','Depuis l’intérieur si accessible',1);
     a('disjo','Disjoncteur principal','Ampérage et type visibles',1);
   }
-  if(S.travaux.includes('ballon')){
-    a('ballon_ex','Ballon/chauffe-eau existant','Vue complète avec contenance visible',1);
-    a('ballon_loc','Emplacement prévu — ballon','Local + espace disponible');
+  if(S.tv.includes('ballon')){
+    a('bal_ex','Ballon/chauffe-eau existant','Vue complète avec contenance',1);
+    a('bal_loc','Emplacement prévu','Local + espace disponible',0);
   }
-  if(S.travaux.includes('ite')){
-    a('facade1','Façade principale','Vue complète depuis la rue',1);
-    a('facade2','Autre(s) façade(s)','Pignon / façade arrière',1);
+  if(S.tv.includes('ite')){
+    a('fac1','Façade principale','Vue complète depuis la rue',1);
+    a('fac2','Autre(s) façade(s)','Pignon / façade arrière',1);
   }
-  if(S.travaux.includes('iti')){
-    a('mur1','Mur intérieur — pièce 1','Vue complète + état de surface',1);
-    a('mur2','Mur intérieur — pièce 2','Vue complète + état de surface',1);
+  if(S.tv.includes('iti')){
+    a('mur1','Mur intérieur — pièce 1','Vue complète + état surface',1);
+    a('mur2','Mur intérieur — pièce 2','Vue complète + état surface',1);
   }
-  a('facture_elec','Facture électricité','Page avec consommation annuelle kWh visible',1);
-  if(S.data.pac_remplace&&S.data.pac_remplace.includes('gaz')) a('facture_gaz','Facture gaz','Consommation annuelle bien visible',1);
-  if(S.data.pac_remplace&&S.data.pac_remplace.includes('fioul')) a('facture_fioul','Bon livraison fioul','Quantité litres visible',1);
+  a('fact_el','Facture électricité','Page avec consommation kWh/an',1);
+  if(S.data.pac_r && S.data.pac_r.indexOf('gaz') > -1) a('fact_gz','Facture gaz','Consommation kWh/an visible',1);
+  if(S.data.pac_r && S.data.pac_r.indexOf('fioul') > -1) a('fact_fo','Bon livraison fioul','Quantité litres visible',1);
   return slots;
 }
 
-function rPhotos(){
-  const slots=getSlots();
-  let html='<div class="card"><div class="card-title"><div class="ctd"></div>Photos requises</div>';
-  html+=`<p style="font-size:12px;color:var(--muted);margin-bottom:16px">${slots.length} photos à prendre. L'IA analyse chaque photo automatiquement.</p>`;
-  slots.forEach(sl=>{
-    const has=!!S.photos[sl.id];
-    html+=`<div class="photo-section">
-      <div class="photo-label">${sl.ia?'<span class="ia-badge">🤖 IA</span>':''} ${sl.label}</div>
-      <div class="photo-hint">${sl.hint}</div>
-      <div class="photo-slot ${has?'has-photo':''}" id="slot-${sl.id}" onclick="document.getElementById('inp-${sl.id}').click()">
-        ${has?`<img src="${S.photos[sl.id].prev}" alt="">`:
-          '<div class="slot-empty"><div class="slot-empty-icon">📷</div><div class="slot-empty-txt">Appuyer pour prendre<br>ou choisir une photo</div></div>'}
-      </div>
-      <input class="photo-input" id="inp-${sl.id}" type="file" accept="image/*" onchange="onPhoto(event,'${sl.id}',${sl.ia?1:0})">
-      <div class="ia-loading" id="ial-${sl.id}"><div class="ia-spinner"></div><span>Analyse IA…</span></div>
-      <div class="ia-result ${S.photos[sl.id]?.cls||''} ${S.photos[sl.id]?.ia?'show':''}" id="iar-${sl.id}">${S.photos[sl.id]?.ia||''}</div>
-    </div>`;
-  });
-  html+='</div>';
-  document.getElementById('wiz-content').innerHTML=html;
-}
-
-const IA_PROMPTS={
-  compteur:"Analyse ce compteur électrique. Dis : 1) Mono ou triphasé 2) Puissance souscrite si visible 3) PDL si lisible 4) État. Max 4 lignes. Commence par ✅ si OK ou ⚠️ si attention.",
-  tableau:"Analyse ce tableau électrique. Dis : 1) Mono ou triphasé 2) Ampérage disjoncteur principal 3) Présence différentiel 4) Vétusté / mise aux normes. Max 4 lignes. ✅ ou ⚠️.",
-  chaud_loin:"Identifie cette chaudière. Type (gaz/fioul/élec), marque si visible, état général. Max 3 lignes. ✅ ou ⚠️.",
-  chaud_pres:"Lis cette étiquette chaudière. Extrait marque, modèle, puissance kW, année. Max 3 lignes. ✅ si lisible.",
-  reseau:"Analyse ce réseau hydraulique. Matériau (cuivre/acier/PER), état, compatibilité PAC. Max 3 lignes. ✅ ou ⚠️.",
-  toiture:"Analyse cette toiture. Estime surface utile, orientation, obstacles (velux, cheminée). Max 4 lignes. ✅ ou ⚠️.",
-  tuiles:"Identifie la couverture. Type exact, compatibilité PV, alerte si fibrociment/amiante probable. Max 3 lignes. ✅ ou ⚠️.",
-  charpente:"Analyse cette charpente. Type, état, surface estimée pour PV, renforcement nécessaire ? Max 4 lignes. ✅ ou ⚠️.",
-  disjo:"Identifie ce disjoncteur. Mono/triphasé, ampérage, capacité raccordement PV. Max 3 lignes. ✅ ou ⚠️.",
-  ballon_ex:"Analyse ce ballon. Type, volume si visible, année, état. Max 3 lignes. ✅ ou ⚠️.",
-  facade1:"Analyse cette façade. Estime surface brute m², ouvrants (fenêtres/portes), éléments saillants, surface nette isolable. Max 4 lignes. ✅ ou ⚠️.",
-  facade2:"Analyse cette façade latérale. Surface brute estimée, ouvrants, surface nette isolable. Max 3 lignes. ✅ ou ⚠️.",
-  mur1:"Analyse ce mur intérieur. Matériau apparent, état, humidité/moisissures, compatible ITI ? Max 3 lignes. ✅ ou ⚠️.",
-  mur2:"Analyse ce mur intérieur. Matériau, état, moisissures éventuelles, compatible ITI ? Max 3 lignes. ✅ ou ⚠️.",
-  facture_elec:"Lis cette facture électricité. Extrait consommation annuelle kWh, montant €/an, option tarifaire, puissance souscrite. ✅ si lisible.",
-  facture_gaz:"Lis cette facture gaz. Extrait consommation kWh ou m³/an, montant €/an. ✅ si lisible.",
-  facture_fioul:"Lis ce bon livraison fioul. Extrait quantité litres, estimation annuelle. ✅ si lisible.",
+var IA_P = {
+  compteur: "Analyse ce compteur electrique. Dis: 1) Mono ou triphase 2) Puissance souscrite si visible 3) PDL si lisible 4) Etat. Max 4 lignes. Commence par OK si bon ou ATTENTION si probleme.",
+  tableau: "Analyse ce tableau electrique. Dis: 1) Mono ou triphase 2) Amperage disjoncteur 3) Differentiel present 4) Vetuste. Max 4 lignes. OK ou ATTENTION.",
+  chaud1: "Identifie cette chaudiere. Type (gaz/fioul/elec), marque si visible, etat. Max 3 lignes. OK ou ATTENTION.",
+  chaud2: "Lis cette etiquette chaudiere. Marque, modele, puissance kW, annee. Max 3 lignes. OK si lisible.",
+  reseau: "Analyse ce reseau hydraulique. Materiau (cuivre/acier/PER), etat, compatibilite PAC. Max 3 lignes. OK ou ATTENTION.",
+  toiture: "Analyse cette toiture. Estime surface utile, orientation, obstacles (velux, cheminee). Max 4 lignes. OK ou ATTENTION.",
+  tuiles: "Identifie la couverture. Type exact, compatibilite PV, alerte si fibrociment/amiante probable. Max 3 lignes. OK ou ATTENTION.",
+  charpente: "Analyse cette charpente. Type, etat, surface estimee PV, renforcement necessaire ? Max 4 lignes. OK ou ATTENTION.",
+  disjo: "Identifie ce disjoncteur. Mono/triphase, amperage, capacite raccordement PV. Max 3 lignes. OK ou ATTENTION.",
+  bal_ex: "Analyse ce ballon. Type, volume si visible, annee, etat. Max 3 lignes. OK ou ATTENTION.",
+  fac1: "Analyse cette facade. Estime surface brute m2, ouvrants, elements saillants, surface nette isolable. Max 4 lignes. OK ou ATTENTION.",
+  fac2: "Analyse cette facade. Surface brute, ouvrants, surface nette isolable. Max 3 lignes. OK ou ATTENTION.",
+  mur1: "Analyse ce mur interieur. Materiau, etat, humidite/moisissures, compatible ITI ? Max 3 lignes. OK ou ATTENTION.",
+  mur2: "Analyse ce mur interieur. Materiau, etat, moisissures, compatible ITI ? Max 3 lignes. OK ou ATTENTION.",
+  fact_el: "Lis cette facture electricite. Extrait consommation kWh/an, montant annuel, option tarifaire, puissance souscrite. OK si lisible.",
+  fact_gz: "Lis cette facture gaz. Consommation kWh ou m3/an, montant annuel. OK si lisible.",
+  fact_fo: "Lis ce bon livraison fioul. Quantite litres, estimation annuelle. OK si lisible."
 };
 
-async function onPhoto(e,id,doIA){
-  const file=e.target.files[0];if(!file)return;
-  const reader=new FileReader();
-  reader.onload=async ev=>{
-    const url=ev.target.result;
-    const b64=url.split(',')[1];
-    S.photos[id]={prev:url,b64,mime:file.type,ia:'',cls:''};
-    const slot=document.getElementById('slot-'+id);
-    slot.classList.add('has-photo');
-    slot.innerHTML=`<img src="${url}" alt="">`;
+function rPhotos() {
+  var slots = getSlots();
+  var html = '<div class="card"><div class="ct"><div class="ctd"></div>Photos requises</div>';
+  html += '<p style="font-size:12px;color:var(--mu);margin-bottom:15px">' + slots.length + ' photos à prendre. L’IA analyse chaque photo automatiquement.</p>';
+  slots.forEach(function(sl){
+    var has = !!S.photos[sl.id];
+    html += '<div class="ps"><div class="pl">' + (sl.ia ? '<span class="ib">&#129302; IA</span>' : '') + ' ' + sl.lbl + '</div>';
+    html += '<div class="ph">' + sl.hint + '</div>';
+    html += '<div class="pslot' + (has?' hp':'') + '" data-id="' + sl.id + '">';
+    if(has) html += '<img src="' + S.photos[sl.id].prev + '" alt="">';
+    else html += '<div class="pe"><div class="pei">&#128247;</div><div class="pet">Appuyer pour prendre<br>ou choisir une photo</div></div>';
+    html += '</div>';
+    html += '<input class="pi" type="file" accept="image/*" id="pi-' + sl.id + '" data-id="' + sl.id + '" data-ia="' + (sl.ia?1:0) + '">';
+    html += '<div class="ial" id="ial-' + sl.id + '"><div class="isp"></div><span>Analyse IA…</span></div>';
+    html += '<div class="iar' + (S.photos[sl.id] ? ' on ' + S.photos[sl.id].cls : '') + '" id="iar-' + sl.id + '">' + (S.photos[sl.id] ? S.photos[sl.id].ia : '') + '</div></div>';
+  });
+  html += '</div>';
+  document.getElementById('wc').innerHTML = html;
+  document.querySelectorAll('.pslot').forEach(function(el){
+    el.addEventListener('click', function(){
+      var id = el.getAttribute('data-id');
+      document.getElementById('pi-'+id).click();
+    });
+  });
+  document.querySelectorAll('.pi').forEach(function(inp){
+    inp.addEventListener('change', function(e){
+      handlePhoto(e, inp.getAttribute('data-id'), parseInt(inp.getAttribute('data-ia')));
+    });
+  });
+}
+
+function handlePhoto(e, id, doIA) {
+  var file = e.target.files[0];
+  if(!file) return;
+  var reader = new FileReader();
+  reader.onload = function(ev){
+    var url = ev.target.result;
+    var b64 = url.split(',')[1];
+    S.photos[id] = {prev:url, b64:b64, mime:file.type||'image/jpeg', ia:'', cls:''};
+    var slot = document.querySelector('.pslot[data-id="'+id+'"]');
+    if(slot){slot.classList.add('hp');slot.innerHTML = '<img src="'+url+'" alt="">';}
     if(doIA){
-      document.getElementById('ial-'+id).classList.add('show');
-      try{
-        const prompt=IA_PROMPTS[id]||"Analyse cette photo dans le contexte d'une installation énergétique. Décris en 3 lignes. ✅ ou ⚠️.";
-        const res=await fetch('https://corsproxy.io/?url='+encodeURIComponent('https://api.anthropic.com/v1/messages'),{
-          method:'POST',
-          headers:{'Content-Type':'application/json','x-api-key':API_KEY,'anthropic-version':'2023-06-01'},
-          body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:250,messages:[{role:'user',content:[
-            {type:'image',source:{type:'base64',media_type:file.type||'image/jpeg',data:b64}},
-            {type:'text',text:prompt}
-          ]}]})
-        });
-        const data=await res.json();
-        const txt=data.content[0].text;
-        const cls=txt.includes('❌')?'err':txt.includes('⚠️')?'warn':'ok';
-        S.photos[id].ia=txt;S.photos[id].cls=cls;
-        const el=document.getElementById('iar-'+id);
-        el.textContent=txt;el.className='ia-result show '+cls;
-      }catch(err){
-        const el=document.getElementById('iar-'+id);
-        el.textContent='⚠️ Analyse IA indisponible — photo enregistrée.';
-        el.className='ia-result show warn';
-      }
-      document.getElementById('ial-'+id).classList.remove('show');
+      document.getElementById('ial-'+id).classList.add('on');
+      callIAPhoto(id, b64, file.type||'image/jpeg');
     }
   };
   reader.readAsDataURL(file);
 }
 
-// ─── STEP 5 RECAP ───
-function rRecap(){
-  const d=S.data;
-  const tStr=S.travaux.map(id=>({pac:'PAC Air/Eau',clim:'PAC Air/Air',pv:'Photovoltaïque',ballon:'Ballon',ite:'ITE',iti:'ITI'}[id])).join(' · ');
-  const date=new Date().toLocaleDateString('fr-FR',{day:'numeric',month:'long',year:'numeric'});
-  const nPh=Object.keys(S.photos).length;
-  const nSlots=getSlots().length;
-  const pct=Math.round(nPh/nSlots*100);
-  const ok=nPh>=nSlots;
-  let qa='';
-  S.questions.forEach(q=>{if(d[q.id])qa+=`<div class="recap-row"><span style="max-width:55%;color:var(--muted)">${q.text.substring(0,38)}…</span><span class="recap-val">${d[q.id]}</span></div>`;});
-  const pgrid=Object.values(S.photos).slice(0,9).map(p=>`<div class="photos-grid-item"><img src="${p.prev}" alt=""></div>`).join('');
-  const iaAlerts=Object.entries(S.photos).filter(([,v])=>v.cls==='warn'||v.cls==='err').map(([k,v])=>`<div style="margin-top:6px;font-size:12px"><strong>${k}</strong>: ${v.ia}</div>`).join('');
-
-  document.getElementById('wiz-content').innerHTML=`
-  <div class="recap-hero">
-    <div class="recap-logo-txt">HPTM GROUP</div>
-    <div class="recap-name">${d.nom} ${d.pre}</div>
-    <div class="recap-meta">${d.ent} · ${date}</div>
-    <div class="recap-meta">${d.adr}</div>
-    <div class="recap-chips">${S.travaux.map(id=>({pac:'PAC Air/Eau',clim:'PAC Air/Air',pv:'PV',ballon:'Ballon',ite:'ITE',iti:'ITI'}[id])).map(l=>`<span class="recap-chip">${l}</span>`).join('')}</div>
-  </div>
-
-  <div class="card">
-    <div class="card-title"><div class="ctd"></div>Complétude du dossier</div>
-    <div style="display:flex;align-items:center;gap:12px;">
-      <div style="flex:1;background:var(--border);border-radius:4px;height:8px;"><div style="width:${pct}%;background:${ok?'var(--green)':'var(--orange)'};border-radius:4px;height:8px;"></div></div>
-      <span style="font-size:13px;font-weight:600;color:${ok?'var(--green)':'var(--orange)'}">${nPh}/${nSlots} photos</span>
-    </div>
-    <div class="alert ${ok?'alert-ok':'alert-warn'} show" style="margin-top:10px">${ok?'✅ Dossier complet !':'⚠️ '+(nSlots-nPh)+' photo(s) manquante(s) — le dossier sera envoyé avec les photos disponibles.'}</div>
-    ${iaAlerts?'<div class="alert alert-warn show" style="margin-top:8px">⚠️ Points d'attention IA :<br>'+iaAlerts+'</div>':''}
-  </div>
-
-  <div class="card">
-    <div class="section-h3">🏠 Bâtiment</div>
-    <div class="recap-row"><span>Surface</span><span class="recap-val">${d.surf} m²</span></div>
-    <div class="recap-row"><span>Volume</span><span class="recap-val">${d.vol||Math.round(d.surf*d.haut)} m³</span></div>
-    ${d.dpe?'<div class="recap-row"><span>DPE</span><span class="recap-val">'+d.dpe+'</span></div>':''}
-    ${d.alt?'<div class="recap-row"><span>Altitude</span><span class="recap-val">'+d.alt+' m</span></div>':''}
-    <div class="recap-row"><span>Personnes</span><span class="recap-val">${d.pers}</span></div>
-  </div>
-
-  ${qa?`<div class="card"><div class="section-h3">📋 Questionnaire</div>${qa}</div>`:''}
-
-  ${pgrid?`<div class="card"><div class="section-h3">📸 Photos (${nPh})</div><div class="photos-grid">${pgrid}</div></div>`:''}
-
-  <div class="send-box">
-    <h3>📤 Envoyer le dossier</h3>
-    <p>Le dossier sera envoyé à<br><strong>${MAIL}</strong><br>avec toutes les informations client.</p>
-    <div class="send-btns">
-      <button class="btn btn-teal" style="flex:none;padding:13px 24px;" onclick="doSend()">Envoyer par mail</button>
-    </div>
-  </div>`;
-}
-
-function doSend(){
-  const d=S.data;
-  const travaux=S.travaux.map(id=>({pac:'PAC',clim:'AIR-AIR',pv:'PV',ballon:'BALLON',ite:'ITE',iti:'ITI'}[id])).join('+');
-  const ref=`${d.ent}_${d.nom}_${d.pre}_${travaux}_${Date.now().toString().slice(-5)}`.replace(/\s+/g,'_');
-  const date=new Date().toLocaleDateString('fr-FR');
-  const nPh=Object.keys(S.photos).length;
-
-  let body=`DOSSIER INSTALLATION — HPTM GROUP
-Référence : ${ref}
-Date : ${date}
-
-ENTREPRISE : ${d.ent}
-COMMERCIAL : ${d.com||'—'}
-
-CLIENT
-Nom : ${d.nom} ${d.pre}
-Tél : ${d.tel||'—'}
-Email : ${d.mail||'—'}
-
-CHANTIER
-Adresse : ${d.adr}
-Surface : ${d.surf} m²  |  Volume : ${d.vol||'—'} m³
-DPE : ${d.dpe||'—'}  |  Altitude : ${d.alt||'—'} m
-Personnes : ${d.pers}
-
-TRAVAUX DEMANDÉS
-${S.travaux.map(id=>({pac:'• PAC Air/Eau',clim:'• PAC Air/Air (Climatisation)',pv:'• Photovoltaïque',ballon:'• Ballon Thermodynamique',ite:'• Isolation Extérieure (ITE)',iti:'• Isolation Intérieure (ITI)'}[id])).join('
-')}
-
-QUESTIONNAIRE TERRAIN
-${S.questions.map(q=>`${q.text}
-→ ${S.data[q.id]||'Non renseigné'}`).join('
-
-')}
-
-ANALYSE IA PHOTOS
-${Object.entries(S.photos).filter(([,v])=>v.ia).map(([k,v])=>`[${k}]
-${v.ia}`).join('
-
-')}
-
----
-${nPh} photo(s) — à joindre manuellement depuis la galerie
-Référence dossier : ${ref}`;
-
-  const subj=encodeURIComponent(`[${d.ent}] ${d.nom} ${d.pre} — ${travaux} — ${date}`);
-  window.location.href=`mailto:${MAIL}?subject=${subj}&body=${encodeURIComponent(body)}`;
-  setTimeout(()=>{
-    if(nPh>0) alert(`📸 N'oublie pas de joindre les ${nPh} photo(s) au mail !
-
-Elles se trouvent dans ta galerie photo.
-Référence : ${ref}`);
-  },1500);
-}
-
-// ─── WIZARD NAV ───
-function wizNext(){
-  const step=STEPS[S.step];
-  if(step==='infos'){if(!saveInfos())return;}
-  if(step==='travaux'){if(S.travaux.length===0){alert('Sélectionne au moins un type de travaux.');return;}buildQ();}
-  if(step==='questions'){
-    if(S.qi<S.questions.length-1){S.qi++;rQuestions();document.getElementById('wiz-content').scrollTop=0;return;}
+function callIAPhoto(id, b64, mime) {
+  var prompt = IA_P[id] || "Analyse cette photo dans le contexte d’une installation energetique. Decris en 3 lignes. OK ou ATTENTION.";
+  var body = JSON.stringify({
+    model: 'claude-sonnet-4-20250514',
+    max_tokens: 250,
+    messages: [{role:'user', content:[
+      {type:'image', source:{type:'base64', media_type:mime, data:b64}},
+      {type:'text', text:prompt}
+    ]}]
+  });
+  var headers = {'Content-Type':'application/json','x-api-key':KEY,'anthropic-version':'2023-06-01'};
+  var direct = 'https://api.anthropic.com/v1/messages';
+  var proxy = 'https://corsproxy.io/?url=' + encodeURIComponent(direct);
+  function doFetch(url){
+    return fetch(url, {method:'POST', headers:headers, body:body});
   }
-  if(S.step===STEPS.length-1){doSend();return;}
-  S.step++;render();
-}
-
-function wizBack(){
-  if(STEPS[S.step]==='questions'&&S.qi>0){S.qi--;rQuestions();document.getElementById('wiz-content').scrollTop=0;return;}
-  if(S.step===0){goScreen('screen-home');return;}
-  S.step--;render();
-}
-
-// ─── CHATBOTS ───
-const chatHistory={home:[],aide:[]};
-async function sendChat(who){
-  const inp=document.getElementById(who+'-inp');
-  const txt=inp.value.trim();if(!txt)return;
-  inp.value='';
-  addMsg(who+'-msgs',txt,'user');
-  chatHistory[who].push({role:'user',content:txt});
-  try{
-    const r=await fetch('https://corsproxy.io/?url='+encodeURIComponent('https://api.anthropic.com/v1/messages'),{
-      method:'POST',
-      headers:{'Content-Type':'application/json','x-api-key':API_KEY,'anthropic-version':'2023-06-01'},
-      body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:350,system:"Tu es l'assistant technique de HPTM GROUP, spécialiste en PAC, photovoltaïque, isolation et ballon thermodynamique. Réponds en français, de façon concise et pratique (max 5-6 lignes). Tu connais les aides françaises 2024 (MaPrimeRénov', CEE, éco-PTZ).",messages:chatHistory[who]})
+  doFetch(direct)
+    .catch(function(){ return doFetch(proxy); })
+    .then(function(r){ return r.json(); })
+    .then(function(data){
+      var txt = data.content && data.content[0] ? data.content[0].text : 'Analyse indisponible.';
+      var cls = txt.indexOf('ATTENTION') > -1 ? 'wa' : 'ok';
+      S.photos[id].ia = txt; S.photos[id].cls = cls;
+      var el = document.getElementById('iar-'+id);
+      if(el){el.textContent = txt; el.className = 'iar on ' + cls;}
+      document.getElementById('ial-'+id).classList.remove('on');
+    })
+    .catch(function(){
+      var el = document.getElementById('iar-'+id);
+      if(el){el.textContent = 'Analyse IA indisponible — photo enregistrée.'; el.className = 'iar on wa';}
+      document.getElementById('ial-'+id).classList.remove('on');
     });
-    const data=await r.json();
-    const rep=data.content[0].text;
-    chatHistory[who].push({role:'assistant',content:rep});
-    addMsg(who+'-msgs',rep,'ai');
-  }catch(e){addMsg(who+'-msgs','Service IA momentanément indisponible.','ai');}
 }
 
-function quickQ(q){document.getElementById('aide-inp').value=q;sendChat('aide');}
-
-function addMsg(cid,txt,who){
-  const c=document.getElementById(cid);
-  const d=document.createElement('div');
-  d.className='msg msg-'+who;d.textContent=txt;
-  c.appendChild(d);c.scrollTop=c.scrollHeight;
+function rRecap() {
+  var d = S.data;
+  var tLbl = {pac:'PAC Air/Eau',clim:'PAC Air/Air',pv:'PV',ballon:'Ballon',ite:'ITE',iti:'ITI'};
+  var date = new Date().toLocaleDateString('fr-FR',{day:'numeric',month:'long',year:'numeric'});
+  var nPh = Object.keys(S.photos).length;
+  var nSl = getSlots().length;
+  var pct = Math.round(nPh/nSl*100);
+  var ok = nPh >= nSl;
+  var qa = '';
+  S.qs.forEach(function(q){if(d[q.id]) qa += '<div class="rrow"><span style="color:var(--mu);max-width:55%">' + q.text.substring(0,40) + '…</span><span class="rv">' + d[q.id] + '</span></div>';});
+  var pg = Object.values(S.photos).slice(0,9).map(function(p){return '<div class="pgi"><img src="'+p.prev+'" alt=""></div>';}).join('');
+  var chips = S.tv.map(function(id){return '<span class="rch">'+tLbl[id]+'</span>';}).join('');
+  var html = '<div class="rh"><div class="rlt">HPTM GROUP</div><div class="rn">'+d.nom+' '+d.pre+'</div><div class="rm">'+d.ent+' &middot; '+date+'</div><div class="rm">'+d.adr+'</div><div class="rc">'+chips+'</div></div>';
+  html += '<div class="card"><div class="ct"><div class="ctd"></div>Complétude</div>';
+  html += '<div style="display:flex;align-items:center;gap:11px;"><div style="flex:1;background:var(--bd);border-radius:4px;height:7px"><div style="width:'+pct+'%;background:'+(ok?'var(--gn)':'var(--or)')+';border-radius:4px;height:7px"></div></div><span style="font-size:13px;font-weight:600;color:'+(ok?'var(--gn)':'var(--or)')+'">'+nPh+'/'+nSl+'</span></div>';
+  html += '<div class="al '+(ok?'al-ok':'al-wa')+' on" style="margin-top:9px">'+(ok?'✅ Dossier complet !':'⚠️ '+(nSl-nPh)+' photo(s) manquante(s)')+'</div></div>';
+  html += '<div class="card"><div class="sh3">&#127968; Bâtiment</div>';
+  html += '<div class="rrow"><span>Surface</span><span class="rv">'+d.surf+' m²</span></div>';
+  html += '<div class="rrow"><span>Volume</span><span class="rv">'+(d.vol||Math.round(d.surf*parseFloat(d.haut||2.5)))+' m³</span></div>';
+  if(d.dpe) html += '<div class="rrow"><span>DPE</span><span class="rv">'+d.dpe+'</span></div>';
+  if(d.alt) html += '<div class="rrow"><span>Altitude</span><span class="rv">'+d.alt+' m</span></div>';
+  html += '<div class="rrow"><span>Personnes</span><span class="rv">'+d.pers+'</span></div></div>';
+  if(qa) html += '<div class="card"><div class="sh3">&#128203; Questionnaire</div>'+qa+'</div>';
+  if(pg) html += '<div class="card"><div class="sh3">&#128248; Photos ('+nPh+')</div><div class="pg">'+pg+'</div></div>';
+  html += '<div class="sb"><h3>&#128228; Envoyer le dossier</h3><p>Le dossier sera envoyé à<br><strong>'+MAIL+'</strong></p><div style="display:flex;gap:9px;justify-content:center;"><button class="btn btn-t" style="flex:none;padding:12px 22px" id="send-btn">Envoyer par mail</button></div></div>';
+  document.getElementById('wc').innerHTML = html;
+  document.getElementById('send-btn').addEventListener('click', doSend);
 }
 
-// ─── UTILS ───
-function showAlert(id,type,msg){
-  const el=document.getElementById(id);
-  if(!el)return;
-  el.className='alert show alert-'+type;
-  el.textContent=msg;
+function doSend() {
+  var d = S.data;
+  var tLbl = {pac:'PAC',clim:'AIR-AIR',pv:'PV',ballon:'BALLON',ite:'ITE',iti:'ITI'};
+  var tv = S.tv.map(function(id){return tLbl[id];}).join('+');
+  var ref = (d.ent+'_'+d.nom+'_'+d.pre+'_'+tv+'_'+Date.now().toString().slice(-5)).replace(/\s+/g,'_');
+  var date = new Date().toLocaleDateString('fr-FR');
+  var nPh = Object.keys(S.photos).length;
+  var tvFull = {pac:'PAC Air/Eau',clim:'PAC Air/Air (Climatisation)',pv:'Photovoltaïque',ballon:'Ballon Thermodynamique',ite:'Isolation Extérieure (ITE)',iti:'Isolation Intérieure (ITI)'};
+  var body = 'DOSSIER INSTALLATION - HPTM GROUP\nRef: '+ref+'\nDate: '+date+'\n\n';
+  body += 'ENTREPRISE: '+d.ent+'\nCOMMERCIAL: '+(d.com||'-')+'\n\n';
+  body += 'CLIENT\nNom: '+d.nom+' '+d.pre+'\nTel: '+(d.tel||'-')+'\nEmail: '+(d.mail||'-')+'\n\n';
+  body += 'CHANTIER\nAdresse: '+d.adr+'\nSurface: '+d.surf+' m2 | Volume: '+(d.vol||'-')+' m3\n';
+  body += 'DPE: '+(d.dpe||'-')+' | Altitude: '+(d.alt||'-')+' m\nPersonnes: '+d.pers+'\n\n';
+  body += 'TRAVAUX\n';
+  S.tv.forEach(function(id){body += '- '+tvFull[id]+'\n';});
+  body += '\nQUESTIONNAIRE\n';
+  S.qs.forEach(function(q){body += q.text+'\n-> '+(S.data[q.id]||'Non renseigne')+'\n\n';});
+  body += 'ANALYSE IA PHOTOS\n';
+  Object.entries(S.photos).forEach(function(e){if(e[1].ia) body += '['+e[0]+']\n'+e[1].ia+'\n\n';});
+  body += '---\n'+nPh+' photo(s) - joindre depuis la galerie\nRef: '+ref;
+  var subj = '['+d.ent+'] '+d.nom+' '+d.pre+' - '+tv+' - '+date;
+  window.location.href = 'mailto:'+MAIL+'?subject='+encodeURIComponent(subj)+'&body='+encodeURIComponent(body);
+  if(nPh > 0) setTimeout(function(){alert('N’oublie pas de joindre les '+nPh+' photo(s) au mail !\nRef: '+ref);}, 1500);
 }
 
-// PWA
-if('serviceWorker' in navigator){
-  const sw=`const C='hptm-v1';self.addEventListener('install',e=>e.waitUntil(caches.open(C).then(c=>c.addAll(['/']))));self.addEventListener('fetch',e=>e.respondWith(caches.match(e.request).then(r=>r||fetch(e.request))));`;
-  navigator.serviceWorker.register(URL.createObjectURL(new Blob([sw],{type:'application/javascript'})));
+function wizNext() {
+  var step = STEPS[S.step];
+  if(step === 'infos'){if(!saveInfos()) return;}
+  if(step === 'travaux'){if(S.tv.length === 0){alert('Sélectionne au moins un type de travaux.');return;} buildQs();}
+  if(step === 'questions'){
+    if(S.qi < S.qs.length-1){S.qi++;rQs();document.getElementById('wc').scrollTop=0;return;}
+  }
+  if(S.step === STEPS.length-1){doSend();return;}
+  S.step++;
+  render();
+}
+
+function wizBack() {
+  if(STEPS[S.step] === 'questions' && S.qi > 0){S.qi--;rQs();document.getElementById('wc').scrollTop=0;return;}
+  if(S.step === 0){goSc('s-home');return;}
+  S.step--;
+  render();
+}
+
+var chatH = {h:[], a:[]};
+function sendChat(who) {
+  var inp = document.getElementById(who==='h'?'hi':'ai');
+  var txt = inp.value.trim();
+  if(!txt) return;
+  inp.value = '';
+  addMsg(who==='h'?'hm':'am', txt, 'u');
+  chatH[who].push({role:'user', content:txt});
+  var msgs = chatH[who].map(function(m){return m;});
+  var body = JSON.stringify({
+    model:'claude-sonnet-4-20250514', max_tokens:350,
+    system:"Tu es l’assistant technique de HPTM GROUP, specialiste en PAC, photovoltaique, isolation et ballon thermodynamique. Reponds en francais, concis, max 5-6 lignes. Tu connais les aides francaises 2024 (MaPrimeRenov, CEE, eco-PTZ).",
+    messages:msgs
+  });
+  var headers = {'Content-Type':'application/json','x-api-key':KEY,'anthropic-version':'2023-06-01'};
+  var direct = 'https://api.anthropic.com/v1/messages';
+  var proxy = 'https://corsproxy.io/?url='+encodeURIComponent(direct);
+  function doF(url){return fetch(url,{method:'POST',headers:headers,body:body});}
+  doF(direct).catch(function(){return doF(proxy);})
+    .then(function(r){return r.json();})
+    .then(function(data){
+      var rep = data.content && data.content[0] ? data.content[0].text : 'Erreur API';
+      chatH[who].push({role:'assistant',content:rep});
+      addMsg(who==='h'?'hm':'am', rep, 'ai');
+    })
+    .catch(function(){addMsg(who==='h'?'hm':'am','Service IA momentanément indisponible.','ai');});
+}
+
+function addMsg(cid, txt, who) {
+  var c = document.getElementById(cid);
+  var d = document.createElement('div');
+  d.className = 'msg ' + (who==='ai'?'ma':'mu2');
+  d.textContent = txt;
+  c.appendChild(d);
+  c.scrollTop = c.scrollHeight;
+}
+
+function showAl(id, type, msg) {
+  var el = document.getElementById(id);
+  if(!el) return;
+  el.className = 'al on al-' + (type==='ok'?'ok':type==='wa'?'wa':'er');
+  el.textContent = msg;
 }
 </script>
 </body>
